@@ -1,0 +1,12 @@
+---
+contentdir: "content"
+layoutdir: "layouts"
+publishdir: "public"
+indexes:
+  category: "categories"
+baseurl: "http://davidcai.github.io/blog"
+canonifyurls: true
+title: "David Cai's Random Thoughts"
+params:
+  MastheadTitle: "dcai | blog"
+...
