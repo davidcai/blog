@@ -12,6 +12,11 @@ categories:
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
 
+
+### Sub
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?
+
 ```js
 ;(function() {
   'use strict';
@@ -33,10 +38,6 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
 
-
-### Sub
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?
 
 ## Conclusion
 
