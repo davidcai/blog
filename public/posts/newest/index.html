@@ -63,6 +63,26 @@
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.</p>
 
+<pre><code class="language-js">;(function() {
+  'use strict';
+
+  angular
+    .module('myApp', [
+      'ngRouter'
+    ])
+    .controller('MainController', MainController)
+  ;
+
+
+  function MainController($log, $scope) {
+    $log.log('MainController');
+    $scope.name = 'David';
+  }
+})();
+</code></pre>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.</p>
+
 <h3 id="sub:912493bb798d2cf24137bef8b4adb6f6">Sub</h3>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?</p>

@@ -2,7 +2,7 @@
 title: "Just another sample post"
 date: "2014-03-29"
 description: "This should be a more useful description"
-categories: 
+categories:
     - "hugo"
     - "fun"
     - "test"
@@ -11,6 +11,28 @@ categories:
 ## First Heading
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
+
+```js
+;(function() {
+  'use strict';
+
+  angular
+    .module('myApp', [
+      'ngRouter'
+    ])
+    .controller('MainController', MainController)
+  ;
+
+
+  function MainController($log, $scope) {
+    $log.log('MainController');
+    $scope.name = 'David';
+  }
+})();
+```
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
+
 
 ### Sub
 
