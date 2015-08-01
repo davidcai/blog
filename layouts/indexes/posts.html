@@ -12,7 +12,7 @@
     <div class="masthead">
       <div class="container">
         <h3 class="masthead-title">
-          <a href="/posts" title="Blog">Blog Posts</a>
+          Posts
         </h3>
       </div>
     </div>
@@ -25,15 +25,13 @@
       /layouts/posts/li.html to provide a short description of each post.
     -->
     <div class="container content">
-    <p>Here are all my blog posts, in descending order by creation date. If you would like to view them by topic, see the <a href="/categories">Categories</a> page.</p>
-      <h1 class="post-title">All Blog Posts (By Date)</h1>
-        <section id="main">
-          <ul id="list">
-            {{ range .Data.Pages }}
-            {{ .Render "li"}}
-            {{ end }}
-          </ul>
-        </section>
+      <section id="main">
+        <ul id="list">
+          {{ range .Data.Pages }}
+          {{ .Render "li"}}
+          {{ end }}
+        </ul>
+      </section>
     </div>
   </div>
 
@@ -41,6 +39,3 @@
 
   <!-- Include footer (ends <body> and <html>) -->
   {{ template "chrome/footer.html" }}
-
-
-
