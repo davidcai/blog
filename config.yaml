@@ -6,7 +6,7 @@ indexes:
   category: "categories"
 baseurl: "http://davidcai.github.io/blog"
 canonifyurls: true
-title: "David Cai's Random Thoughts"
+title: "David Cai"
 params:
   MastheadTitle: "dcai | blog"
 ...
