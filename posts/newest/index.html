@@ -12,9 +12,12 @@
     
 
 <link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
-<link rel="stylesheet" href="http://davidcai.github.io/blog/css/syntax.css">
 <link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/monokai_sublime.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 </head>
 
@@ -86,6 +89,40 @@
 </code></pre>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+echo -e &quot;\033[0;32mDeploying updates to Github...\033[0m&quot;
+
+# Build the project.
+#rm -rf public
+hugo
+
+# Add changes to git.
+git add -A
+
+# Commit changes.
+msg=&quot;rebuilding site `date`&quot;
+if [ $# -eq 1 ]
+  then msg=&quot;$1&quot;
+fi
+git commit -m &quot;$msg&quot;
+
+# Push source and build repos.
+git push origin master
+#git subtree push --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages
+
+# http://blog.srackham.com/posts/porting-my-blog-with-hugo/
+# https://gist.github.com/cobyism/4730490
+git subtree push --prefix public origin gh-pages
+</code></pre>
+
+<pre><code class="language-html">&lt;div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;abc&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
 
 <h2 id="conclusion:912493bb798d2cf24137bef8b4adb6f6">Conclusion</h2>
 
