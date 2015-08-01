@@ -30,22 +30,20 @@
     -->
     <div class="container content">
       <h1 class="post-title">{{ .Title }}</h1>
-        <section id="main">
-          <h5 id="date"> {{ .Date.Format "Mon Jan 2, 2006" }} </h5>
-          {{ .Content }}
-        </section>
+      <section id="main">
+        <h5 id="date"> {{ .Date.Format "Mon Jan 2, 2006" }} </h5>
+        {{ .Content }}
+      </section>
     </div>
-  </div>
+
+    {{ template "chrome/categories.html" . }}
+    <br />
+    {{ template "chrome/prev_next.html" . }}
+    <br />
+    {{ partial "disqus.html" . }}
+  </div> <!-- /.wrap -->
 
   <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-  {{ template "chrome/prev_next.html" . }}
-  <br />
-  {{ template "chrome/categories.html" . }}
-
-
   <!-- Include footer (ends <body class="theme-base-08"> and <html>) -->
   {{ template "chrome/footer.html" }}
-
-
-

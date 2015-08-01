@@ -9,4 +9,5 @@ canonifyurls: true
 title: "David Cai"
 params:
   MastheadTitle: "dcai | blog"
+disqusShortname: "davidcai"
 ...
