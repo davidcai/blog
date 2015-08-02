@@ -3,15 +3,15 @@ title: "Just another sample post"
 date: "2014-03-29"
 description: "This should be a more useful description"
 categories:
-    - "hugo"
-    - "fun"
-    - "test"
+  - "hugo"
+  - "fun"
+  - "test"
 ---
 
 ## First Heading
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.
-
+<!--more-->
 
 ### Sub
 
