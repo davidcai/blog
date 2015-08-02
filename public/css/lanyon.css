@@ -115,6 +115,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 48rem) {
+/*@media (max-width: 767px) {*/
+
   .masthead-title {
     text-align: center;
   }
