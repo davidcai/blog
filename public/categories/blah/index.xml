@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blah on David Cai</title>
-    <link>http://davidcai.github.io/blog/categories/blah/</link>
+    <link>http://localhost:1313/blog/categories/blah/</link>
     <description>Recent content in Blah on David Cai</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 27 Mar 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/blah/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/categories/blah/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>First Post</title>
-      <link>http://davidcai.github.io/blog/posts/oldest/</link>
+      <link>http://localhost:1313/blog/posts/oldest/</link>
       <pubDate>Thu, 27 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/oldest/</guid>
+      <guid>http://localhost:1313/blog/posts/oldest/</guid>
       <description>
 
 &lt;h2 id=&#34;sample-post-1:5be75e971689338db5c820fd71089689&#34;&gt;Sample Post 1&lt;/h2&gt;
