@@ -18,3 +18,5 @@
     font-size: 1rem;
   }
 }
+
+ul.catlist li:after { content: "\00B7"; }
