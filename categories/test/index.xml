@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Test on David Cai</title>
-    <link>http://davidcai.github.io/blog/categories/test/</link>
+    <link>http://localhost:1313/blog/categories/test/</link>
     <description>Recent content in Test on David Cai</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 29 Mar 2014 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Just another sample post</title>
-      <link>http://davidcai.github.io/blog/posts/newest/</link>
+      <link>http://localhost:1313/blog/posts/newest/</link>
       <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/newest/</guid>
+      <guid>http://localhost:1313/blog/posts/newest/</guid>
       <description>
 
 &lt;h2 id=&#34;first-heading:912493bb798d2cf24137bef8b4adb6f6&#34;&gt;First Heading&lt;/h2&gt;
@@ -86,10 +86,10 @@ git subtree push --prefix public origin gh-pages
     
     <item>
       <title>First Post</title>
-      <link>http://davidcai.github.io/blog/posts/oldest/</link>
+      <link>http://localhost:1313/blog/posts/oldest/</link>
       <pubDate>Thu, 27 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/oldest/</guid>
+      <guid>http://localhost:1313/blog/posts/oldest/</guid>
       <description>
 
 &lt;h2 id=&#34;sample-post-1:5be75e971689338db5c820fd71089689&#34;&gt;Sample Post 1&lt;/h2&gt;
