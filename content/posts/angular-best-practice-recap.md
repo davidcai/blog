@@ -15,7 +15,7 @@ I attended a great Angular training provided by OasisDigital the last week. Lear
 <br />
 
 
-## FAVOR FACTORY OVER SERVICE
+## PREFER FACTORY OVER SERVICE
 
 A service is a simplified version of a factory. Services are a constructor functions. However, I've seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let's favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.
 

@@ -25,7 +25,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;favor-factory-over-service:55578ab064fd5af32026dc69791cd223&#34;&gt;FAVOR FACTORY OVER SERVICE&lt;/h2&gt;
+&lt;h2 id=&#34;prefer-factory-over-service:55578ab064fd5af32026dc69791cd223&#34;&gt;PREFER FACTORY OVER SERVICE&lt;/h2&gt;
 
 &lt;p&gt;A service is a simplified version of a factory. Services are a constructor functions. However, I&amp;rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&amp;rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.&lt;/p&gt;
 
