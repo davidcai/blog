@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nodejs on David Cai | Blog</title>
+    <link>http://davidcai.github.io/blog/categories/nodejs/</link>
+    <description>Recent content in Nodejs on David Cai | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 14 Jun 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://davidcai.github.io/blog/categories/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Let&#39;s use NVM</title>
+      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
+      <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm.png&#34; alt=&#34;Node Version Manager&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;My colleague just came to me with a troubled face. He couldn&amp;rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)&lt;/p&gt;
+
+&lt;p&gt;In this fast-moving industry, maintaining specific versions for your libraries or tools seems to be a chore. That&amp;rsquo;s why there are so many xyz managers, e.g. pip, apt-get, bower, npm, jspm, and homebrew, etc. For managing versions of Node JS, there is NVM - Node Version Manager. I highly recommend using it to have better controls of which version of Node I use.&lt;/p&gt;
+
+&lt;p&gt;If you already installed Node via other installers, it&amp;rsquo;s better to completely remove the existing Node and NPM. To do that, I stole the following command from this stackoverflow thread - &lt;a href=&#34;http://stackoverflow.com/questions/11177954/how-do-i-completely-uninstall-node-js-and-reinstall-from-beginning-mac-os-x&#34;&gt;How do I completely uninstall Node.js, and reinstall from beginning (Mac OS X)&lt;/a&gt;. Here are the commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;lsbom -f -l -s -pf /var/db/receipts/org.nodejs.pkg.bom | while read f; do  sudo rm /usr/local/${f}; done
+
+sudo rm -rf /usr/local/lib/node /usr/local/lib/node_modules /var/db/receipts/org.nodejs.*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That should remove all Node JS and NPM from Mac OS X. Now let&amp;rsquo;s install NVM. As of June 2015, the following might be the easiest command to install NVM:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Note: It&amp;rsquo;s always safe to check if &lt;a href=&#34;https://github.com/creationix/nvm&#34;&gt;NVM&lt;/a&gt; updated their installation command.)&lt;/p&gt;
+
+&lt;p&gt;The install.sh script will insert a few lines to ~/.bashrc, however, Mac OS X for some reason won&amp;rsquo;t source ~/.bashrc (&lt;a href=&#34;http://apple.stackexchange.com/questions/119711/why-mac-os-x-dont-source-bashrc&#34;&gt;see details&lt;/a&gt;). So we have to copy the inserted lines to ~/.bash_profile instead:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Node version manager
+export NVM_DIR=&amp;quot;/Users/your_username/.nvm&amp;quot;
+[ -s &amp;quot;$NVM_DIR/nvm.sh&amp;quot; ] &amp;amp;&amp;amp; . &amp;quot;$NVM_DIR/nvm.sh&amp;quot;  # This loads nvm​​​
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Change your_username to your home dir name. After sourcing ~/.bash_profile, NVM will be loaded and ready to use.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;source ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install Node JS, for example, version 0.10.38:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nvm install 0.10.38
+nvm use 0.10.38
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Type &lt;code&gt;node -v&lt;/code&gt; to check if the correct version is installed and in use.&lt;/p&gt;
+
+&lt;p&gt;Node 0.10.38 is installed. However, it will be a bit tedious to type &lt;code&gt;nvm use 0.10.38&lt;/code&gt; to switch to that version every time a terminal session starts. To fix that, I assign &amp;lsquo;default&amp;rsquo; as an alias to v0.10.38:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nvm alias default 0.10.38
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Versions tied to the &amp;lsquo;default&amp;rsquo; alias will be the default active version.&lt;/p&gt;
+
+&lt;p&gt;You are free to install many versions of Node JS with NVM. For instance, here we install the stable version (0.12.4 as of June 2015):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nvm install stable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:873ad2aa58948dc097de69876bea24cc&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Managing versions is crucial but tedious. The task should be automated. NVM helps us manage multiple Node Js versions without a sweat. It becomes much easy to work in a working version, and try something new in the latest version. All I have to do is &lt;code&gt;nvm use default&lt;/code&gt; and &lt;code&gt;nvm use stable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And a side benefit is that I don&amp;rsquo;t have to &lt;code&gt;sudo npm install&lt;/code&gt; any more. Just &lt;code&gt;npm install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
