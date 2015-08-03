@@ -5,136 +5,413 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 29 Mar 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Just another sample post</title>
-      <link>http://davidcai.github.io/blog/posts/newest/</link>
-      <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
+      <title>Angular Best Practice Recap</title>
+      <link>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</link>
+      <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/newest/</guid>
+      <guid>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</guid>
       <description>
 
-&lt;h2 id=&#34;first-heading:912493bb798d2cf24137bef8b4adb6f6&#34;&gt;First Heading&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/best-practice.png&#34; alt=&#34;Best practice&#34; /&gt;
+&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;sub:912493bb798d2cf24137bef8b4adb6f6&#34;&gt;Sub&lt;/h3&gt;
+&lt;p&gt;I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&amp;rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&amp;rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perferendis saepe voluptatem a nesciunt architecto voluptas deleniti dolor tempora quasi quidem odit rem fugit magnam minima quam dolores vel id?&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
-  &#39;use strict&#39;;
+&lt;h2 id=&#34;favor-factory-over-service:55578ab064fd5af32026dc69791cd223&#34;&gt;FAVOR FACTORY OVER SERVICE&lt;/h2&gt;
 
-  angular
-    .module(&#39;myApp&#39;, [
-      &#39;ngRouter&#39;
-    ])
-    .controller(&#39;MainController&#39;, MainController)
-  ;
+&lt;p&gt;A service is a simplified version of a factory. Services are a constructor functions. However, I&amp;rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&amp;rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;fooService&#39;, fooService)
+;
 
-  function MainController($log, $scope) {
-    $log.log(&#39;MainController&#39;);
-    $scope.name = &#39;David&#39;;
-  }
-})();
+function fooService() {
+  return {
+    getFoo: function() { ... },
+    getBar: function() { ... }
+  };
+}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur aspernatur omnis iste. Voluptates, id inventore ea natus ab sed amet ipsa ratione sunt dignissimos. Soluta illum aliquid repellendus recusandae.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+&lt;h2 id=&#34;assign-third-party-globals-to-values:55578ab064fd5af32026dc69791cd223&#34;&gt;ASSIGN THIRD-PARTY GLOBALS TO VALUES&lt;/h2&gt;
 
-echo -e &amp;quot;\033[0;32mDeploying updates to Github...\033[0m&amp;quot;
+&lt;p&gt;Although I can use $window to reference globals of third-party libraries, I like to assign globals to values, and inject them. This makes function arguments a clear contract of what dependencies my code requires.&lt;/p&gt;
 
-# Build the project.
-#rm -rf public
-hugo
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .value(&#39;_&#39;, _) // lodash
+  .value(&#39;d3&#39;, d3) // D3
+;
 
-# Add changes to git.
-git add -A
+...
 
-# Commit changes.
-msg=&amp;quot;rebuilding site `date`&amp;quot;
-if [ $# -eq 1 ]
-  then msg=&amp;quot;$1&amp;quot;
-fi
-git commit -m &amp;quot;$msg&amp;quot;
-
-# Push source and build repos.
-git push origin master
-#git subtree push --prefix=public git@github.com:spencerlyon2/hugo_gh_blog.git gh-pages
-
-# http://blog.srackham.com/posts/porting-my-blog-with-hugo/
-# https://gist.github.com/cobyism/4730490
-git subtree push --prefix public origin gh-pages
+function MainController(_, d3) { // Injection
+  _.forEach( ... );
+  d3.select( ... );
+}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div&amp;gt;
-  &amp;lt;ul&amp;gt;
-    &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;abc&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;/ul&amp;gt;
+&lt;p&gt;For low-level libraries (e.g., lodash), I can even delete lodash&amp;rsquo;s global &amp;lsquo;&lt;em&gt;&amp;rsquo; from the window object, so &amp;lsquo;&lt;/em&gt;&amp;rsquo; will be available only through injection:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;_&#39;, function() {
+    var _ = window._;
+    delete window._; // Delete _ from window
+
+    return _;
+  })
+;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;stick-with-http:55578ab064fd5af32026dc69791cd223&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
+
+&lt;p&gt;I feel $http gives me more flexibilities than $resource. And $http service&amp;rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;wrap-rest-in-services:55578ab064fd5af32026dc69791cd223&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
+
+&lt;p&gt;Encapsulate REST requests as methods in services, so users of the service don&amp;rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;accountService&#39;, accountService)
+;
+
+function accountService($http, $log) {
+  return {
+    getAccounts: function(userId) {
+      return $http.get(&#39;/api/accounts/&#39; + userId)
+        .then(function(response) {
+          return response.data;
+        })
+        .catch(function(error) {
+          $log.error(error);
+          return error;
+        })
+      ;
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
+
+&lt;p&gt;I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.&lt;/p&gt;
+
+&lt;p&gt;Assign a name-to-function map to the resolve property. If the function returns a value, the returned value is treated as dependency, and the value is injected into the controller; if the function returns a promise, the promise is resolved before the controller is instantiated, and the resolved value is injected into the controller.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider
+  .state(&#39;home&#39;, {
+    ... ,
+
+    // Resolve items and users before routing to the &#39;home&#39; state
+    resolve: {
+      items: function() {
+        // Returns an array value
+        return [
+          { name: &#39;The Settlers of Catan&#39;, price: 51.46 },
+          { name: &#39;Mansions of Madness&#39;, price: 56.52 }
+        ];
+      },
+      users: function(userService) {
+        // Returns a promise
+        return userService.getUsers();
+      }
+    },
+
+    // items and users are injected to the controller
+    controller: function($scope, $log, items, users) {
+      $log.log(items);
+      $log.log(users);
+    }
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;isolate-directive-scope:55578ab064fd5af32026dc69791cd223&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
+
+&lt;p&gt;Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&amp;rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&amp;rsquo;s DOM attributes) should be the only place where a directive retrieves external information.&lt;/p&gt;
+
+&lt;p&gt;Pass information to directives via element attributes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-browse-happy-banner
+  data-ie-version=&amp;quot;8&amp;quot;
+  data-on-dismiss=&amp;quot;bannerDismissed()&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then retrieve these information from the scope:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .directive(&#39;browseHappyBanner&#39;, browseHappyBanner)
+;
+
+function browseHappyBanner() {
+  return {
+    restrict: &#39;A&#39;,
+    scope: { // Isolated scope
+      ieVersion: &#39;@&#39;, // Pass ieVersion from data-ie-version attribute
+      onDismiss: &#39;&amp;amp;&#39; // Pass onDismiss callback from data-on-dismiss attribute
+    },
+    template: &#39;&amp;lt;div&amp;gt; ... &amp;lt;a data-ng-click=&amp;quot;onClose()&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/div&amp;gt;&#39;,
+    ... ,
+    link: function(scope) {
+      // Retrieve ieVersion from scope
+      var iev = parseInt(scope.ieVersion, 10);
+      ...
+      scope.onClose = function() {
+        // Invoke onDismiss callback from the scope
+        scope.onDismiss();  
+      };
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;clean-template:55578ab064fd5af32026dc69791cd223&#34;&gt;CLEAN TEMPLATE&lt;/h2&gt;
+
+&lt;p&gt;If snippets in a template look like program, then you are doing it wrong. Templates need to be declarative, easy to understand for non-programmers. The best practice is to imagine your template is written by a web designer rather than a developer.&lt;/p&gt;
+
+&lt;p&gt;Will a web designer understand the following template?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-ng-class=&amp;quot;{
+  &#39;error&#39;: ((bFormSubmitted || PersonalInfoForm.DOBmonth.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOBmonth.$invalid) ||
+            ((bFormSubmitted || PersonalInfoForm.DOBday.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOBday.$invalid) ||
+            ((bFormSubmitted || PersonalInfoForm.DOByear.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOByear.$invalid ) || errorMapResult.birthdate,
+  &#39;success&#39;: (PersonalInfoForm.DOBmonth.$dirty &amp;amp;&amp;amp; !PersonalInfoForm.DOBmonth.$invalid) &amp;amp;&amp;amp;
+              (PersonalInfoForm.DOBday.$dirty &amp;amp;&amp;amp; !PersonalInfoForm.DOBday.$invalid) &amp;amp;&amp;amp;
+              (PersonalInfoForm.DOByear.$dirty &amp;amp;&amp;amp; !PersonalInfoForm.DOByear.$invalid )}&amp;quot;&amp;gt;
+  ...
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;conclusion:912493bb798d2cf24137bef8b4adb6f6&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Guess no. Even developer might have hard time to understand this. Move the logic to controller or service, so the template becomes clean:&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, numquam ipsa ad! Quasi, deleniti quae sint consequatur error corporis dicta inventore alias soluta dignissimos? Molestias, quia ab deserunt repellat ut.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Second Post</title>
-      <link>http://davidcai.github.io/blog/posts/middle/</link>
-      <pubDate>Fri, 28 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://davidcai.github.io/blog/posts/middle/</guid>
-      <description>
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-ng-class=&amp;quot;{ &#39;error&#39;: hasError, &#39;success&#39;: isSuccessful }&amp;quot;&amp;gt;
+  ...
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;sample-post-1:5d41645769bc0f1237f2300a661d7e18&#34;&gt;Sample Post 1&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h2 id=&#34;thin-controller:55578ab064fd5af32026dc69791cd223&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
 
-&lt;h3 id=&#34;sub-heading:5d41645769bc0f1237f2300a661d7e18&#34;&gt;Sub-heading&lt;/h3&gt;
+&lt;p&gt;Make controller thin. Move logic to services and directives. This makes controller much easy to test.&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, non, ratione, molestiae illo optio quia sequi id fuga natus nihil ad architecto dolor alias ex sunt iste aperiam eius itaque.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;foo:5d41645769bc0f1237f2300a661d7e18&#34;&gt;foo&lt;/h2&gt;
+&lt;h2 id=&#34;light-filter:55578ab064fd5af32026dc69791cd223&#34;&gt;LIGHT FILTER&lt;/h2&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, neque, eveniet voluptate eos debitis illum qui nostrum eius maxime ratione assumenda suscipit impedit deserunt voluptatibus odio ducimus non. Ex, ratione.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>http://davidcai.github.io/blog/posts/oldest/</link>
-      <pubDate>Thu, 27 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://davidcai.github.io/blog/posts/oldest/</guid>
-      <description>
+&lt;p&gt;Filter tends to be called multiple times. So if you have a filter that does a lot of heavy lifting, it will drag down the performance of the entire app. Try to simplify the logic in filter. Use cache or memoization to improve the performance.&lt;/p&gt;
 
-&lt;h2 id=&#34;sample-post-1:5be75e971689338db5c820fd71089689&#34;&gt;Sample Post 1&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;
+angular
+  .module(&amp;quot;myApp&amp;quot;)
+  .filter(&amp;quot;heavyLifting&amp;quot;, heavyLifting) // A filter does heavy lifting stuff
+;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+function heavyLifting() {
 
-&lt;h3 id=&#34;sub-heading:5be75e971689338db5c820fd71089689&#34;&gt;Sub-heading&lt;/h3&gt;
+  var doHeavyLifting = function() { ... }; // Complicate process
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, non, ratione, molestiae illo optio quia sequi id fuga natus nihil ad architecto dolor alias ex sunt iste aperiam eius itaque.&lt;/p&gt;
+  // Use lodash&#39;s memoize function to cache the returned result for a specific input.
+  // Future calls with the same input will return the cached result.
+  return _.memoize(function(input) {
+    return doHeavyLifting(input);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;foo:5be75e971689338db5c820fd71089689&#34;&gt;foo&lt;/h2&gt;
+&lt;p&gt;More details on filter and memoization can be found &lt;a href=&#34;http://www.terrencewatson.com/2014/06/28/memoize/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, neque, eveniet voluptate eos debitis illum qui nostrum eius maxime ratione assumenda suscipit impedit deserunt voluptatibus odio ducimus non. Ex, ratione.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;named-functions:55578ab064fd5af32026dc69791cd223&#34;&gt;NAMED FUNCTIONS&lt;/h2&gt;
+
+&lt;p&gt;Use named functions whenever you can. When error occurs inside the named function, the function name will appear in the stack trace, which is really helpful for debugging.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// Named function showToggle
+$timeout(function showToggle() {
+  angular.element(&#39;.toggle&#39;).css(&#39;display&#39;, &#39;block&#39;);
+}, 1000);
+
+// Named function greet
+var greet = function greet(name) {
+  console.log(&#39;Hello &#39; + name);
+};
+
+// Named controller
+angular.module(&#39;myApp&#39;).controller(&#39;MyController&#39;, MyController);
+function MyController() { ... }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;scope-js-code-in-iife:55578ab064fd5af32026dc69791cd223&#34;&gt;SCOPE JS CODE IN IIFE&lt;/h2&gt;
+
+&lt;p&gt;This best practice is not limited to Angular. IIFE (Immediately-Invoked Function Expression) is often used to create scopes in which the variables and functions will not be leaked to outer scopes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
+  ...
+  var app = angular.module(&#39;myApp&#39;);
+  ...
+})();
+
+console.log(app) // not defined
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;pyramid-testing:55578ab064fd5af32026dc69791cd223&#34;&gt;PYRAMID TESTING&lt;/h2&gt;
+
+&lt;p&gt;Again this advice is not limited to Angular.&lt;/p&gt;
+
+&lt;p&gt;Write more unit tests. Treat unit tests as front-line defense. Use e2e protractor tests as high-level tests for verifying critical happy and error paths.&lt;/p&gt;
+
+&lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ng-model-dot-rule:55578ab064fd5af32026dc69791cd223&#34;&gt;NG-MODEL DOT RULE&lt;/h2&gt;
+
+&lt;p&gt;Misko Hevery in his presentation on Angular best practices coined the &lt;a href=&#34;https://www.youtube.com/watch?feature=player_detailpage&amp;amp;v=ZhfUv0spHCY#t=1758s&#34;&gt;dot rule&lt;/a&gt;. My over-simplified version is to bind objects instead of primitives to $scope, and always initialize the bound object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function MainController($scope) {
+  $scope.something = {}; // Always initialize the bound objects
+
+  $scope.person = {
+    name: &#39;David Cai&#39;
+  }; // Bind objects to $scope instead of $scope.name = &#39;David Cai&#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the HTML template:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-controller=&amp;quot;MainController&amp;quot;&amp;gt;
+  &amp;lt;input ng-model=&amp;quot;person.name&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;one-component-per-file:55578ab064fd5af32026dc69791cd223&#34;&gt;ONE COMPONENT PER FILE&lt;/h2&gt;
+
+&lt;p&gt;Limit one Angular component (directive, service, controller, etc.) per JavaScript file. Make it easy to locate components, and keep files shorter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .directive(&#39;myAwesomeWidget&#39;, function() { ... })
+
+  // Don&#39;t.
+  // We already defined a directive in this file.
+  // Move the following directive to another file.
+  .directive(&#39;myOtherAwesomeWidget&#39;, function() { ... })
+;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;group-files-by-features:55578ab064fd5af32026dc69791cd223&#34;&gt;GROUP FILES BY FEATURES&lt;/h2&gt;
+
+&lt;p&gt;There are two schools of thoughts when it comes to organizing Angular files - grouping by types, and grouping by features. I prefer the latter for big projects. Much easier for navigation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;common
+  - util.filter.js
+  - util.filter.spec.js
+action-panel
+  - action-panel.directive.js
+  - action-panel.directive.spec.js
+  - action-panel.html
+  - action-panel.scss
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;include-intention-in-file-names:55578ab064fd5af32026dc69791cd223&#34;&gt;INCLUDE INTENTION IN FILE NAMES&lt;/h2&gt;
+
+&lt;p&gt;.js can mean a lot of things in Angular apps. It makes the intention much clear when the file names contain .controller, .directive, .spec, .service, etc.&lt;/p&gt;
+
+&lt;p&gt;Shai Reznik recommends using .ctrl for controllers, .drv for directives, .srv for services., .tpl for templates, and .test for unit tests. I prefer full names, e.g. .controller. I also feel that HTML files don&amp;rsquo;t need .tpl or .template, since in most cases, HTML files are templates. No need to explicitly call them out as templates.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;lint-javascript:55578ab064fd5af32026dc69791cd223&#34;&gt;LINT JAVASCRIPT&lt;/h2&gt;
+
+&lt;p&gt;Use jshint, JSCS, or even better - &lt;a href=&#34;http://eslint.org/&#34;&gt;eslint&lt;/a&gt; to lint javascript code. Integrate lint into the build process. Use editor plugins to bring lint warnings and errors right in front of developers&amp;rsquo;s eyes. I&amp;rsquo;ve been considering to create GIT hook to block git pushes if lint reports any warnings or errors.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;use-ng-annotate:55578ab064fd5af32026dc69791cd223&#34;&gt;USE NG-ANNOTATE&lt;/h2&gt;
+
+&lt;p&gt;Angular replies on the names of function arguments for dependency injection. However, JS minification will shorten argument names, which ruined Angular DI. To work around this issue, we either use the DI array syntax:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// DI array syntax
+app.controller(&#39;MainController&#39;, [&#39;$scope&#39;, &#39;$log&#39;, function($scope, $log) {
+  ...
+}]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;hellip; or assign dependencies to the $inject property:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// $inject syntax
+MainController.$inject = [&#39;$scope&#39;, &#39;$log&#39;];
+function MainController($scope, $log) {
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These workarounds look like patchwork to me. Not to mention that both are error prone where you have to maintain the dependency order in arrays.&lt;/p&gt;
+
+&lt;p&gt;Here comes &lt;a href=&#34;https://github.com/olov/ng-annotate&#34;&gt;ngAnnotate&lt;/a&gt; - an Angular plugin that automatically inserts the DI array syntax in source code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// ngAnnotate will replace function($scope, $log) { ... } with
+// [&#39;$scope&#39;, &#39;$log&#39;, function($scope, $log) { ... }]
+app.controller(&#39;MainController&#39;, function($scope, $log) {
+  ...
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Although ngAnnotate is quite smart to figure out where to annotate DI syntax, in some cases, ngAnnotate might miss the DI annotation for a function. You can prepend a function with &lt;code&gt;/*@ngInject*/&lt;/code&gt; to explicitly state that the function should get annotated.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;leverage-task-runners:55578ab064fd5af32026dc69791cd223&#34;&gt;LEVERAGE TASK RUNNERS&lt;/h2&gt;
+
+&lt;p&gt;Lint and ngAnnotate can be integrated in the build process by task runners such as Gulp.&lt;/p&gt;
+
+&lt;p&gt;Use Gulp to automate:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;JS lint - &lt;a href=&#34;https://github.com/adametry/gulp-eslint&#34;&gt;gulp-eslint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ngAnnotate - &lt;a href=&#34;https://github.com/Kagami/gulp-ng-annotate&#34;&gt;gulp-ng-annotate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sort angular files - &lt;a href=&#34;https://github.com/klei/gulp-angular-filesort&#34;&gt;gulp-angular-filesort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Convert HTML templates to JS strings in $templateCache - &lt;a href=&#34;https://github.com/miickel/gulp-angular-templatecache&#34;&gt;gulp-angular-templatecache&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
     </item>
     

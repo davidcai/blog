@@ -6,20 +6,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="http://localhost:1313/blog/">
+  <base href="http://davidcai.github.io/blog">
   <title>Angular Best Practice Recap</title>
-  <link rel="canonical" href="http://localhost:1313/blog/posts/angular-best-practice-recap/">
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/angular-best-practice-recap/">
   
 
-<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://localhost:1313/blog/js/app.js"></script>
+<script src="http://davidcai.github.io/blog/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </head>
@@ -35,9 +35,9 @@
 <div class="sidebar" id="sidebar">
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
   </nav>
 
   
@@ -55,41 +55,18 @@
     </div>
 
     
-    <div class="container content">
+    <div class="container content article-content">
       <h1 class="post-title">Angular Best Practice Recap</h1>
       <section id="main">
         <h5 id="date"> Sat Aug 1, 2015 </h5>
         
 
-<p><img src="http://localhost:1313/blog/img/best-practice.png" alt="Best practice" />
+<p><img src="http://davidcai.github.io/blog/img/best-practice.png" alt="Best practice" />
 </p>
 
 <p><br /></p>
 
-<p>I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what they said and what I learned.</p>
-
-<p><br /></p>
-
-<h2 id="wrap-rest-in-services:55578ab064fd5af32026dc69791cd223">WRAP REST IN SERVICES</h2>
-
-<p>Encapsulate REST requests as methods in services, so users of the service don&rsquo;t have to know the interface of your REST APIs, and the choice of your REST libraries ($http, $resource, etc.).</p>
-
-<pre><code class="language-js">function accountService($http) {
-  return {
-    getAccounts: function(userId) {
-      return $http.get('/api/accounts/' + userId).then(function(response) {
-        return response.data;
-      });
-    }
-  };
-}
-</code></pre>
-
-<p><br /></p>
-
-<h2 id="stick-with-http:55578ab064fd5af32026dc69791cd223">STICK WITH $HTTP</h2>
-
-<p>I feel $http gives me more flexibilities than $resource. And $http service&rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.</p>
+<p>I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.</p>
 
 <p><br /></p>
 
@@ -145,6 +122,40 @@ function MainController(_, d3) { // Injection
 
 <p><br /></p>
 
+<h2 id="stick-with-http:55578ab064fd5af32026dc69791cd223">STICK WITH $HTTP</h2>
+
+<p>I feel $http gives me more flexibilities than $resource. And $http service&rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.</p>
+
+<p><br /></p>
+
+<h2 id="wrap-rest-in-services:55578ab064fd5af32026dc69791cd223">WRAP REST IN SERVICES</h2>
+
+<p>Encapsulate REST requests as methods in services, so users of the service don&rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .factory('accountService', accountService)
+;
+
+function accountService($http, $log) {
+  return {
+    getAccounts: function(userId) {
+      return $http.get('/api/accounts/' + userId)
+        .then(function(response) {
+          return response.data;
+        })
+        .catch(function(error) {
+          $log.error(error);
+          return error;
+        })
+      ;
+    }
+  };
+}
+</code></pre>
+
+<p><br /></p>
+
 <h2 id="ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223">UI ROUTER RESOLVE PATTERN</h2>
 
 <p>I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.</p>
@@ -182,13 +193,43 @@ function MainController(_, d3) { // Injection
 
 <h2 id="isolate-directive-scope:55578ab064fd5af32026dc69791cd223">ISOLATE DIRECTIVE SCOPE</h2>
 
-<p>Think Angular directives as re-usable functions and the scope is the argument list of a function.</p>
+<p>Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&rsquo;s DOM attributes) should be the only place where a directive retrieves external information.</p>
 
-<p><br /></p>
+<p>Pass information to directives via element attributes:</p>
 
-<h2 id="thin-controller:55578ab064fd5af32026dc69791cd223">THIN CONTROLLER</h2>
+<pre><code class="language-html">&lt;div data-browse-happy-banner
+  data-ie-version=&quot;8&quot;
+  data-on-dismiss=&quot;bannerDismissed()&quot;&gt;&lt;/div&gt;
+</code></pre>
 
-<p>Make controller thin. Move logic to services and directives. This makes controller much easy to test.</p>
+<p>Then retrieve these information from the scope:</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .directive('browseHappyBanner', browseHappyBanner)
+;
+
+function browseHappyBanner() {
+  return {
+    restrict: 'A',
+    scope: { // Isolated scope
+      ieVersion: '@', // Pass ieVersion from data-ie-version attribute
+      onDismiss: '&amp;' // Pass onDismiss callback from data-on-dismiss attribute
+    },
+    template: '&lt;div&gt; ... &lt;a data-ng-click=&quot;onClose()&quot;&gt;&lt;/a&gt;&lt;/div&gt;',
+    ... ,
+    link: function(scope) {
+      // Retrieve ieVersion from scope
+      var iev = parseInt(scope.ieVersion, 10);
+      ...
+      scope.onClose = function() {
+        // Invoke onDismiss callback from the scope
+        scope.onDismiss();  
+      };
+    }
+  };
+}
+</code></pre>
 
 <p><br /></p>
 
@@ -198,7 +239,7 @@ function MainController(_, d3) { // Injection
 
 <p>Will a web designer understand the following template?</p>
 
-<pre><code class="language-html">&lt;div ng-class=&quot;{
+<pre><code class="language-html">&lt;div data-ng-class=&quot;{
   'error': ((bFormSubmitted || PersonalInfoForm.DOBmonth.$dirty) &amp;&amp; PersonalInfoForm.DOBmonth.$invalid) ||
             ((bFormSubmitted || PersonalInfoForm.DOBday.$dirty) &amp;&amp; PersonalInfoForm.DOBday.$invalid) ||
             ((bFormSubmitted || PersonalInfoForm.DOByear.$dirty) &amp;&amp; PersonalInfoForm.DOByear.$invalid ) || errorMapResult.birthdate,
@@ -211,10 +252,16 @@ function MainController(_, d3) { // Injection
 
 <p>Guess no. Even developer might have hard time to understand this. Move the logic to controller or service, so the template becomes clean:</p>
 
-<pre><code class="language-html">&lt;div ng-class=&quot;{ 'error': hasError, 'success': isSuccessful }&quot;&gt;
+<pre><code class="language-html">&lt;div data-ng-class=&quot;{ 'error': hasError, 'success': isSuccessful }&quot;&gt;
   ...
 &lt;/div&gt;
 </code></pre>
+
+<p><br /></p>
+
+<h2 id="thin-controller:55578ab064fd5af32026dc69791cd223">THIN CONTROLLER</h2>
+
+<p>Make controller thin. Move logic to services and directives. This makes controller much easy to test.</p>
 
 <p><br /></p>
 
@@ -288,7 +335,7 @@ console.log(app) // not defined
 
 <p>Martin Fowler discussed <a href="http://martinfowler.com/bliki/TestPyramid.html">Test pyramid</a> in his blog.</p>
 
-<p><img src="http://localhost:1313/blog/img/pyramid.png" alt="Test Pyramid" />
+<p><img src="http://davidcai.github.io/blog/img/pyramid.png" alt="Test Pyramid" />
 </p>
 
 <p><br /></p>
@@ -419,7 +466,7 @@ app.controller('MainController', function($scope, $log) {
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://localhost:1313/blog/categories/angular">angular</a> </li>
+      <li><a href="http://davidcai.github.io/blog/categories/angular">angular</a> </li>
     
   </ul>
 </div>
@@ -431,10 +478,6 @@ app.controller('MainController', function($scope, $log) {
   
 
   
-    <span class="right">
-      <a class="next" href="http://localhost:1313/blog/posts/newest/">Just another sample post</a> &raquo;
-    </span>
-  
 </div>
 
     <br />
@@ -442,9 +485,9 @@ app.controller('MainController', function($scope, $log) {
   <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
-    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/angular-best-practice-recap\/';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/angular-best-practice-recap\/';
     var disqus_title = 'Angular Best Practice Recap';
-    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/angular-best-practice-recap\/';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/angular-best-practice-recap\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -477,9 +520,6 @@ app.controller('MainController', function($scope, $log) {
 </script>
 
 
-<script data-no-instant>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 </html>
 

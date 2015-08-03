@@ -21,7 +21,7 @@
 
 ul.catlist li:after { content: "\00B7"; }
 
-.container.content ul {
+.container.content.article-content ul {
   list-style-type: disc;
   margin-left: 2rem;
 }
