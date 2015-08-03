@@ -2,49 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Angular on David Cai</title>
-    <link>http://localhost:1313/blog/categories/angular/</link>
+    <link>http://davidcai.github.io/blog/categories/angular/</link>
     <description>Recent content in Angular on David Cai</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 01 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/categories/angular/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://davidcai.github.io/blog/categories/angular/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Angular Best Practice Recap</title>
-      <link>http://localhost:1313/blog/posts/angular-best-practice-recap/</link>
+      <link>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</link>
       <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/angular-best-practice-recap/</guid>
+      <guid>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/best-practice.png&#34; alt=&#34;Best practice&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/best-practice.png&#34; alt=&#34;Best practice&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&amp;rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&amp;rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what they said and what I learned.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;wrap-rest-in-services:55578ab064fd5af32026dc69791cd223&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
-
-&lt;p&gt;Encapsulate REST requests as methods in services, so users of the service don&amp;rsquo;t have to know the interface of your REST APIs, and the choice of your REST libraries ($http, $resource, etc.).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function accountService($http) {
-  return {
-    getAccounts: function(userId) {
-      return $http.get(&#39;/api/accounts/&#39; + userId).then(function(response) {
-        return response.data;
-      });
-    }
-  };
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;stick-with-http:55578ab064fd5af32026dc69791cd223&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
-
-&lt;p&gt;I feel $http gives me more flexibilities than $resource. And $http service&amp;rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.&lt;/p&gt;
+&lt;p&gt;I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&amp;rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&amp;rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -100,6 +77,40 @@ function MainController(_, d3) { // Injection
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
+&lt;h2 id=&#34;stick-with-http:55578ab064fd5af32026dc69791cd223&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
+
+&lt;p&gt;I feel $http gives me more flexibilities than $resource. And $http service&amp;rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;wrap-rest-in-services:55578ab064fd5af32026dc69791cd223&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
+
+&lt;p&gt;Encapsulate REST requests as methods in services, so users of the service don&amp;rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;accountService&#39;, accountService)
+;
+
+function accountService($http, $log) {
+  return {
+    getAccounts: function(userId) {
+      return $http.get(&#39;/api/accounts/&#39; + userId)
+        .then(function(response) {
+          return response.data;
+        })
+        .catch(function(error) {
+          $log.error(error);
+          return error;
+        })
+      ;
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
 
 &lt;p&gt;I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.&lt;/p&gt;
@@ -137,13 +148,43 @@ function MainController(_, d3) { // Injection
 
 &lt;h2 id=&#34;isolate-directive-scope:55578ab064fd5af32026dc69791cd223&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
 
-&lt;p&gt;Think Angular directives as re-usable functions and the scope is the argument list of a function.&lt;/p&gt;
+&lt;p&gt;Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&amp;rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&amp;rsquo;s DOM attributes) should be the only place where a directive retrieves external information.&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Pass information to directives via element attributes:&lt;/p&gt;
 
-&lt;h2 id=&#34;thin-controller:55578ab064fd5af32026dc69791cd223&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-browse-happy-banner
+  data-ie-version=&amp;quot;8&amp;quot;
+  data-on-dismiss=&amp;quot;bannerDismissed()&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Make controller thin. Move logic to services and directives. This makes controller much easy to test.&lt;/p&gt;
+&lt;p&gt;Then retrieve these information from the scope:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .directive(&#39;browseHappyBanner&#39;, browseHappyBanner)
+;
+
+function browseHappyBanner() {
+  return {
+    restrict: &#39;A&#39;,
+    scope: { // Isolated scope
+      ieVersion: &#39;@&#39;, // Pass ieVersion from data-ie-version attribute
+      onDismiss: &#39;&amp;amp;&#39; // Pass onDismiss callback from data-on-dismiss attribute
+    },
+    template: &#39;&amp;lt;div&amp;gt; ... &amp;lt;a data-ng-click=&amp;quot;onClose()&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/div&amp;gt;&#39;,
+    ... ,
+    link: function(scope) {
+      // Retrieve ieVersion from scope
+      var iev = parseInt(scope.ieVersion, 10);
+      ...
+      scope.onClose = function() {
+        // Invoke onDismiss callback from the scope
+        scope.onDismiss();  
+      };
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -153,7 +194,7 @@ function MainController(_, d3) { // Injection
 
 &lt;p&gt;Will a web designer understand the following template?&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-class=&amp;quot;{
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-ng-class=&amp;quot;{
   &#39;error&#39;: ((bFormSubmitted || PersonalInfoForm.DOBmonth.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOBmonth.$invalid) ||
             ((bFormSubmitted || PersonalInfoForm.DOBday.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOBday.$invalid) ||
             ((bFormSubmitted || PersonalInfoForm.DOByear.$dirty) &amp;amp;&amp;amp; PersonalInfoForm.DOByear.$invalid ) || errorMapResult.birthdate,
@@ -166,10 +207,16 @@ function MainController(_, d3) { // Injection
 
 &lt;p&gt;Guess no. Even developer might have hard time to understand this. Move the logic to controller or service, so the template becomes clean:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-class=&amp;quot;{ &#39;error&#39;: hasError, &#39;success&#39;: isSuccessful }&amp;quot;&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div data-ng-class=&amp;quot;{ &#39;error&#39;: hasError, &#39;success&#39;: isSuccessful }&amp;quot;&amp;gt;
   ...
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;thin-controller:55578ab064fd5af32026dc69791cd223&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
+
+&lt;p&gt;Make controller thin. Move logic to services and directives. This makes controller much easy to test.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -243,7 +290,7 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
