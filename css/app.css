@@ -1,0 +1,27 @@
+@media (min-width: 38rem) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  overflow: hidden;
+}
+@media (min-width: 56rem) {
+  .container {
+    max-width: 50rem;
+  }
+}
+
+@media (min-width: 30rem) {
+  .sidebar {
+    font-size: 1rem;
+  }
+}
+
+ul.catlist li:after { content: "\00B7"; }
+
+.container.content ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}

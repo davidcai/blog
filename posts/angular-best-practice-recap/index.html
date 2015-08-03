@@ -1,0 +1,485 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://localhost:1313/blog/">
+  <title>Angular Best Practice Recap</title>
+  <link rel="canonical" href="http://localhost:1313/blog/posts/angular-best-practice-recap/">
+  
+
+<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://localhost:1313/blog/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          Blog Post
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Angular Best Practice Recap</h1>
+      <section id="main">
+        <h5 id="date"> Sat Aug 1, 2015 </h5>
+        
+
+<p><img src="http://localhost:1313/blog/img/best-practice.png" alt="Best practice" />
+</p>
+
+<p><br /></p>
+
+<p>I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what they said and what I learned.</p>
+
+<p><br /></p>
+
+<h2 id="wrap-rest-in-services:55578ab064fd5af32026dc69791cd223">WRAP REST IN SERVICES</h2>
+
+<p>Encapsulate REST requests as methods in services, so users of the service don&rsquo;t have to know the interface of your REST APIs, and the choice of your REST libraries ($http, $resource, etc.).</p>
+
+<pre><code class="language-js">function accountService($http) {
+  return {
+    getAccounts: function(userId) {
+      return $http.get('/api/accounts/' + userId).then(function(response) {
+        return response.data;
+      });
+    }
+  };
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="stick-with-http:55578ab064fd5af32026dc69791cd223">STICK WITH $HTTP</h2>
+
+<p>I feel $http gives me more flexibilities than $resource. And $http service&rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.</p>
+
+<p><br /></p>
+
+<h2 id="favor-factory-over-service:55578ab064fd5af32026dc69791cd223">FAVOR FACTORY OVER SERVICE</h2>
+
+<p>A service is a simplified version of a factory. Services are a constructor functions. However, I&rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .factory('fooService', fooService)
+;
+
+function fooService() {
+  return {
+    getFoo: function() { ... },
+    getBar: function() { ... }
+  };
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="assign-third-party-globals-to-values:55578ab064fd5af32026dc69791cd223">ASSIGN THIRD-PARTY GLOBALS TO VALUES</h2>
+
+<p>Although I can use $window to reference globals of third-party libraries, I like to assign globals to values, and inject them. This makes function arguments a clear contract of what dependencies my code requires.</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .value('_', _) // lodash
+  .value('d3', d3) // D3
+;
+
+...
+
+function MainController(_, d3) { // Injection
+  _.forEach( ... );
+  d3.select( ... );
+}
+</code></pre>
+
+<p>For low-level libraries (e.g., lodash), I can even delete lodash&rsquo;s global &lsquo;<em>&rsquo; from the window object, so &lsquo;</em>&rsquo; will be available only through injection:</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .factory('_', function() {
+    var _ = window._;
+    delete window._; // Delete _ from window
+
+    return _;
+  })
+;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223">UI ROUTER RESOLVE PATTERN</h2>
+
+<p>I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.</p>
+
+<p>Assign a name-to-function map to the resolve property. If the function returns a value, the returned value is treated as dependency, and the value is injected into the controller; if the function returns a promise, the promise is resolved before the controller is instantiated, and the resolved value is injected into the controller.</p>
+
+<pre><code class="language-js">$stateProvider
+  .state('home', {
+    ... ,
+
+    // Resolve items and users before routing to the 'home' state
+    resolve: {
+      items: function() {
+        // Returns an array value
+        return [
+          { name: 'The Settlers of Catan', price: 51.46 },
+          { name: 'Mansions of Madness', price: 56.52 }
+        ];
+      },
+      users: function(userService) {
+        // Returns a promise
+        return userService.getUsers();
+      }
+    },
+
+    // items and users are injected to the controller
+    controller: function($scope, $log, items, users) {
+      $log.log(items);
+      $log.log(users);
+    }
+  });
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="isolate-directive-scope:55578ab064fd5af32026dc69791cd223">ISOLATE DIRECTIVE SCOPE</h2>
+
+<p>Think Angular directives as re-usable functions and the scope is the argument list of a function.</p>
+
+<p><br /></p>
+
+<h2 id="thin-controller:55578ab064fd5af32026dc69791cd223">THIN CONTROLLER</h2>
+
+<p>Make controller thin. Move logic to services and directives. This makes controller much easy to test.</p>
+
+<p><br /></p>
+
+<h2 id="clean-template:55578ab064fd5af32026dc69791cd223">CLEAN TEMPLATE</h2>
+
+<p>If snippets in a template look like program, then you are doing it wrong. Templates need to be declarative, easy to understand for non-programmers. The best practice is to imagine your template is written by a web designer rather than a developer.</p>
+
+<p>Will a web designer understand the following template?</p>
+
+<pre><code class="language-html">&lt;div ng-class=&quot;{
+  'error': ((bFormSubmitted || PersonalInfoForm.DOBmonth.$dirty) &amp;&amp; PersonalInfoForm.DOBmonth.$invalid) ||
+            ((bFormSubmitted || PersonalInfoForm.DOBday.$dirty) &amp;&amp; PersonalInfoForm.DOBday.$invalid) ||
+            ((bFormSubmitted || PersonalInfoForm.DOByear.$dirty) &amp;&amp; PersonalInfoForm.DOByear.$invalid ) || errorMapResult.birthdate,
+  'success': (PersonalInfoForm.DOBmonth.$dirty &amp;&amp; !PersonalInfoForm.DOBmonth.$invalid) &amp;&amp;
+              (PersonalInfoForm.DOBday.$dirty &amp;&amp; !PersonalInfoForm.DOBday.$invalid) &amp;&amp;
+              (PersonalInfoForm.DOByear.$dirty &amp;&amp; !PersonalInfoForm.DOByear.$invalid )}&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+
+<p>Guess no. Even developer might have hard time to understand this. Move the logic to controller or service, so the template becomes clean:</p>
+
+<pre><code class="language-html">&lt;div ng-class=&quot;{ 'error': hasError, 'success': isSuccessful }&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="light-filter:55578ab064fd5af32026dc69791cd223">LIGHT FILTER</h2>
+
+<p>Filter tends to be called multiple times. So if you have a filter that does a lot of heavy lifting, it will drag down the performance of the entire app. Try to simplify the logic in filter. Use cache or memoization to improve the performance.</p>
+
+<pre><code class="language-js">
+angular
+  .module(&quot;myApp&quot;)
+  .filter(&quot;heavyLifting&quot;, heavyLifting) // A filter does heavy lifting stuff
+;
+
+function heavyLifting() {
+
+  var doHeavyLifting = function() { ... }; // Complicate process
+
+  // Use lodash's memoize function to cache the returned result for a specific input.
+  // Future calls with the same input will return the cached result.
+  return _.memoize(function(input) {
+    return doHeavyLifting(input);
+  });
+}
+</code></pre>
+
+<p>More details on filter and memoization can be found <a href="http://www.terrencewatson.com/2014/06/28/memoize/">here</a></p>
+
+<p><br /></p>
+
+<h2 id="named-functions:55578ab064fd5af32026dc69791cd223">NAMED FUNCTIONS</h2>
+
+<p>Use named functions whenever you can. When error occurs inside the named function, the function name will appear in the stack trace, which is really helpful for debugging.</p>
+
+<pre><code class="language-js">// Named function showToggle
+$timeout(function showToggle() {
+  angular.element('.toggle').css('display', 'block');
+}, 1000);
+
+// Named function greet
+var greet = function greet(name) {
+  console.log('Hello ' + name);
+};
+
+// Named controller
+angular.module('myApp').controller('MyController', MyController);
+function MyController() { ... }
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="scope-js-code-in-iife:55578ab064fd5af32026dc69791cd223">SCOPE JS CODE IN IIFE</h2>
+
+<p>This best practice is not limited to Angular. IIFE (Immediately-Invoked Function Expression) is often used to create scopes in which the variables and functions will not be leaked to outer scopes.</p>
+
+<pre><code class="language-js">;(function() {
+  ...
+  var app = angular.module('myApp');
+  ...
+})();
+
+console.log(app) // not defined
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="pyramid-testing:55578ab064fd5af32026dc69791cd223">PYRAMID TESTING</h2>
+
+<p>Again this advice is not limited to Angular.</p>
+
+<p>Write more unit tests. Treat unit tests as front-line defense. Use e2e protractor tests as high-level tests for verifying critical happy and error paths.</p>
+
+<p>Martin Fowler discussed <a href="http://martinfowler.com/bliki/TestPyramid.html">Test pyramid</a> in his blog.</p>
+
+<p><img src="http://localhost:1313/blog/img/pyramid.png" alt="Test Pyramid" />
+</p>
+
+<p><br /></p>
+
+<h2 id="ng-model-dot-rule:55578ab064fd5af32026dc69791cd223">NG-MODEL DOT RULE</h2>
+
+<p>Misko Hevery in his presentation on Angular best practices coined the <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=ZhfUv0spHCY#t=1758s">dot rule</a>. My over-simplified version is to bind objects instead of primitives to $scope, and always initialize the bound object:</p>
+
+<pre><code class="language-js">function MainController($scope) {
+  $scope.something = {}; // Always initialize the bound objects
+
+  $scope.person = {
+    name: 'David Cai'
+  }; // Bind objects to $scope instead of $scope.name = 'David Cai';
+}
+</code></pre>
+
+<p>In the HTML template:</p>
+
+<pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
+  &lt;input ng-model=&quot;person.name&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="one-component-per-file:55578ab064fd5af32026dc69791cd223">ONE COMPONENT PER FILE</h2>
+
+<p>Limit one Angular component (directive, service, controller, etc.) per JavaScript file. Make it easy to locate components, and keep files shorter.</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .directive('myAwesomeWidget', function() { ... })
+
+  // Don't.
+  // We already defined a directive in this file.
+  // Move the following directive to another file.
+  .directive('myOtherAwesomeWidget', function() { ... })
+;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="group-files-by-features:55578ab064fd5af32026dc69791cd223">GROUP FILES BY FEATURES</h2>
+
+<p>There are two schools of thoughts when it comes to organizing Angular files - grouping by types, and grouping by features. I prefer the latter for big projects. Much easier for navigation.</p>
+
+<pre><code class="language-plain">common
+  - util.filter.js
+  - util.filter.spec.js
+action-panel
+  - action-panel.directive.js
+  - action-panel.directive.spec.js
+  - action-panel.html
+  - action-panel.scss
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="include-intention-in-file-names:55578ab064fd5af32026dc69791cd223">INCLUDE INTENTION IN FILE NAMES</h2>
+
+<p>.js can mean a lot of things in Angular apps. It makes the intention much clear when the file names contain .controller, .directive, .spec, .service, etc.</p>
+
+<p>Shai Reznik recommends using .ctrl for controllers, .drv for directives, .srv for services., .tpl for templates, and .test for unit tests. I prefer full names, e.g. .controller. I also feel that HTML files don&rsquo;t need .tpl or .template, since in most cases, HTML files are templates. No need to explicitly call them out as templates.</p>
+
+<p><br /></p>
+
+<h2 id="lint-javascript:55578ab064fd5af32026dc69791cd223">LINT JAVASCRIPT</h2>
+
+<p>Use jshint, JSCS, or even better - <a href="http://eslint.org/">eslint</a> to lint javascript code. Integrate lint into the build process. Use editor plugins to bring lint warnings and errors right in front of developers&rsquo;s eyes. I&rsquo;ve been considering to create GIT hook to block git pushes if lint reports any warnings or errors.</p>
+
+<p><br /></p>
+
+<h2 id="use-ng-annotate:55578ab064fd5af32026dc69791cd223">USE NG-ANNOTATE</h2>
+
+<p>Angular replies on the names of function arguments for dependency injection. However, JS minification will shorten argument names, which ruined Angular DI. To work around this issue, we either use the DI array syntax:</p>
+
+<pre><code class="language-js">// DI array syntax
+app.controller('MainController', ['$scope', '$log', function($scope, $log) {
+  ...
+}]);
+</code></pre>
+
+<p>&hellip; or assign dependencies to the $inject property:</p>
+
+<pre><code class="language-js">// $inject syntax
+MainController.$inject = ['$scope', '$log'];
+function MainController($scope, $log) {
+  ...
+}
+</code></pre>
+
+<p>These workarounds look like patchwork to me. Not to mention that both are error prone where you have to maintain the dependency order in arrays.</p>
+
+<p>Here comes <a href="https://github.com/olov/ng-annotate">ngAnnotate</a> - an Angular plugin that automatically inserts the DI array syntax in source code:</p>
+
+<pre><code class="language-js">// ngAnnotate will replace function($scope, $log) { ... } with
+// ['$scope', '$log', function($scope, $log) { ... }]
+app.controller('MainController', function($scope, $log) {
+  ...
+});
+</code></pre>
+
+<p>Although ngAnnotate is quite smart to figure out where to annotate DI syntax, in some cases, ngAnnotate might miss the DI annotation for a function. You can prepend a function with <code>/*@ngInject*/</code> to explicitly state that the function should get annotated.</p>
+
+<p><br /></p>
+
+<h2 id="leverage-task-runners:55578ab064fd5af32026dc69791cd223">LEVERAGE TASK RUNNERS</h2>
+
+<p>Lint and ngAnnotate can be integrated in the build process by task runners such as Gulp.</p>
+
+<p>Use Gulp to automate:</p>
+
+<ul>
+<li>JS lint - <a href="https://github.com/adametry/gulp-eslint">gulp-eslint</a></li>
+<li>ngAnnotate - <a href="https://github.com/Kagami/gulp-ng-annotate">gulp-ng-annotate</a></li>
+<li>Sort angular files - <a href="https://github.com/klei/gulp-angular-filesort">gulp-angular-filesort</a></li>
+<li>Convert HTML templates to JS strings in $templateCache - <a href="https://github.com/miickel/gulp-angular-templatecache">gulp-angular-templatecache</a></li>
+</ul>
+
+<p><br /></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://localhost:1313/blog/categories/angular">angular</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://localhost:1313/blog/posts/newest/">Just another sample post</a> &raquo;
+    </span>
+  
+</div>
+
+    <br />
+    <div class="container">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/angular-best-practice-recap\/';
+    var disqus_title = 'Angular Best Practice Recap';
+    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/angular-best-practice-recap\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+
