@@ -6,7 +6,7 @@ indexes:
   category: "categories"
 baseurl: "http://davidcai.github.io/blog"
 canonifyurls: true
-title: "David Cai"
+title: "David Cai | Blog"
 params:
   MastheadTitle: "dcai | blog"
 disqusShortname: "davidcai"
