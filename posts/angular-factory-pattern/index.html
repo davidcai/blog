@@ -1,0 +1,310 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://localhost:1313/blog/">
+  <title>Angular Factory Pattern</title>
+  <link rel="canonical" href="http://localhost:1313/blog/posts/angular-factory-pattern/">
+  
+
+<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/monokai_sublime.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://localhost:1313/blog/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          Blog Post
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">Angular Factory Pattern</h1>
+      <section id="main">
+        <h5 id="date"> Wed Aug 5, 2015 </h5>
+        
+
+<p><img src="http://localhost:1313/blog/img/factory.jpg" alt="Factory" />
+</p>
+
+<p><br /></p>
+
+<h2 id="suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543">Suffix Factory with &lsquo;Service&rsquo;</h2>
+
+<p>The terminology &ldquo;Factory&rdquo; used in Angular is somewhat different from the one in the Java community. From a Java developer&rsquo;s perspective, a factory is a singleton to create something by the specification which the factory caller supplies. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.</p>
+
+<p>However, in Angular, unlike <code>angular.controller</code> which creates a controller, what <code>angular.factory</code> creates is not a factory but a service - a place to host public APIs and encapsulate logics. It certainly could be used to create things, however, the most common usage is to wrap shared code and expose them to consumer code.</p>
+
+<p>That&rsquo;s the reason why I would name a factory abcService in Angular, just to eliminate the confusion.</p>
+
+<pre><code class="language-js">angular
+  .module('myApp')
+  .factory('userService', userService) // userService created by the factory function
+;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="decouple-interface-from-implementation:2125073d380548c4d6df7eb33c79e543">Decouple Interface from Implementation</h2>
+
+<p>A common factory looks like this:</p>
+
+<pre><code class="language-js">//
+// Not so good
+//
+angular
+  .module('myApp')
+  .factory('userService', userService)
+;
+
+function userService($http, $log) {
+
+  // Private variables
+  var REST_URL = '/api/users';
+
+  // Return the service instance
+  return {
+
+    // Public methods
+
+    getUsers: function() { ... },
+    queryUsers: function(by) { ... }
+  };
+}
+</code></pre>
+
+<p>Nothing is really wrong with the above example. However, there is room for improvement - the returned service instance is a congealment of both interface and implementation. <code>getUsers</code> and <code>queryUsers</code> are interface, while their associated anonymous functions are implementation details. If the functions grow in lines of code, it would be &ldquo;a bit&rdquo; difficult to tell the service interface from implementations. A common practice is to move the implementations out:</p>
+
+<pre><code class="language-js">//
+// Better
+//
+function userService($http, $log) {
+
+  ...
+
+  // Implementation
+  var getUsers = function() { ... };
+  var queryUsers = function(by) { ... };
+
+  // Interface
+  return {
+    getUsers: getUsers
+    queryUsers: queryUsers
+  };
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="move-declarations-to-top:2125073d380548c4d6df7eb33c79e543">Move Declarations to Top</h2>
+
+<p>To push good readability further, it will be nice to have interface declarations precede implementations, just like how we define angular components:</p>
+
+<pre><code class="language-js">//
+// Good example
+//
+angular
+  .module('myApp')
+  // Component declarations. We have two controllers
+  .controller('MainController', MainController)
+  .controller('SideBarController', SideBarController)
+;
+
+// Component implementations
+function MainController() { ... }
+function SideBarController() { ... }
+</code></pre>
+
+<p>This way, we have a manifest of what this Angular script will create right in front. Then, component implementations follow behind. Apply the same principle to factories:</p>
+
+<pre><code class="language-js">//
+// Improved
+//
+function userService($http) {
+
+  // Declarations
+  return {
+    getUsers: getUsers,
+    queryUsers: queryUsers
+  };
+
+  // Implementations
+  // Use function declaration syntax instead of
+  // var getUsers = function() { ... };
+  function getUsers() { ... }
+  function queryUsers(by) { ... }
+}
+</code></pre>
+
+<p>Here we use function declaration syntax to define the implementation functions so they will be hoisted and accessible even before they are defined.</p>
+
+<p>It&rsquo;s also recommended to have variables defined at top of the function body:</p>
+
+<pre><code class="language-js">//
+// Improved
+//
+function userService($http) {
+
+  // Declarations
+  var var1 = 1;
+
+  return {
+    getUsers: getUsers,
+    queryUsers: queryUsers
+  };
+
+  // Implementations
+  function getUsers() { ... }
+  function queryUsers(by) { ... }
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="conclusion:2125073d380548c4d6df7eb33c79e543">Conclusion</h2>
+
+<p>Suffix factories with &lsquo;Service&rsquo;. Leverage function hoisting to pull declarations above implementations.</p>
+
+<pre><code class="language-js">;(function() {
+  'use strict';
+
+  angular
+    .module('myApp')
+    .factory('userService', userService) // Declaration
+  ;
+
+
+  function userService($http, $log) { // Implementation
+
+    // Declaration
+
+    var REST_URL = '/api/users';
+
+    return {
+      getUsers: getUsers,
+      queryUsers: queryUsers
+    };
+
+    // Implementation
+
+    function getUsers() { ... }
+
+    function queryUsers(by) { ... }
+  }
+
+})();
+</code></pre>
+
+<p>Readability again is one of the keys to having maintainable code :)</p>
+
+<p><br /></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://localhost:1313/blog/categories/angular">angular</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/">My Favorite Atom Editor Plugins</a> &raquo;
+    </span>
+  
+</div>
+
+    <br />
+    <div class="container">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/angular-factory-pattern\/';
+    var disqus_title = 'Angular Factory Pattern';
+    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/angular-factory-pattern\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
+</html>
+
