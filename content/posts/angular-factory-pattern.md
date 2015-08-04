@@ -2,7 +2,7 @@
 draft: true
 title: "Angular Factory Pattern"
 date: "2015-08-05"
-description: "Angular factory pattern."
+description: "Write better factories."
 categories:
   - "angular"
 ---
