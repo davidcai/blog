@@ -5,22 +5,22 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="http://davidcai.github.io/blog">
+  <base href="http://localhost:1313/blog/">
   <title>David Cai | Blog</title>
-  <link rel="canonical" href="http://davidcai.github.io/blog/">
-  <link href="http://davidcai.github.io/blog/index.xml" rel="alternate" type="application/rss+xml" title="David Cai | Blog" />
+  <link rel="canonical" href="http://localhost:1313/blog/">
+  <link href="http://localhost:1313/blog/index.xml" rel="alternate" type="application/rss+xml" title="David Cai | Blog" />
 
   
 
-<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
-<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
-<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/monokai_sublime.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://davidcai.github.io/blog/js/app.js"></script>
+<script src="http://localhost:1313/blog/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </head>
@@ -35,9 +35,9 @@
 <div class="sidebar" id="sidebar">
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
-    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
-    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
   </nav>
 
   
@@ -67,13 +67,13 @@
 
 <article class="post">
     <header>
-      <h2><a href='http://davidcai.github.io/blog/posts/angular-best-practice-recap/'> Angular Best Practice Recap</a> </h2>
-      <div class="meta">Sat, Aug 1, 2015</div>
+      <h2><a href='http://localhost:1313/blog/posts/angular-factory-pattern/'> Angular Factory Pattern</a> </h2>
+      <div class="meta">Wed, Aug 5, 2015</div>
     </header>
 
-    I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community.
+    Suffix Factory with &lsquo;Service&rsquo; The terminology &ldquo;Factory&rdquo; used in Angular is somewhat different from the one in the Java community. From a Java developer&rsquo;s perspective, a factory is a singleton to create something by the specification which the factory caller supplies. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff. However, in Angular, unlike angular.controller which creates a controller, what angular.factory creates is not a factory but a service - a place to host public APIs and encapsulate logics.
     <footer>
-        <a href='http://davidcai.github.io/blog/posts/angular-best-practice-recap/'><nobr>Read more →</nobr></a>
+        <a href='http://localhost:1313/blog/posts/angular-factory-pattern/'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
@@ -82,13 +82,43 @@
 
 <article class="post">
     <header>
-      <h2><a href='http://davidcai.github.io/blog/posts/lets-use-nvm/'> Let&#39;s use NVM</a> </h2>
+      <h2><a href='http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/'> My Favorite Atom Editor Plugins</a> </h2>
+      <div class="meta">Mon, Aug 3, 2015</div>
+    </header>
+
+    
+    <footer>
+        <a href='http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+          
+          
+
+<article class="post">
+    <header>
+      <h2><a href='http://localhost:1313/blog/posts/angular-best-practice-recap/'> Angular Best Practice Recap</a> </h2>
+      <div class="meta">Sat, Aug 1, 2015</div>
+    </header>
+
+    I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community.
+    <footer>
+        <a href='http://localhost:1313/blog/posts/angular-best-practice-recap/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+          
+          
+
+<article class="post">
+    <header>
+      <h2><a href='http://localhost:1313/blog/posts/lets-use-nvm/'> Let&#39;s use NVM</a> </h2>
       <div class="meta">Sun, Jun 14, 2015</div>
     </header>
 
     My colleague just came to me with a troubled face. He couldn&rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to?
     <footer>
-        <a href='http://davidcai.github.io/blog/posts/lets-use-nvm/'><nobr>Read more →</nobr></a>
+        <a href='http://localhost:1313/blog/posts/lets-use-nvm/'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
@@ -116,6 +146,9 @@
 </script>
 
 
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 

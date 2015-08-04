@@ -2,21 +2,215 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/posts/</link>
+    <link>http://localhost:1313/blog/posts/</link>
     <description>Recent content in Posts on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 01 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Angular Factory Pattern</title>
+      <link>http://localhost:1313/blog/posts/angular-factory-pattern/</link>
+      <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/posts/angular-factory-pattern/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/factory.jpg&#34; alt=&#34;Factory&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
+
+&lt;p&gt;The terminology &amp;ldquo;Factory&amp;rdquo; used in Angular is somewhat different from the one in the Java community. From a Java developer&amp;rsquo;s perspective, a factory is a singleton to create something by the specification which the factory caller supplies. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.&lt;/p&gt;
+
+&lt;p&gt;However, in Angular, unlike &lt;code&gt;angular.controller&lt;/code&gt; which creates a controller, what &lt;code&gt;angular.factory&lt;/code&gt; creates is not a factory but a service - a place to host public APIs and encapsulate logics. It certainly could be used to create things, however, the most common usage is to wrap shared code and expose them to consumer code.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s the reason why I would name a factory abcService in Angular, just to eliminate the confusion.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;userService&#39;, userService) // userService created by the factory function
+;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;decouple-interface-from-implementation:2125073d380548c4d6df7eb33c79e543&#34;&gt;Decouple Interface from Implementation&lt;/h2&gt;
+
+&lt;p&gt;A common factory looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
+// Not so good
+//
+angular
+  .module(&#39;myApp&#39;)
+  .factory(&#39;userService&#39;, userService)
+;
+
+function userService($http, $log) {
+
+  // Private variables
+  var REST_URL = &#39;/api/users&#39;;
+
+  // Return the service instance
+  return {
+
+    // Public methods
+
+    getUsers: function() { ... },
+    queryUsers: function(by) { ... }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nothing is really wrong with the above example. However, there is room for improvement - the returned service instance is a congealment of both interface and implementation. &lt;code&gt;getUsers&lt;/code&gt; and &lt;code&gt;queryUsers&lt;/code&gt; are interface, while their associated anonymous functions are implementation details. If the functions grow in lines of code, it would be &amp;ldquo;a bit&amp;rdquo; difficult to tell the service interface from implementations. A common practice is to move the implementations out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
+// Better
+//
+function userService($http, $log) {
+
+  ...
+
+  // Implementation
+  var getUsers = function() { ... };
+  var queryUsers = function(by) { ... };
+
+  // Interface
+  return {
+    getUsers: getUsers
+    queryUsers: queryUsers
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;move-declarations-to-top:2125073d380548c4d6df7eb33c79e543&#34;&gt;Move Declarations to Top&lt;/h2&gt;
+
+&lt;p&gt;To push good readability further, it will be nice to have interface declarations precede implementations, just like how we define angular components:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
+// Good example
+//
+angular
+  .module(&#39;myApp&#39;)
+  // Component declarations. We have two controllers
+  .controller(&#39;MainController&#39;, MainController)
+  .controller(&#39;SideBarController&#39;, SideBarController)
+;
+
+// Component implementations
+function MainController() { ... }
+function SideBarController() { ... }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This way, we have a manifest of what this Angular script will create right in front. Then, component implementations follow behind. Apply the same principle to factories:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
+// Improved
+//
+function userService($http) {
+
+  // Declarations
+  return {
+    getUsers: getUsers,
+    queryUsers: queryUsers
+  };
+
+  // Implementations
+  // Use function declaration syntax instead of
+  // var getUsers = function() { ... };
+  function getUsers() { ... }
+  function queryUsers(by) { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we use function declaration syntax to define the implementation functions so they will be hoisted and accessible even before they are defined.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s also recommended to have variables defined at top of the function body:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
+// Improved
+//
+function userService($http) {
+
+  // Declarations
+  var var1 = 1;
+
+  return {
+    getUsers: getUsers,
+    queryUsers: queryUsers
+  };
+
+  // Implementations
+  function getUsers() { ... }
+  function queryUsers(by) { ... }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:2125073d380548c4d6df7eb33c79e543&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Suffix factories with &amp;lsquo;Service&amp;rsquo;. Leverage function hoisting to pull declarations above implementations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
+  &#39;use strict&#39;;
+
+  angular
+    .module(&#39;myApp&#39;)
+    .factory(&#39;userService&#39;, userService) // Declaration
+  ;
+
+
+  function userService($http, $log) { // Implementation
+
+    // Declaration
+
+    var REST_URL = &#39;/api/users&#39;;
+
+    return {
+      getUsers: getUsers,
+      queryUsers: queryUsers
+    };
+
+    // Implementation
+
+    function getUsers() { ... }
+
+    function queryUsers(by) { ... }
+  }
+
+})();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Readability again is one of the keys to having maintainable code :)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>My Favorite Atom Editor Plugins</title>
+      <link>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</link>
+      <pubDate>Mon, 03 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Angular Best Practice Recap</title>
-      <link>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</link>
+      <link>http://localhost:1313/blog/posts/angular-best-practice-recap/</link>
       <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</guid>
+      <guid>http://localhost:1313/blog/posts/angular-best-practice-recap/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/best-practice.png&#34; alt=&#34;Best practice&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/best-practice.png&#34; alt=&#34;Best practice&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -290,7 +484,7 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -417,13 +611,13 @@ app.controller(&#39;MainController&#39;, function($scope, $log) {
     
     <item>
       <title>Let&#39;s use NVM</title>
-      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
+      <link>http://localhost:1313/blog/posts/lets-use-nvm/</link>
       <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
+      <guid>http://localhost:1313/blog/posts/lets-use-nvm/</guid>
       <description>
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm.png&#34; alt=&#34;Node Version Manager&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm.png&#34; alt=&#34;Node Version Manager&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -480,7 +674,7 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
