@@ -9,6 +9,9 @@ categories:
 
 ![Node Version Manager](/img/nvm.png)
 
+<br />
+
+
 My colleague just came to me with a troubled face. He couldn't figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)
 
 In this fast-moving industry, maintaining specific versions for your libraries or tools seems to be a chore. That's why there are so many xyz managers, e.g. pip, apt-get, bower, npm, jspm, and homebrew, etc. For managing versions of Node JS, there is NVM - Node Version Manager. I highly recommend using it to have better controls of which version of Node I use.
