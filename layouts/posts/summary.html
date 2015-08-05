@@ -13,10 +13,10 @@
 
 <article class="post">
     <header>
-      <h2><a href='{{ .Permalink }}'> {{ .Title }}</a> </h2>
+      <h2><a href='{{ .Permalink }}'>{{ .Title }}</a></h2>
       <div class="meta">{{ .Date.Format "Mon, Jan 2, 2006" }}</div>
     </header>
-
+    {{ template "posts/hero.html" . }}
     {{ .Summary }}
     <footer>
         <a href='{{ .Permalink }}'><nobr>Read more →</nobr></a>

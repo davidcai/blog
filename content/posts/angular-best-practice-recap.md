@@ -4,11 +4,9 @@ date: "2015-08-01"
 description: "Recap on what best practices I learned from the Angular community."
 categories:
   - "angular"
+hero: "/img/best-practice.png"
+heroalt: "Best practice"
 ---
-
-![Best practice](/img/best-practice.png)
-
-<br />
 
 I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I'd like to document the stuff I learned. So again, I use my blog as study notes. While I'm on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.
 

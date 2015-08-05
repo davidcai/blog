@@ -6,20 +6,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="http://localhost:1313/blog/">
+  <base href="http://davidcai.github.io/blog">
   <title>Let&#39;s use NVM</title>
-  <link rel="canonical" href="http://localhost:1313/blog/posts/lets-use-nvm/">
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/lets-use-nvm/">
   
 
-<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/monokai_sublime.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://localhost:1313/blog/js/app.js"></script>
+<script src="http://davidcai.github.io/blog/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </head>
@@ -35,9 +35,9 @@
 <div class="sidebar" id="sidebar">
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
   </nav>
 
   
@@ -58,13 +58,14 @@
     <div class="container content article-content">
       <h1 class="post-title">Let&#39;s use NVM</h1>
       <section id="main">
-        <h5 id="date"> Sun Jun 14, 2015 </h5>
+        <h5 id="date">Sun Jun 14, 2015</h5>
         
-
-<p><img src="http://localhost:1313/blog/img/nvm.png" alt="Node Version Manager" />
+<p class="hero">
+  <img src="http://davidcai.github.io/blog/img/nvm.png" alt="Node Version Manager">
 </p>
 
-<p><br /></p>
+
+        
 
 <p>My colleague just came to me with a troubled face. He couldn&rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)</p>
 
@@ -118,8 +119,7 @@ nvm use 0.10.38
 
 <p>To list all installed Node Js, and see which one is active, use the <code>nvm ls</code> command:</p>
 
-<p><img src="http://localhost:1313/blog/img/nvm-ls.png" alt="nvm ls" />
-</p>
+<p><img src="http://davidcai.github.io/blog/img/nvm-ls.png" alt="nvm ls" /></p>
 
 <p>The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.</p>
 
@@ -141,9 +141,9 @@ nvm use 0.10.38
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://localhost:1313/blog/categories/tool">tool</a> </li>
+      <li><a href="http://davidcai.github.io/blog/categories/tool">tool</a> </li>
     
-      <li><a href="http://localhost:1313/blog/categories/nodejs">nodejs</a> </li>
+      <li><a href="http://davidcai.github.io/blog/categories/nodejs">nodejs</a> </li>
     
   </ul>
 </div>
@@ -154,7 +154,7 @@ nvm use 0.10.38
   <hr />
   
     <span class="left">
-      <em>&laquo; </em> <a class="next" href="http://localhost:1313/blog/posts/angular-best-practice-recap/">Angular Best Practice Recap</a>
+      <em>&laquo; </em> <a class="next" href="http://davidcai.github.io/blog/posts/angular-best-practice-recap/">Angular Best Practice Recap</a>
     </span>
   
 
@@ -166,9 +166,9 @@ nvm use 0.10.38
   <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
-    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/lets-use-nvm\/';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/lets-use-nvm\/';
     var disqus_title = 'Let\x27s use NVM';
-    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/lets-use-nvm\/';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/lets-use-nvm\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -201,9 +201,6 @@ nvm use 0.10.38
 </script>
 
 
-<script data-no-instant>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 </html>
 

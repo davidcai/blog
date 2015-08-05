@@ -4,6 +4,7 @@
   }
 }
 
+/* Container */
 .container {
   overflow: hidden;
 }
@@ -13,15 +14,36 @@
   }
 }
 
+/* Side bar */
 @media (min-width: 30rem) {
   .sidebar {
     font-size: 1rem;
   }
 }
 
-ul.catlist li:after { content: "\00B7"; }
+/* Area below the top banner */
+.masthead {
+  margin-bottom: 2rem;
+}
 
+/* Category separator  */
+ul.catlist li:after {
+  content: "\00B7";
+}
+
+/* List inside article content */
 .container.content.article-content ul {
   list-style-type: disc;
   margin-left: 2rem;
+}
+
+/* Article title */
+/*header h2 {
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.5rem;
+}*/
+
+/* Article date in home page */
+header .meta {
+  margin-bottom: 0.5rem;
 }

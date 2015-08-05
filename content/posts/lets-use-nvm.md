@@ -5,12 +5,9 @@ description: "Use NVM (Node Version Manager) to gain better controls of Node JS 
 categories:
   - "tool"
   - "nodejs"
+hero: "/img/nvm.png"
+heroalt: "Node Version Manager"
 ---
-
-![Node Version Manager](/img/nvm.png)
-
-<br />
-
 
 My colleague just came to me with a troubled face. He couldn't figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)
 
