@@ -12,5 +12,6 @@
   <base href="{{ .Site.BaseUrl }}">
   <title>{{ .Title }}</title>
   <link rel="canonical" href="{{ .Permalink }}">
+  {{ template "chrome/rss_links.html" . }}
   {{ template "chrome/head_includes.html" . }}
 </head>
