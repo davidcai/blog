@@ -85,3 +85,9 @@ header .meta {
     display: none;
   }
 }
+
+/* All posts link */
+#all-posts {
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+}
