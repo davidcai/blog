@@ -47,3 +47,36 @@ ul.catlist li:after {
 header .meta {
   margin-bottom: 0.5rem;
 }
+
+/* Previous and next articles */
+.prev_next {
+  margin-bottom: 4rem;
+}
+
+/* Share on */
+.share-on .share-on-label {
+  float: left;
+  text-transform: uppercase;
+  font-family: 'PT Sans', 'Helvetica Neue', arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+.share-on .share-on-icons {
+  float: left;
+  margin-left: 0.5rem;
+}
+.share-on .share-on-icons img {
+  display: inline;
+  margin: 0;
+  border-radius: 0;
+  width: auto;
+}
+
+/* Article subtitle */
+.post-subtitle #date {
+  float: left;
+  margin-top: 0;
+}
+.post-subtitle .share-on {
+  float: right;
+}
