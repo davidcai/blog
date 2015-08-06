@@ -2,18 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tool on David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/categories/tool/</link>
+    <link>http://localhost:1313/blog/categories/tool/</link>
     <description>Recent content in Tool on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 14 Jun 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My Favorite Atom Editor Plugins</title>
+      <link>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</link>
+      <pubDate>Mon, 03 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Let&#39;s use NVM</title>
-      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
+      <link>http://localhost:1313/blog/posts/lets-use-nvm/</link>
       <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
+      <guid>http://localhost:1313/blog/posts/lets-use-nvm/</guid>
       <description>
 
 &lt;p&gt;My colleague just came to me with a troubled face. He couldn&amp;rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)&lt;/p&gt;
@@ -68,7 +77,7 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
