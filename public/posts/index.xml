@@ -18,15 +18,16 @@
 
 &lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
 
-&lt;p&gt;The terminology &amp;ldquo;Factory&amp;rdquo; used in Angular is somewhat different from the one in the Java community. From a Java developer&amp;rsquo;s perspective, a factory is a singleton to create something by the specification which the factory caller supplies. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.&lt;/p&gt;
+&lt;p&gt;The terminology &amp;ldquo;Factory&amp;rdquo; in Angular is different from the one used in the Java community. From a Java developer&amp;rsquo;s perspective, a factory is to create something by a specification supplied by the factory caller. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.&lt;/p&gt;
 
-&lt;p&gt;However, in Angular, unlike &lt;code&gt;angular.controller&lt;/code&gt; which creates a controller, what &lt;code&gt;angular.factory&lt;/code&gt; creates is not a factory but a service - a place to host public APIs and encapsulate logics. It certainly could be used to create things, however, the most common usage is to wrap shared code and expose them to consumer code.&lt;/p&gt;
+&lt;p&gt;However, in Angular, unlike &lt;code&gt;angular.controller&lt;/code&gt; which creates a controller, what &lt;code&gt;angular.factory&lt;/code&gt; creates is not a factory but a service - a place to host public APIs and encapsulate logics, not a factory that creates stuff. Services certainly could be used to create things, however, the most common usage is to wrap shared code and expose them to consumer code.&lt;/p&gt;
 
-&lt;p&gt;That&amp;rsquo;s the reason why I would name a factory abcService in Angular, just to eliminate the confusion.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;angular.factory&lt;/code&gt; returns a service singleton. That&amp;rsquo;s why I would like to suffix the factory function with &amp;ldquo;Service&amp;rdquo; not &amp;ldquo;Factory&amp;rdquo;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;angular
   .module(&#39;myApp&#39;)
-  .factory(&#39;userService&#39;, userService) // userService created by the factory function
+  // userService instead of userFactory
+  .factory(&#39;userService&#39;, userService)
 ;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -60,7 +61,7 @@ function userService($http, $log) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Nothing is really wrong with the above example. However, there is room for improvement - the returned service instance is a congealment of both interface and implementation. &lt;code&gt;getUsers&lt;/code&gt; and &lt;code&gt;queryUsers&lt;/code&gt; are interface, while their associated anonymous functions are implementation details. If the functions grow in lines of code, it would be &amp;ldquo;a bit&amp;rdquo; difficult to tell the service interface from implementations. A common practice is to move the implementations out:&lt;/p&gt;
+&lt;p&gt;Nothing is really wrong with the above example. However, there is room for improvement - the returned service instance is a congealment of both interface and implementation. &lt;code&gt;getUsers&lt;/code&gt; and &lt;code&gt;queryUsers&lt;/code&gt; are interfaces, while their associated anonymous functions are implementation details. If the anonymous functions grow in lines of code, it would be &amp;ldquo;a bit&amp;rdquo; difficult to tell the service interface from implementations. To improve the readability, a common practice is to move the implementations out:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
 // Better
@@ -69,11 +70,11 @@ function userService($http, $log) {
 
   ...
 
-  // Implementation
+  // Move implementation here
   var getUsers = function() { ... };
   var queryUsers = function(by) { ... };
 
-  // Interface
+  // Keep interface simple
   return {
     getUsers: getUsers
     queryUsers: queryUsers
@@ -85,37 +86,37 @@ function userService($http, $log) {
 
 &lt;h2 id=&#34;move-declarations-to-top:2125073d380548c4d6df7eb33c79e543&#34;&gt;Move Declarations to Top&lt;/h2&gt;
 
-&lt;p&gt;To push good readability further, it will be nice to have interface declarations precede implementations, just like how we define angular components:&lt;/p&gt;
+&lt;p&gt;To push good readability further, I will move declarations above implementations, just like how we define Angular components. Here is an example of Angular controller definition:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
 // Good example
 //
 angular
   .module(&#39;myApp&#39;)
-  // Component declarations. We have two controllers
+  // Controller declarations. We have two controllers
   .controller(&#39;MainController&#39;, MainController)
   .controller(&#39;SideBarController&#39;, SideBarController)
 ;
 
-// Component implementations
+// Controller implementations
 function MainController() { ... }
 function SideBarController() { ... }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This way, we have a manifest of what this Angular script will create right in front. Then, component implementations follow behind. Apply the same principle to factories:&lt;/p&gt;
+&lt;p&gt;By moving declarations above Implementations, we have a clear manifest of what this Angular script will do. Apply the same principle to factories:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;//
 // Improved
 //
 function userService($http) {
 
-  // Declarations
+  // Declarations, moved up.
   return {
     getUsers: getUsers,
     queryUsers: queryUsers
   };
 
-  // Implementations
+  // Implementations, moved down.
   // Use function declaration syntax instead of
   // var getUsers = function() { ... };
   function getUsers() { ... }
@@ -123,7 +124,7 @@ function userService($http) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Here we use function declaration syntax to define the implementation functions so they will be hoisted and accessible even before they are defined.&lt;/p&gt;
+&lt;p&gt;Here we use function declaration syntax to define the implementation functions, so they will be hoisted and accessible even before they are defined.&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s also recommended to have variables defined at top of the function body:&lt;/p&gt;
 
@@ -182,7 +183,36 @@ function userService($http) {
 })();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Readability again is one of the keys to having maintainable code :)&lt;/p&gt;
+&lt;p&gt;The same style can be applied to other Angular components, such as directives and filters. Here is a directive example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
+  &#39;use strict&#39;;
+
+  angular
+    .module(&#39;myApp&#39;)
+    .directive(&#39;myAwesomeWidget&#39;, myAwesomeWidget)
+  ;
+
+
+  function myAwesomeWidget($log) {
+
+    // Directive declarations
+    return {
+      restrict: &#39;AE&#39;,
+      scope: {
+        options: &#39;=&#39;
+      },
+      templateUrl: &#39;app/common/myAwesomeWidget.html&#39;,
+      link: linkMyAwesomeWidget
+    };
+
+    // Link function implementation
+    function linkMyAwesomeWidget(scope, elem, attrs) {
+      ...
+    }
+  }
+})();
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
@@ -465,7 +495,8 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
+&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -649,7 +680,8 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
+&lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
 
