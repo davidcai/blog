@@ -91,3 +91,8 @@ header .meta {
   margin-top: 8rem;
   margin-bottom: 3rem;
 }
+
+/* Code block */
+pre {
+  border: solid 1px #aaa;
+}
