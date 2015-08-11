@@ -95,4 +95,5 @@ header .meta {
 /* Code block */
 pre {
   border: solid 1px #aaa;
+  background-color: #fff;
 }
