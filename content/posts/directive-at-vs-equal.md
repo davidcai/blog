@@ -8,7 +8,7 @@ hero: "/img/vs.jpg"
 heroalt: "@ vs. ="
 ---
 
-@ or =? Their difference is very well documented in Angular's official site. However, I often find people asking the same question whenever creating Angular directives. Hope this article will clarify the difference.
+@ or =? Their difference is very well documented in the Angular official site. However, I often find people ask the same question when creating directives. Hope this article will clarify some of the difference.
 
 <br />
 

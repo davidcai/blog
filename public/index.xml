@@ -16,7 +16,7 @@
       <guid>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</guid>
       <description>
 
-&lt;p&gt;@ or =? Their difference is very well documented in Angular&amp;rsquo;s official site. However, I often find people asking the same question whenever creating Angular directives. Hope this article will clarify the difference.&lt;/p&gt;
+&lt;p&gt;@ or =? Their difference is very well documented in the Angular official site. However, I often find people ask the same question when creating directives. Hope this article will clarify some of the difference.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
