@@ -1,0 +1,374 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://davidcai.github.io/blog">
+  <title>Directive: @ vs. =</title>
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/directive-at-vs-equal/">
+  
+
+  
+
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://davidcai.github.io/blog/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          Blog Post
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">Directive: @ vs. =</h1>
+      <section id="main">
+        <div class="post-subtitle">
+          <h5 id="date">Wed Aug 12, 2015</h5>
+          <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+        </div>
+        
+<p class="hero">
+  <img src="img/vs.jpg" alt="@ vs. =">
+</p>
+
+
+        
+
+<p>@ or =? Their difference is very well documented in Angular&rsquo;s official site. However, I often find people asking the same question whenever creating Angular directives. Hope this article will clarify the difference.</p>
+
+<p><br /></p>
+
+<h2 id="one-way-binding:a300ed22ee47617686df42dbda8a1336">@: one-way binding</h2>
+
+<p>@ is for one-way binding - the bound value is passed into a directive&rsquo;s scope, however, any change made to the value inside the directive will not be passed back from the directive. To help myself remember this syntax, I&rsquo;d like to think @ as &lsquo;point at&rsquo; - a one-way direction - from the external scope to a directive&rsquo;s internal scope.</p>
+
+<p>For example, we have an awesome-widget directive:</p>
+
+<pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
+  &lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>We bind <code>{{ person.name }}</code> to the directive through the <code>name</code> attribute. The value of <code>person.name</code> comes from a person object that is attached to the controller&rsquo;s scope:</p>
+
+<pre><code class="language-js">// A controller
+function MainController($scope) {
+  $scope.person = { name: 'David' };
+}
+</code></pre>
+
+<p>Inside the directive, the @ symbol is to indicate that name will be one-way bound to the directive&rsquo;s scope variable (scope.name).</p>
+
+<pre><code class="language-js">// A directive
+function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: '@' // One-way binding
+    },
+    link: function(scope) {
+      // Here we change the name variable on the directive scope
+      scope.name = 'Serena';
+    }
+  }
+}
+</code></pre>
+
+<p>If we change the name variable inside the directive (e.g., inside the link function), the changed name will not be passed back from the directive&rsquo;s scope to the controller&rsquo;s scope.</p>
+
+<pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
+  &lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
+
+  &lt;!-- In the controller's scope, person.name will still be &quot;David&quot; instead of &quot;Serena&quot; --&gt;
+  {{ person.name }}
+&lt;/div&gt;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="two-way-binding:a300ed22ee47617686df42dbda8a1336">=: two-way binding</h2>
+
+<p>= is for two-way binding, meaning the change made to the bound value will be &ldquo;sync&rsquo;d&rdquo; both inside and outside of a directive. I&rsquo;d like to think the &ldquo;=&rdquo; symbol as &ldquo;bi-directional&rdquo;.</p>
+
+<p>Using the above example, we change &ldquo;@&rdquo; to &ldquo;=&rdquo;:</p>
+
+<pre><code class="language-js">// A directive
+function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: '=' // Two-way binding
+    },
+    link: function(scope) {
+      scope.name = 'Serena';
+    }
+  }
+}
+</code></pre>
+
+<p>We also need to change <code>{{ person.name }}</code> to <code>person.name</code> in HTML (I will explain the reason later):</p>
+
+<pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
+  &lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt;
+
+  &lt;!-- person.name is changed to &quot;Serena&quot; --&gt;
+  {{ person.name }}
+&lt;/div&gt;
+</code></pre>
+
+<p>Now, the name both inside and outside the directive is changed to &ldquo;Serena&rdquo;.</p>
+
+<p><br /></p>
+
+<h2 id="bind-variables:a300ed22ee47617686df42dbda8a1336">=: bind variables</h2>
+
+<p>Have you ever wondered why some Angular directives require using quotes to bind a string, while other directives don&rsquo;t? For example, the following <code>ngInclude</code> directive uses single quotes to wrap a path:</p>
+
+<pre><code class="language-html">&lt;ng-include src=&quot;'app/content.html'&quot; /&gt; &lt;!-- Why the single quotes? --&gt;
+</code></pre>
+
+<p>The single quotes are needed because <code>src</code> in ngInclude is bound using the = symbol. Besides two-way binding, &ldquo;=&rdquo; introduced another interesting characteristic: &ldquo;=&rdquo; symbol is used to bind variables that need to be &ldquo;eval&rsquo;d&rdquo;.</p>
+
+<p>Let&rsquo;s say we have a <code>templateUrl</code> variable attached to a scope in a controller:</p>
+
+<pre><code class="language-js">function MainController($scope) {
+  $scope.templateUrl = 'app/content.html';
+}
+</code></pre>
+
+<p>Then, we can bind the variable <code>templateUrl</code> to ngInclude:</p>
+
+<pre><code class="language-html">&lt;ng-include src=&quot;templateUrl&quot; /&gt;
+</code></pre>
+
+<p>In this case, <code>src</code> points to the <code>templateUrl</code> variable. When <code>templateUrl</code> is eval&rsquo;d, the resolved value will be &ldquo;app/content.html&rdquo;.</p>
+
+<p>If we want to bind a string primitive to <code>src</code>, we have to wrap the string in single quotes, so when src is eval&rsquo;d, the eval&rsquo;d value will be the string value:</p>
+
+<pre><code class="language-html">&lt;ng-include src=&quot;'app/content.html'&quot; /&gt;
+</code></pre>
+
+<p>For numbers and booleans, they can be passed directly to =-bound values:</p>
+
+<pre><code class="language-html">&lt;awesome-widget age=&quot;26&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>Angular is smart enough to figure out the type:</p>
+
+<pre><code class="language-js">function awesomeWidget($log) {
+  return {
+    ...,
+    link: function(scope) {
+      $log.log(typeof scope.age); // number
+      $log.log(typeof scope.single); // boolean
+    }
+  };
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="bind-interpolations:a300ed22ee47617686df42dbda8a1336">@: bind interpolations</h2>
+
+<p>&rdquo;@&rdquo; symbol, on the contrary, is used to bind interpolations. Interpolations are {{ }} expressions.</p>
+
+<p>In our examples in the &ldquo;@: one-way binding&rdquo; and &ldquo;=: two-way binding&rdquo; sections, we use interpolation <code>{{ person.name }}</code> for the @-bound value:</p>
+
+<pre><code class="language-html">&lt;!-- Use interpolation for @-bound values --&gt;
+&lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>&hellip; While for =-bound value, we use variable <code>person.name</code> instead of interpolation <code>{{ person.name }}</code>:</p>
+
+<pre><code class="language-html">&lt;!-- Use variable for =-bound values --&gt;
+&lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>We can also assign primitives directly to the @-bound values:</p>
+
+<pre><code class="language-html">&lt;awesome-widget age=&quot;26.5&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>For strings, unlike =-bound values, single quotes are not needed:</p>
+
+<pre><code class="language-html">&lt;awesome-widget name=&quot;David&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="conclusion:a300ed22ee47617686df42dbda8a1336">Conclusion</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Type</th>
+<th align="left">Direction</th>
+<th align="left">Value type</th>
+<th align="left">String value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">@</td>
+<td align="left">One-way binding</td>
+<td align="left">Interpolations and primitives</td>
+<td align="left">No single quote: &ldquo;David&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">=</td>
+<td align="left">Two-way binding</td>
+<td align="left">Variables and primitives</td>
+<td align="left">Single quote: &ldquo;&lsquo;David&rsquo;&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+<p><br /></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/angular">angular</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container prev_next">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://davidcai.github.io/blog/posts/angular-factory-pattern/">Angular Factory Pattern</a> &raquo;
+    </span>
+  
+</div>
+
+
+    <div class="container">
+      <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fdirective-at-vs-equal%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <br />
+    <div class="container">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/directive-at-vs-equal\/';
+    var disqus_title = 'Directive: @ vs. =';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/directive-at-vs-equal\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+

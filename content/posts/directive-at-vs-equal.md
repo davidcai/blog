@@ -1,7 +1,7 @@
 ---
 title: "Directive: @ vs. ="
 date: "2015-08-12"
-draft: true
+description: "Angular Directive Mystery: @ vs =."
 categories:
   - "angular"
 hero: "img/vs.jpg"
