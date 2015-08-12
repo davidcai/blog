@@ -5,8 +5,211 @@
     <link>http://davidcai.github.io/blog/categories/angular/</link>
     <description>Recent content in Angular on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/categories/angular/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Directive: @ vs. =</title>
+      <link>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</link>
+      <pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</guid>
+      <description>
+
+&lt;p&gt;@ or =? Their difference is very well documented in Angular&amp;rsquo;s official site. However, I often find people asking the same question whenever creating Angular directives. Hope this article will clarify the difference.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;one-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: one-way binding&lt;/h2&gt;
+
+&lt;p&gt;@ is for one-way binding - the bound value is passed into a directive&amp;rsquo;s scope, however, any change made to the value inside the directive will not be passed back from the directive. To help myself remember this syntax, I&amp;rsquo;d like to think @ as &amp;lsquo;point at&amp;rsquo; - a one-way direction - from the external scope to a directive&amp;rsquo;s internal scope.&lt;/p&gt;
+
+&lt;p&gt;For example, we have an awesome-widget directive:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-controller=&amp;quot;MainController&amp;quot;&amp;gt;
+  &amp;lt;awesome-widget name=&amp;quot;{{ person.name }}&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We bind &lt;code&gt;{{ person.name }}&lt;/code&gt; to the directive through the &lt;code&gt;name&lt;/code&gt; attribute. The value of &lt;code&gt;person.name&lt;/code&gt; comes from a person object that is attached to the controller&amp;rsquo;s scope:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// A controller
+function MainController($scope) {
+  $scope.person = { name: &#39;David&#39; };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Inside the directive, the @ symbol is to indicate that name will be one-way bound to the directive&amp;rsquo;s scope variable (scope.name).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// A directive
+function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: &#39;@&#39; // One-way binding
+    },
+    link: function(scope) {
+      // Here we change the name variable on the directive scope
+      scope.name = &#39;Serena&#39;;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we change the name variable inside the directive (e.g., inside the link function), the changed name will not be passed back from the directive&amp;rsquo;s scope to the controller&amp;rsquo;s scope.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-controller=&amp;quot;MainController&amp;quot;&amp;gt;
+  &amp;lt;awesome-widget name=&amp;quot;{{ person.name }}&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+
+  &amp;lt;!-- In the controller&#39;s scope, person.name will still be &amp;quot;David&amp;quot; instead of &amp;quot;Serena&amp;quot; --&amp;gt;
+  {{ person.name }}
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;two-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: two-way binding&lt;/h2&gt;
+
+&lt;p&gt;= is for two-way binding, meaning the change made to the bound value will be &amp;ldquo;sync&amp;rsquo;d&amp;rdquo; both inside and outside of a directive. I&amp;rsquo;d like to think the &amp;ldquo;=&amp;rdquo; symbol as &amp;ldquo;bi-directional&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Using the above example, we change &amp;ldquo;@&amp;rdquo; to &amp;ldquo;=&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// A directive
+function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: &#39;=&#39; // Two-way binding
+    },
+    link: function(scope) {
+      scope.name = &#39;Serena&#39;;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We also need to change &lt;code&gt;{{ person.name }}&lt;/code&gt; to &lt;code&gt;person.name&lt;/code&gt; in HTML (I will explain the reason later):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;div ng-controller=&amp;quot;MainController&amp;quot;&amp;gt;
+  &amp;lt;awesome-widget name=&amp;quot;person.name&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+
+  &amp;lt;!-- person.name is changed to &amp;quot;Serena&amp;quot; --&amp;gt;
+  {{ person.name }}
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, the name both inside and outside the directive is changed to &amp;ldquo;Serena&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;bind-variables:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: bind variables&lt;/h2&gt;
+
+&lt;p&gt;Have you ever wondered why some Angular directives require using quotes to bind a string, while other directives don&amp;rsquo;t? For example, the following &lt;code&gt;ngInclude&lt;/code&gt; directive uses single quotes to wrap a path:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;ng-include src=&amp;quot;&#39;app/content.html&#39;&amp;quot; /&amp;gt; &amp;lt;!-- Why the single quotes? --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The single quotes are needed because &lt;code&gt;src&lt;/code&gt; in ngInclude is bound using the = symbol. Besides two-way binding, &amp;ldquo;=&amp;rdquo; introduced another interesting characteristic: &amp;ldquo;=&amp;rdquo; symbol is used to bind variables that need to be &amp;ldquo;eval&amp;rsquo;d&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we have a &lt;code&gt;templateUrl&lt;/code&gt; variable attached to a scope in a controller:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function MainController($scope) {
+  $scope.templateUrl = &#39;app/content.html&#39;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, we can bind the variable &lt;code&gt;templateUrl&lt;/code&gt; to ngInclude:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;ng-include src=&amp;quot;templateUrl&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, &lt;code&gt;src&lt;/code&gt; points to the &lt;code&gt;templateUrl&lt;/code&gt; variable. When &lt;code&gt;templateUrl&lt;/code&gt; is eval&amp;rsquo;d, the resolved value will be &amp;ldquo;app/content.html&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;If we want to bind a string primitive to &lt;code&gt;src&lt;/code&gt;, we have to wrap the string in single quotes, so when src is eval&amp;rsquo;d, the eval&amp;rsquo;d value will be the string value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;ng-include src=&amp;quot;&#39;app/content.html&#39;&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For numbers and booleans, they can be passed directly to =-bound values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;awesome-widget age=&amp;quot;26&amp;quot; single=&amp;quot;false&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Angular is smart enough to figure out the type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function awesomeWidget($log) {
+  return {
+    ...,
+    link: function(scope) {
+      $log.log(typeof scope.age); // number
+      $log.log(typeof scope.single); // boolean
+    }
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;bind-interpolations:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: bind interpolations&lt;/h2&gt;
+
+&lt;p&gt;&amp;rdquo;@&amp;rdquo; symbol, on the contrary, is used to bind interpolations. Interpolations are {{ }} expressions.&lt;/p&gt;
+
+&lt;p&gt;In our examples in the &amp;ldquo;@: one-way binding&amp;rdquo; and &amp;ldquo;=: two-way binding&amp;rdquo; sections, we use interpolation &lt;code&gt;{{ person.name }}&lt;/code&gt; for the @-bound value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Use interpolation for @-bound values --&amp;gt;
+&amp;lt;awesome-widget name=&amp;quot;{{ person.name }}&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;hellip; While for =-bound value, we use variable &lt;code&gt;person.name&lt;/code&gt; instead of interpolation &lt;code&gt;{{ person.name }}&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Use variable for =-bound values --&amp;gt;
+&amp;lt;awesome-widget name=&amp;quot;person.name&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can also assign primitives directly to the @-bound values:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;awesome-widget age=&amp;quot;26.5&amp;quot; single=&amp;quot;false&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For strings, unlike =-bound values, single quotes are not needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;awesome-widget name=&amp;quot;David&amp;quot;&amp;gt;&amp;lt;/awesome-widget&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:a300ed22ee47617686df42dbda8a1336&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Type&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Direction&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Value type&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;String value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;@&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;One-way binding&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Interpolations and primitives&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;No single quote: &amp;ldquo;David&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;=&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Two-way binding&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Variables and primitives&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Single quote: &amp;ldquo;&amp;lsquo;David&amp;rsquo;&amp;rdquo;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Angular Factory Pattern</title>
