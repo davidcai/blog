@@ -4,7 +4,7 @@ date: "2015-08-12"
 description: "Angular Directive Mystery: @ vs =."
 categories:
   - "angular"
-hero: "img/vs.jpg"
+hero: "/img/vs.jpg"
 heroalt: "@ vs. ="
 ---
 
