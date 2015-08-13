@@ -9,6 +9,7 @@ heroalt: "@ vs. ="
 ---
 
 @ or =? Their difference is very well documented in the Angular official site. However, I often find people ask the same question when creating directives. Hope this article will clarify some of the difference.
+<!--more-->
 
 <br />
 
