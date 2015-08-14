@@ -14,7 +14,7 @@
     <div class="masthead">
       <div class="container">
         <h3 class="masthead-title">
-          Categories
+          David Cai | Blog
         </h3>
       </div>
     </div>
@@ -29,16 +29,17 @@
       to the category name.
     -->
     <div class="container content">
-        <section id="main">
-          <div>
-            <ul class="category">
-              {{ $data := .Data }}
-              {{ range $key,$value := .Data.Index.ByCount }}
-              <li><a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}"> {{ $value.Name }} </a> ({{ $value.Count }} entries) </li>
-              {{ end }}
-            </ul>
-          </div>
-        </section>
+      <h1 class="page-title">Categories</h1>
+      <section id="main">
+        <div>
+          <ul class="category">
+            {{ $data := .Data }}
+            {{ range $key,$value := .Data.Index.ByCount }}
+            <li><a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}"> {{ $value.Name }} </a> ({{ $value.Count }} entries) </li>
+            {{ end }}
+          </ul>
+        </div>
+      </section>
     </div>
   </div>
 

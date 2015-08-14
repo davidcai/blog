@@ -72,6 +72,11 @@ header .meta {
   width: auto;
 }
 
+/* Page title */
+.page-title {
+  margin-bottom: 3rem;
+}
+
 /* Article subtitle */
 .post-subtitle #date {
   float: left;
@@ -84,12 +89,6 @@ header .meta {
   .post-subtitle .share-on {
     display: none;
   }
-}
-
-/* All posts link */
-#all-posts {
-  margin-top: 8rem;
-  margin-bottom: 3rem;
 }
 
 /* Code block */

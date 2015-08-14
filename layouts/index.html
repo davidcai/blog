@@ -48,6 +48,7 @@
 
       <!-- Recent Posts section -->
       <!-- <h1 class="post-title">Recent Posts</h1> -->
+      <h1 class="page-title">Recent Posts</h1>
       <section id="main">
         <ul id="list">
           {{ range first 10 .Data.Pages }}
@@ -55,9 +56,9 @@
           {{ end }}
         </ul>
       </section>
-      <section id="all-posts">
-        <h2><a href="/posts">All Posts</a></h2>
-      </section>
+      <h1 class="page-title">
+        <a href="/posts">All Posts</a>
+      </h1>
     </div>
   </div>
 
