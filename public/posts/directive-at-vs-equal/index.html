@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="http://davidcai.github.io/blog">
-  <title>Directive: @ vs. =</title>
+  <title>Directive Isolated Scope: @ vs. =</title>
   <link rel="canonical" href="http://davidcai.github.io/blog/posts/directive-at-vs-equal/">
   
 
@@ -58,10 +58,10 @@
 
     
     <div class="container content article-content">
-      <h1 class="post-title">Directive: @ vs. =</h1>
+      <h1 class="post-title">Directive Isolated Scope: @ vs. =</h1>
       <section id="main">
         <div class="post-subtitle">
-          <h5 id="date">Wed Aug 12, 2015</h5>
+          <h5 id="date">Thu Aug 13, 2015</h5>
           <div class="share-on">
   <div class="share-on-label">Share on: </div>
   <div class="share-on-icons">
@@ -89,22 +89,119 @@
 
         
 
-<p>@ or =? Their difference is very well documented in the Angular official site. However, I often find people ask the same question when creating directives. Hope this article will clarify some of the difference.</p>
+<p>Shall I use @ or = to bind scope variables? Their difference is very well explained in Angular&rsquo;s documentation. However, this question still often pops up when I create directives. In this post, I listed some of the major differences between these two.</p>
 
 <p><br /></p>
 
-<h2 id="one-way-binding:a300ed22ee47617686df42dbda8a1336">@: one-way binding</h2>
+<h2 id="interpolation-binding:a300ed22ee47617686df42dbda8a1336">@: Interpolation Binding</h2>
+
+<p>&rdquo;@&rdquo; symbols can be used to bind interpolations. Interpolations are {{ }} expressions.</p>
+
+<p>Let&rsquo;s say we have a @-bound scope variable &ndash; <code>name</code> in a directive:</p>
+
+<pre><code class="language-js">// A directive
+function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: '@' // @-bound variable
+    }
+  }
+}
+</code></pre>
+
+<p>We now can assign interpolation <code>{{ person.name }}</code> to the @-bound variable <code>name</code>:</p>
+
+<pre><code class="language-html">&lt;!-- Use interpolation {{ person.name }} for @-bound variables --&gt;
+&lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>However, what will happen if we replace <code>{{ person.name }}</code> with <code>person.name</code>? Angular will not throw any error, but the value of <code>scope.name</code> will be a <code>'person.name'</code> string instead of the real value of person.name.</p>
+
+<p>We can also assign primitives (string, number, boolean, and etc.) directly to @-bound values. For example:</p>
+
+<pre><code class="language-html">&lt;awesome-widget name=&quot;David&quot; age=&quot;26.5&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
+&lt;!-- Note: &quot;David&quot; here is a string primitive not a variable name --&gt;
+</code></pre>
+
+<p>Angular is smart enough to figure out their types:</p>
+
+<pre><code class="language-js">function awesomeWidget($log) {
+  return {
+    ...
+    scope: {
+      name: '@', age: '@', single: '@'
+    },
+    link: function(scope) {
+      $log.log(scope.name, typeof scope.name);
+      // --&gt; &quot;David&quot;, string
+      $log.log(scope.age, typeof scope.age);
+      // --&gt; 26.5, number
+      $log.log(scope.single, typeof scope.single);
+      // --&gt; false, boolean
+    }
+  }
+}
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="variable-name-binding:a300ed22ee47617686df42dbda8a1336">=: Variable Name Binding</h2>
+
+<p>&rdquo;=&rdquo; symbols can be used to bind variable names.</p>
+
+<p>Here, we have a =-bound variable &ndash; <code>name</code>:</p>
+
+<pre><code class="language-js">function awesomeWidget() {
+  return {
+    ...
+    scope: {
+      name: '=' // =-bound scope variable
+    }
+  }
+}
+</code></pre>
+
+<p>Unlike @-bound variables which require interpolations such as <code>{{ person.name }}</code>, =-bound variables can directly refer to variable names, e.g. <code>person.name</code>.</p>
+
+<pre><code class="language-html">&lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt;
+&lt;!-- Not {{ person.name }} --&gt;
+</code></pre>
+
+<p>If we replace <code>person.name</code> with <code>{{ person.name }}</code>, Angular will throw an error this time:</p>
+
+<pre><code class="language-plain">Error: [$parse:syntax] Syntax Error:
+Token '{' invalid key at column 2 of the expression [{{ person.name }}]
+starting at [{ person.name }}].
+</code></pre>
+
+<p>Primitives can also be assigned to =-bound variables. For instance:</p>
+
+<pre><code class="language-html">&lt;awesome-widget age=&quot;26.5&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
+</code></pre>
+
+<p>However, for strings, single quotes are needed. This is different from @-bound values:</p>
+
+<pre><code class="language-html">&lt;awesome-widget name=&quot;'David'&quot;&gt;&lt;/awesome-widget&gt;
+&lt;!-- Note: David is wrapped in single quotes --&gt;
+</code></pre>
+
+<p>The single quotes are needed because without the single quotes, Angular will treat &ldquo;David&rdquo; as a variable name instead of a string primitive, which might not be what you wanted.</p>
+
+<p><br /></p>
+
+<h2 id="one-way-binding:a300ed22ee47617686df42dbda8a1336">@: One-way Binding</h2>
 
 <p>@ is for one-way binding - the bound value is passed into a directive&rsquo;s scope, however, any change made to the value inside the directive will not be passed back from the directive. To help myself remember this syntax, I&rsquo;d like to think @ as &lsquo;point at&rsquo; - a one-way direction - from the external scope to a directive&rsquo;s internal scope.</p>
 
-<p>For example, we have an awesome-widget directive:</p>
+<p>For example:</p>
 
 <pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
   &lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
 &lt;/div&gt;
 </code></pre>
 
-<p>We bind <code>{{ person.name }}</code> to the directive through the <code>name</code> attribute. The value of <code>person.name</code> comes from a person object that is attached to the controller&rsquo;s scope:</p>
+<p>We bind <code>{{ person.name }}</code> to the directive through the <code>name</code> attribute. The value of <code>person.name</code> comes from a person object that is attached to the <code>MainController</code>&rsquo;s scope:</p>
 
 <pre><code class="language-js">// A controller
 function MainController($scope) {
@@ -112,7 +209,7 @@ function MainController($scope) {
 }
 </code></pre>
 
-<p>Inside the directive, the @ symbol is to indicate that name will be one-way bound to the directive&rsquo;s scope variable (scope.name).</p>
+<p>In the directive, the @ symbol is to indicate that <code>name</code> will be one-way bound to the directive&rsquo;s scope variable <code>scope.name</code>.</p>
 
 <pre><code class="language-js">// A directive
 function awesomeWidget() {
@@ -129,7 +226,7 @@ function awesomeWidget() {
 }
 </code></pre>
 
-<p>If we change the name variable inside the directive (e.g., inside the link function), the changed name will not be passed back from the directive&rsquo;s scope to the controller&rsquo;s scope.</p>
+<p>If we change the name variable inside the directive (e.g., in the link function), the changed name will not be passed back from the directive&rsquo;s scope to the controller&rsquo;s scope.</p>
 
 <pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
   &lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
@@ -139,9 +236,11 @@ function awesomeWidget() {
 &lt;/div&gt;
 </code></pre>
 
+<p>Inside awesome-widget&rsquo;s <code>link</code> function, name is changed from &ldquo;David&rdquo; to &ldquo;Sereana&rdquo;. However, outside of the directive, <code>person.name</code> is still &ldquo;David&rdquo;. This is because the scope variable <code>name</code> is one-way bound. The change will not affect the scope outside of its directive.</p>
+
 <p><br /></p>
 
-<h2 id="two-way-binding:a300ed22ee47617686df42dbda8a1336">=: two-way binding</h2>
+<h2 id="two-way-binding:a300ed22ee47617686df42dbda8a1336">=: Two-way Binding</h2>
 
 <p>= is for two-way binding, meaning the change made to the bound value will be &ldquo;sync&rsquo;d&rdquo; both inside and outside of a directive. I&rsquo;d like to think the &ldquo;=&rdquo; symbol as &ldquo;bi-directional&rdquo;.</p>
 
@@ -152,7 +251,7 @@ function awesomeWidget() {
   return {
     ...
     scope: {
-      name: '=' // Two-way binding
+      name: '=' // Changed to two-way binding
     },
     link: function(scope) {
       scope.name = 'Serena';
@@ -161,93 +260,17 @@ function awesomeWidget() {
 }
 </code></pre>
 
-<p>We also need to change <code>{{ person.name }}</code> to <code>person.name</code> in HTML (I will explain the reason later):</p>
+<p>Note that in the HTML template, we also changed <code>{{ person.name }}</code> to <code>person.name</code>:</p>
 
 <pre><code class="language-html">&lt;div ng-controller=&quot;MainController&quot;&gt;
-  &lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt;
+  &lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt; &lt;!-- Removed {{ }} --&gt;
 
-  &lt;!-- person.name is changed to &quot;Serena&quot; --&gt;
+  &lt;!-- Now, person.name is changed to &quot;Serena&quot; --&gt;
   {{ person.name }}
 &lt;/div&gt;
 </code></pre>
 
-<p>Now, the name both inside and outside the directive is changed to &ldquo;Serena&rdquo;.</p>
-
-<p><br /></p>
-
-<h2 id="bind-variables:a300ed22ee47617686df42dbda8a1336">=: bind variables</h2>
-
-<p>Have you ever wondered why some Angular directives require using quotes to bind a string, while other directives don&rsquo;t? For example, the following <code>ngInclude</code> directive uses single quotes to wrap a path:</p>
-
-<pre><code class="language-html">&lt;ng-include src=&quot;'app/content.html'&quot; /&gt; &lt;!-- Why the single quotes? --&gt;
-</code></pre>
-
-<p>The single quotes are needed because <code>src</code> in ngInclude is bound using the = symbol. Besides two-way binding, &ldquo;=&rdquo; introduced another interesting characteristic: &ldquo;=&rdquo; symbol is used to bind variables that need to be &ldquo;eval&rsquo;d&rdquo;.</p>
-
-<p>Let&rsquo;s say we have a <code>templateUrl</code> variable attached to a scope in a controller:</p>
-
-<pre><code class="language-js">function MainController($scope) {
-  $scope.templateUrl = 'app/content.html';
-}
-</code></pre>
-
-<p>Then, we can bind the variable <code>templateUrl</code> to ngInclude:</p>
-
-<pre><code class="language-html">&lt;ng-include src=&quot;templateUrl&quot; /&gt;
-</code></pre>
-
-<p>In this case, <code>src</code> points to the <code>templateUrl</code> variable. When <code>templateUrl</code> is eval&rsquo;d, the resolved value will be &ldquo;app/content.html&rdquo;.</p>
-
-<p>If we want to bind a string primitive to <code>src</code>, we have to wrap the string in single quotes, so when src is eval&rsquo;d, the eval&rsquo;d value will be the string value:</p>
-
-<pre><code class="language-html">&lt;ng-include src=&quot;'app/content.html'&quot; /&gt;
-</code></pre>
-
-<p>For numbers and booleans, they can be passed directly to =-bound values:</p>
-
-<pre><code class="language-html">&lt;awesome-widget age=&quot;26&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
-</code></pre>
-
-<p>Angular is smart enough to figure out the type:</p>
-
-<pre><code class="language-js">function awesomeWidget($log) {
-  return {
-    ...,
-    link: function(scope) {
-      $log.log(typeof scope.age); // number
-      $log.log(typeof scope.single); // boolean
-    }
-  };
-}
-</code></pre>
-
-<p><br /></p>
-
-<h2 id="bind-interpolations:a300ed22ee47617686df42dbda8a1336">@: bind interpolations</h2>
-
-<p>&rdquo;@&rdquo; symbol, on the contrary, is used to bind interpolations. Interpolations are {{ }} expressions.</p>
-
-<p>In our examples in the &ldquo;@: one-way binding&rdquo; and &ldquo;=: two-way binding&rdquo; sections, we use interpolation <code>{{ person.name }}</code> for the @-bound value:</p>
-
-<pre><code class="language-html">&lt;!-- Use interpolation for @-bound values --&gt;
-&lt;awesome-widget name=&quot;{{ person.name }}&quot;&gt;&lt;/awesome-widget&gt;
-</code></pre>
-
-<p>&hellip; While for =-bound value, we use variable <code>person.name</code> instead of interpolation <code>{{ person.name }}</code>:</p>
-
-<pre><code class="language-html">&lt;!-- Use variable for =-bound values --&gt;
-&lt;awesome-widget name=&quot;person.name&quot;&gt;&lt;/awesome-widget&gt;
-</code></pre>
-
-<p>We can also assign primitives directly to the @-bound values:</p>
-
-<pre><code class="language-html">&lt;awesome-widget age=&quot;26.5&quot; single=&quot;false&quot;&gt;&lt;/awesome-widget&gt;
-</code></pre>
-
-<p>For strings, unlike =-bound values, single quotes are not needed:</p>
-
-<pre><code class="language-html">&lt;awesome-widget name=&quot;David&quot;&gt;&lt;/awesome-widget&gt;
-</code></pre>
+<p>The scope variable <code>name</code> is changed in directive&rsquo;s <code>link</code> function. Because <code>name</code> is two-way bound, the change is also reflected in <code>person.name</code> on <code>MainControler</code>&rsquo;s scope.</p>
 
 <p><br /></p>
 
@@ -259,7 +282,7 @@ function awesomeWidget() {
 <th align="left">Type</th>
 <th align="left">Direction</th>
 <th align="left">Value type</th>
-<th align="left">String value</th>
+<th align="left">String primitive</th>
 </tr>
 </thead>
 
@@ -274,8 +297,8 @@ function awesomeWidget() {
 <tr>
 <td align="left">=</td>
 <td align="left">Two-way binding</td>
-<td align="left">Variables and primitives</td>
-<td align="left">Single quote: &ldquo;&lsquo;David&rsquo;&rdquo;</td>
+<td align="left">Variable names and primitives</td>
+<td align="left">Single quotes: &ldquo;&lsquo;David&rsquo;&rdquo;</td>
 </tr>
 </tbody>
 </table>
@@ -336,7 +359,7 @@ function awesomeWidget() {
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
     var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/directive-at-vs-equal\/';
-    var disqus_title = 'Directive: @ vs. =';
+    var disqus_title = 'Directive Isolated Scope: @ vs. =';
     var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/directive-at-vs-equal\/';
 
     (function() {
