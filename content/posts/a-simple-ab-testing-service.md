@@ -90,6 +90,6 @@ Here is an example of how to use abTestService in UI Router:
 })();
 ~~~
 
-To better understand the logic behind `templateProvider`, I created this [post](posts/router-dynamic-templates/) to explain it.
+To better understand the logic behind `templateProvider`, I created this [post]({{< ref "router-dynamic-templates.md" >}}) to explain it.
 
 <br />

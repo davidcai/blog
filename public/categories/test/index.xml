@@ -91,7 +91,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 })();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;To better understand the logic behind &lt;code&gt;templateProvider&lt;/code&gt;, I created this &lt;a href=&#34;posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt; to explain it.&lt;/p&gt;
+&lt;p&gt;To better understand the logic behind &lt;code&gt;templateProvider&lt;/code&gt;, I created this &lt;a href=&#34;http://davidcai.github.io/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt; to explain it.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
