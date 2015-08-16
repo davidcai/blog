@@ -35,7 +35,7 @@ In some cases, this state-to-template relationship can not be determined beforeh
 
 In either scenario, the template cannot be fixed to `app/home/home.html`, and has be to resolved using run-time data.
 
-Router's `templateUrl` configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the `templateUrl` function is `$stateParams`.
+Router's `templateUrl` configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject run-time dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the `templateUrl` function is `$stateParams`.
 
 ~~~js
 $stateProvider.state('home', {
@@ -50,7 +50,9 @@ $stateProvider.state('home', {
 
 ## SOLUTION
 
-Both Angular built-in router and the UI Router have a `templateProvider` configuration. `templateProvider` accepts a function that can be injected with dependencies.
+The anwser is `templateProvder`.
+
+Both Angular built-in router and the UI Router have a `templateProvider` configuration. `templateProvider` accepts a function that can be injected with run-time dependencies.
 
 ~~~js
 $stateProvider.state('home', {
@@ -104,7 +106,7 @@ $stateProvider.state('home', {
 
 ## EVEN BETTER SOLUTION
 
-Having `ngInclude` in `templateProvder` function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content for me. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service, and all I need to do is `$templateCache.get('templateUrl')`:
+Having `ngInclude` in `templateProvder` function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is `$templateCache.get('templateUrl')`:
 
 ~~~js
 $stateProvider.state('home', {
