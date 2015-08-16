@@ -1,0 +1,262 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://davidcai.github.io/blog">
+  <title>A Simple A/B Testing Service</title>
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/">
+  
+
+  
+
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://davidcai.github.io/blog/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          David Cai | Blog
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">A Simple A/B Testing Service</h1>
+      <section id="main">
+        <div class="post-subtitle">
+          <h5 id="date">Sun Aug 16, 2015</h5>
+          <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+        </div>
+        
+<p class="hero">
+  <img src="http://davidcai.github.io/blog/img/ab-testing.jpg" alt="A/B testing">
+</p>
+
+
+        <p>A very simple A/B testing service implemented in Angular &ndash; abTestService:</p>
+
+<pre><code class="language-js">;(function() {
+  'use strict';
+
+  angular
+    .module('abTest')
+    .factory('abTestService', abTestService)
+  ;
+
+
+  function abTestService() {
+    return {
+      pick: pick
+    };
+
+    function pick() {
+      var len = arguments.length;
+      if (len === 0) {
+        return null;
+      }
+
+      // Random number from [0, 1)
+      var res = Math.random();
+
+      for (var i = 0; i &lt; len; i++) {
+        if (res &lt; (1 / len) * (i + 1)) {
+          return arguments[i];
+        }
+      }
+    } // /function pick
+  }
+
+})();
+</code></pre>
+
+<p>abTestService has only one method &ndash; pick, which is to evenly pick one from many choices:</p>
+
+<pre><code class="language-js">// a or b. 50% vs 50% chances
+abTestService.pick('a', 'b');
+
+// apple or orange. 50% vs 50%
+abTestService.pick('apple', 'orange');
+
+// a, b, or c. 1/3 vs 1/3 vs 1/3
+abTestService.pick('a', 'b', 'c');
+
+// a or b. 2/3 vs 1/3
+abTestService.pick('a', 'a', 'b');
+</code></pre>
+
+<p>Here is an example of how to use abTestService in UI Router:</p>
+
+<pre><code class="language-js">;(function() {
+  'use strict';
+
+  angular
+    .module('myApp', ['abTest'])
+    .config(configRoute)
+  ;
+
+
+  function configRoute($stateProvider) {
+    $stateProvider.state('home', {
+      url: '/',
+      templateProvider: function(abTestService) { // Inject abTestService
+        var result = abTestService.pick('a', 'b'); // Pick a or b
+
+        // home-a.html or home-b.html
+        return '&lt;div ng-include=&quot;\'app/home-' + result + '.html\'&quot;&gt;&lt;/div&gt;';
+      }
+    });
+  }
+
+})();
+</code></pre>
+
+<p>To better understand the logic behind <code>templateProvider</code>, I created this <a href="posts/router-dynamic-templates/">post</a> to explain it.</p>
+
+<p><br /></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/angular">angular</a> </li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/test">test</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container prev_next">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://davidcai.github.io/blog/posts/router-dynamic-templates/">Router: Dynamic Templates</a> &raquo;
+    </span>
+  
+</div>
+
+
+    <div class="container">
+      <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <br />
+    <div class="container">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/a-simple-ab-testing-service\/';
+    var disqus_title = 'A Simple A\/B Testing Service';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/a-simple-ab-testing-service\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+

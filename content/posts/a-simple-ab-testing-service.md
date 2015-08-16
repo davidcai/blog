@@ -1,7 +1,6 @@
 ---
 title: "A Simple A/B Testing Service"
 date: "2015-08-16"
-draft: true
 description: "A Simple A/B Testing Service and its example."
 categories:
   - "angular"
