@@ -94,5 +94,9 @@ header .meta {
 /* Code block */
 pre {
   border: solid 1px #aaa;
-  background-color: #fff;
+  background-color: #F9F9F9;
+}
+pre code,
+pre code.hljs {
+  background-color: #F9F9F9;
 }
