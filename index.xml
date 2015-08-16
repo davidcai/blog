@@ -41,7 +41,7 @@
 
 &lt;p&gt;In either scenario, the template cannot be fixed to &lt;code&gt;app/home/home.html&lt;/code&gt;, and has be to resolved using run-time data.&lt;/p&gt;
 
-&lt;p&gt;Router&amp;rsquo;s &lt;code&gt;templateUrl&lt;/code&gt; configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the &lt;code&gt;templateUrl&lt;/code&gt; function is &lt;code&gt;$stateParams&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Router&amp;rsquo;s &lt;code&gt;templateUrl&lt;/code&gt; configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject run-time dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the &lt;code&gt;templateUrl&lt;/code&gt; function is &lt;code&gt;$stateParams&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
   templateUrl: function($stateParams) { // Can not inject dependencies
@@ -54,7 +54,9 @@
 
 &lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
 
-&lt;p&gt;Both Angular built-in router and the UI Router have a &lt;code&gt;templateProvider&lt;/code&gt; configuration. &lt;code&gt;templateProvider&lt;/code&gt; accepts a function that can be injected with dependencies.&lt;/p&gt;
+&lt;p&gt;The anwser is &lt;code&gt;templateProvder&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Both Angular built-in router and the UI Router have a &lt;code&gt;templateProvider&lt;/code&gt; configuration. &lt;code&gt;templateProvider&lt;/code&gt; accepts a function that can be injected with run-time dependencies.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
   templateProvider: function(abTestService) { // abTestService is injected here
@@ -103,7 +105,7 @@
 
 &lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
 
-&lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvder&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content for me. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service, and all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvder&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
   templateProvider: function(abTestService, $templateCache) {

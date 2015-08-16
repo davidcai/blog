@@ -114,7 +114,7 @@
 
 <p>In either scenario, the template cannot be fixed to <code>app/home/home.html</code>, and has be to resolved using run-time data.</p>
 
-<p>Router&rsquo;s <code>templateUrl</code> configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the <code>templateUrl</code> function is <code>$stateParams</code>.</p>
+<p>Router&rsquo;s <code>templateUrl</code> configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject run-time dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the <code>templateUrl</code> function is <code>$stateParams</code>.</p>
 
 <pre><code class="language-js">$stateProvider.state('home', {
   templateUrl: function($stateParams) { // Can not inject dependencies
@@ -127,7 +127,9 @@
 
 <h2 id="solution:7c673880e38fa750461b975e7ddb6656">SOLUTION</h2>
 
-<p>Both Angular built-in router and the UI Router have a <code>templateProvider</code> configuration. <code>templateProvider</code> accepts a function that can be injected with dependencies.</p>
+<p>The anwser is <code>templateProvder</code>.</p>
+
+<p>Both Angular built-in router and the UI Router have a <code>templateProvider</code> configuration. <code>templateProvider</code> accepts a function that can be injected with run-time dependencies.</p>
 
 <pre><code class="language-js">$stateProvider.state('home', {
   templateProvider: function(abTestService) { // abTestService is injected here
@@ -176,7 +178,7 @@
 
 <h2 id="even-better-solution:7c673880e38fa750461b975e7ddb6656">EVEN BETTER SOLUTION</h2>
 
-<p>Having <code>ngInclude</code> in <code>templateProvder</code> function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content for me. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service, and all I need to do is <code>$templateCache.get('templateUrl')</code>:</p>
+<p>Having <code>ngInclude</code> in <code>templateProvder</code> function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is <code>$templateCache.get('templateUrl')</code>:</p>
 
 <pre><code class="language-js">$stateProvider.state('home', {
   templateProvider: function(abTestService, $templateCache) {
