@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on David Cai | Blog</title>
+    <link>http://davidcai.github.io/blog/categories/test/</link>
+    <description>Recent content in Test on David Cai | Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 15 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://davidcai.github.io/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Router: Dynamic Templates</title>
+      <link>http://davidcai.github.io/blog/posts/router-dynamic-templates/</link>
+      <pubDate>Sat, 15 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/router-dynamic-templates/</guid>
+      <description>
+
+&lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router and the third-party UI Router.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;problem:7c673880e38fa750461b975e7ddb6656&#34;&gt;PROBLEM&lt;/h2&gt;
+
+&lt;p&gt;For Single Page Applications (SPAs), we often need to switch views or states inside containers. This is usually done through routers. With either Angular&amp;rsquo;s built-in router or the popular UI Router, we are able to define the relationship between states and their templates. For instance, here we defined a state &lt;code&gt;home&lt;/code&gt; and its template URL &lt;code&gt;app/home/home.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;app.config(function($stateProvider) {
+  $stateProvider.state(&#39;home&#39;, {
+    url: &#39;/&#39;,
+    templateUrl: &#39;app/home/home.html&#39;
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In some cases, this state-to-template relationship can not be determined beforehand at the &lt;code&gt;config&lt;/code&gt; time. The decision of what the template or template URL will be used for a state has to wait for the availability of run-time data. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;User&amp;rsquo;s account type, e.g. show Home version A for members, and version B for public users.&lt;/li&gt;
+&lt;li&gt;A/B testing, e.g. a A/B testing service randomly picks from two versions &amp;ndash; A or B.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In either scenario, the template cannot be fixed to &lt;code&gt;app/home/home.html&lt;/code&gt;, and has be to resolved using run-time data.&lt;/p&gt;
+
+&lt;p&gt;Router&amp;rsquo;s &lt;code&gt;templateUrl&lt;/code&gt; configuration accepts a function which can be used to create dynamic template URL. However, we are not able to inject dependencies (e.g. user services, or A/B test services) into the templateUrl function. The only available argument of the &lt;code&gt;templateUrl&lt;/code&gt; function is &lt;code&gt;$stateParams&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
+  templateUrl: function($stateParams) { // Can not inject dependencies
+    return &#39;app/home.&#39; + $stateParams.option + &#39;.html&#39;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;Both Angular built-in router and the UI Router have a &lt;code&gt;templateProvider&lt;/code&gt; configuration. &lt;code&gt;templateProvider&lt;/code&gt; accepts a function that can be injected with dependencies.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
+  templateProvider: function(abTestService) { // abTestService is injected here
+    var result = abTestService.pick(&#39;a&#39;, &#39;b&#39;); // Choose version A or B
+    return &#39;...&#39;; // Return template content based on the result
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;templateProvider&lt;/code&gt; returns template content (not an URL to the template). We can certainly embed HTML markups directly in JavaScript, but for complicate HTML, it&amp;rsquo;s better to externalize the HTML content to separate template files. Here, we created &lt;code&gt;home-a.html&lt;/code&gt; and &lt;code&gt;home-b.html&lt;/code&gt;, and &lt;code&gt;ngInclude&lt;/code&gt; them in the templateProvider function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Home version A at app/home/home-a.html --&amp;gt;
+&amp;lt;div ng-controller=&amp;quot;HomeAController&amp;quot;&amp;gt;Version A&amp;lt;/div&amp;gt;
+
+&amp;lt;!-- Home version B at app/home/home-b.html --&amp;gt;
+&amp;lt;div ng-controller=&amp;quot;HomeBController&amp;quot;&amp;gt;Version B&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
+  templateProvider: function(abTestService) {
+    var result = abTestService.pick(&#39;a&#39;, &#39;b&#39;);
+
+    // ngInclude template content based on the A/B test result
+    return &#39;&amp;lt;div ng-include=&amp;quot;\&#39;app/home/home-&#39; + result + &#39;.html\&#39;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&#39;;
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;templateProvder&lt;/code&gt; can also return a Promise which is resolved to template content.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
+  templateProvider: function($http, USER_SERVICE_REST_URL) {
+
+    // Here, we return a promise instead of the template content
+    return $http.get(USER_SERVICE_REST_URL).then(function(data) {
+      var result = (data.type === &#39;member&#39; ? &#39;a&#39; : &#39;b&#39;);
+
+      // Return the template content
+      return &#39;&amp;lt;div ng-include=&amp;quot;\&#39;app/home/home-&#39; + result + &#39;.html\&#39;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&#39;;
+    });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
+
+&lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvder&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content for me. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service, and all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
+  templateProvider: function(abTestService, $templateCache) {
+    var result = abTestService.pick(&#39;a&#39;, &#39;b&#39;);
+
+    // Retrieve the cached template content from $templateCache service
+    return $templateCache.get(&#39;app/home/home-&#39; + result + &#39;.html&#39;);
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To achieve this, we need a Gulp task to convert all HTML files under the app/ directory to JavaScript strings, and save the strings in $templateCache.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// Load gulp and its plugins
+var gulp = require(&#39;gulp&#39;);
+var minifyHtml = require(&#39;gulp-minify-html&#39;);
+var angularTemplateCache = require(&#39;gulp-angular-templatecache&#39;);
+
+
+gulp.task(&#39;templates&#39;, function() {
+
+  return cacheTemplates(&#39;src/app/**/*.html&#39;, &#39;app.template.js&#39;);
+
+  function cacheTemplates(input, output) {
+    return gulp.src(input) // Get all HTML files
+      .pipe(minifyHtml({ // Minify HTML content first
+        empty: true,
+        spare: true,
+        quotes: true
+      }))
+      .pipe(angularTemplateCache(output, { // Save minified strings to cache
+        module: &#39;myApp&#39; // Setup $templateCache for Angular module &#39;myApp&#39;
+      }))
+      .pipe(gulp.dest(&#39;.tmp/templates/&#39;));
+
+  } // /function cacheTemplates
+
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, import the generated &lt;code&gt;template.js&lt;/code&gt; in &lt;code&gt;index.html&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;script src=&amp;quot;.tmp/templates/app.template.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:7c673880e38fa750461b975e7ddb6656&#34;&gt;CONCLUSION&lt;/h2&gt;
+
+&lt;p&gt;By leveraging the &lt;code&gt;templateProvder&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
