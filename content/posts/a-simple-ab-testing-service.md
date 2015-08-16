@@ -17,7 +17,7 @@ A very simple A/B testing service implemented in Angular -- abTestService:
   'use strict';
 
   angular
-    .module('abTest')
+    .module('abTest', [])
     .factory('abTestService', abTestService)
   ;
 
@@ -63,14 +63,17 @@ abTestService.pick('a', 'b', 'c');
 abTestService.pick('a', 'a', 'b');
 ~~~
 
-Here is an example of how to use abTestService in UI Router:
+Here is an example of how to use abTestService with UI Router:
 
 ~~~js
 ;(function() {
   'use strict';
 
   angular
-    .module('myApp', ['abTest'])
+    .module('myApp', [
+      'abTest',
+      'ui.router'
+    ])
     .config(configRoute)
   ;
 
@@ -90,6 +93,6 @@ Here is an example of how to use abTestService in UI Router:
 })();
 ~~~
 
-To better understand the logic behind `templateProvider`, I created this [post]({{< ref "router-dynamic-templates.md" >}}) to explain it.
+To better explain the logic behind templateProvider, I created this [post]({{< ref "router-dynamic-templates.md" >}}).
 
 <br />
