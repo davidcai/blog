@@ -93,7 +93,7 @@
   'use strict';
 
   angular
-    .module('abTest')
+    .module('abTest', [])
     .factory('abTestService', abTestService)
   ;
 
@@ -138,13 +138,16 @@ abTestService.pick('a', 'b', 'c');
 abTestService.pick('a', 'a', 'b');
 </code></pre>
 
-<p>Here is an example of how to use abTestService in UI Router:</p>
+<p>Here is an example of how to use abTestService with UI Router:</p>
 
 <pre><code class="language-js">;(function() {
   'use strict';
 
   angular
-    .module('myApp', ['abTest'])
+    .module('myApp', [
+      'abTest',
+      'ui.router'
+    ])
     .config(configRoute)
   ;
 
@@ -164,7 +167,7 @@ abTestService.pick('a', 'a', 'b');
 })();
 </code></pre>
 
-<p>To better understand the logic behind <code>templateProvider</code>, I created this <a href="http://davidcai.github.io/blog/posts/router-dynamic-templates/">post</a> to explain it.</p>
+<p>To better explain the logic behind templateProvider, I created this <a href="http://davidcai.github.io/blog/posts/router-dynamic-templates/">post</a>.</p>
 
 <p><br /></p>
 
