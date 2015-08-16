@@ -5,8 +5,97 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Simple A/B Testing Service</title>
+      <link>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</link>
+      <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</guid>
+      <description>&lt;p&gt;A very simple A/B testing service implemented in Angular &amp;ndash; abTestService:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
+  &#39;use strict&#39;;
+
+  angular
+    .module(&#39;abTest&#39;)
+    .factory(&#39;abTestService&#39;, abTestService)
+  ;
+
+
+  function abTestService() {
+    return {
+      pick: pick
+    };
+
+    function pick() {
+      var len = arguments.length;
+      if (len === 0) {
+        return null;
+      }
+
+      // Random number from [0, 1)
+      var res = Math.random();
+
+      for (var i = 0; i &amp;lt; len; i++) {
+        if (res &amp;lt; (1 / len) * (i + 1)) {
+          return arguments[i];
+        }
+      }
+    } // /function pick
+  }
+
+})();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;abTestService has only one method &amp;ndash; pick, which is to evenly pick one from many choices:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// a or b. 50% vs 50% chances
+abTestService.pick(&#39;a&#39;, &#39;b&#39;);
+
+// apple or orange. 50% vs 50%
+abTestService.pick(&#39;apple&#39;, &#39;orange&#39;);
+
+// a, b, or c. 1/3 vs 1/3 vs 1/3
+abTestService.pick(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;);
+
+// a or b. 2/3 vs 1/3
+abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is an example of how to use abTestService in UI Router:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
+  &#39;use strict&#39;;
+
+  angular
+    .module(&#39;myApp&#39;, [&#39;abTest&#39;])
+    .config(configRoute)
+  ;
+
+
+  function configRoute($stateProvider) {
+    $stateProvider.state(&#39;home&#39;, {
+      url: &#39;/&#39;,
+      templateProvider: function(abTestService) { // Inject abTestService
+        var result = abTestService.pick(&#39;a&#39;, &#39;b&#39;); // Pick a or b
+
+        // home-a.html or home-b.html
+        return &#39;&amp;lt;div ng-include=&amp;quot;\&#39;app/home-&#39; + result + &#39;.html\&#39;&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&#39;;
+      }
+    });
+  }
+
+})();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To better understand the logic behind &lt;code&gt;templateProvider&lt;/code&gt;, I created this &lt;a href=&#34;posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt; to explain it.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Router: Dynamic Templates</title>
