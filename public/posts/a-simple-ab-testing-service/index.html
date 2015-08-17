@@ -87,20 +87,9 @@
     };
 
     function pick() {
-      var len = arguments.length;
-      if (len === 0) {
-        return null;
-      }
-
-      // Random number from [0, 1)
-      var res = Math.random();
-
-      for (var i = 0; i &lt; len; i++) {
-        if (res &lt; (1 / len) * (i + 1)) {
-          return arguments[i];
-        }
-      }
-    } // /function pick
+      var i = Math.floor(Math.random() * arguments.length);
+      return arguments[i];
+    }
   }
 
 })();

@@ -28,20 +28,9 @@ A very simple A/B testing service implemented in Angular -- abTestService:
     };
 
     function pick() {
-      var len = arguments.length;
-      if (len === 0) {
-        return null;
-      }
-
-      // Random number from [0, 1)
-      var res = Math.random();
-
-      for (var i = 0; i < len; i++) {
-        if (res < (1 / len) * (i + 1)) {
-          return arguments[i];
-        }
-      }
-    } // /function pick
+      var i = Math.floor(Math.random() * arguments.length);
+      return arguments[i];
+    }
   }
 
 })();
