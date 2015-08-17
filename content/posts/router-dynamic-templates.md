@@ -9,7 +9,7 @@ hero: "/img/dynamic-templates.png"
 heroalt: "Dynamic templates"
 ---
 
-This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular's built-in router and the third-party UI Router.
+This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular's built-in router or the third-party UI Router.
 <!--more-->
 
 <br />

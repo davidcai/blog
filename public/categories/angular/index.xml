@@ -97,7 +97,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
       <guid>http://davidcai.github.io/blog/posts/router-dynamic-templates/</guid>
       <description>
 
-&lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router and the third-party UI Router.&lt;/p&gt;
+&lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router or the third-party UI Router.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
