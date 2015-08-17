@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Test on David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/categories/test/</link>
+    <link>http://localhost:1313/blog/categories/test/</link>
     <description>Recent content in Test on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 16 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>A Simple A/B Testing Service</title>
-      <link>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</link>
+      <link>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</link>
       <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</guid>
+      <guid>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</guid>
       <description>&lt;p&gt;A very simple A/B testing service implemented in Angular &amp;ndash; abTestService:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
@@ -83,7 +83,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 })();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://davidcai.github.io/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://localhost:1313/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
@@ -91,10 +91,10 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
     
     <item>
       <title>Router: Dynamic Templates</title>
-      <link>http://davidcai.github.io/blog/posts/router-dynamic-templates/</link>
+      <link>http://localhost:1313/blog/posts/router-dynamic-templates/</link>
       <pubDate>Sat, 15 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/router-dynamic-templates/</guid>
+      <guid>http://localhost:1313/blog/posts/router-dynamic-templates/</guid>
       <description>
 
 &lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router and the third-party UI Router.&lt;/p&gt;

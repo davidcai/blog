@@ -2,38 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://davidcai.github.io/blog/</loc>
+    <loc>http://localhost:1313/blog/</loc>
     <lastmod>2015-08-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</loc>
+    <loc>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</loc>
     <lastmod>2015-08-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/router-dynamic-templates/</loc>
+    <loc>http://localhost:1313/blog/posts/router-dynamic-templates/</loc>
     <lastmod>2015-08-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</loc>
+    <loc>http://localhost:1313/blog/posts/directive-at-vs-equal/</loc>
     <lastmod>2015-08-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/angular-factory-pattern/</loc>
+    <loc>http://localhost:1313/blog/posts/angular-factory-pattern/</loc>
     <lastmod>2015-08-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</loc>
+    <loc>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</loc>
+    <lastmod>2015-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/blog/posts/angular-best-practice-recap/</loc>
     <lastmod>2015-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://davidcai.github.io/blog/posts/lets-use-nvm/</loc>
+    <loc>http://localhost:1313/blog/posts/lets-use-nvm/</loc>
     <lastmod>2015-06-14T00:00:00+00:00</lastmod>
   </url>
   
