@@ -50,7 +50,7 @@ $stateProvider.state('home', {
 
 ## SOLUTION
 
-The anwser is `templateProvder`.
+The anwser is `templateProvider`.
 
 Both Angular built-in router and the UI Router have a `templateProvider` configuration. `templateProvider` accepts a function that can be injected with run-time dependencies.
 
@@ -84,7 +84,7 @@ $stateProvider.state('home', {
 });
 ~~~
 
-`templateProvder` can also return a Promise which is resolved to template content.
+`templateProvider` can also return a Promise which is resolved to template content.
 
 ~~~js
 $stateProvider.state('home', {
@@ -106,7 +106,7 @@ $stateProvider.state('home', {
 
 ## EVEN BETTER SOLUTION
 
-Having `ngInclude` in `templateProvder` function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is `$templateCache.get('templateUrl')`:
+Having `ngInclude` in `templateProvider` function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is `$templateCache.get('templateUrl')`:
 
 ~~~js
 $stateProvider.state('home', {
@@ -161,6 +161,6 @@ Then, import the generated `template.js` in `index.html`:
 
 ## CONCLUSION
 
-By leveraging the `templateProvder` function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.
+By leveraging the `templateProvider` function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.
 
 <br />

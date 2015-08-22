@@ -110,7 +110,7 @@
 
 <h2 id="solution:7c673880e38fa750461b975e7ddb6656">SOLUTION</h2>
 
-<p>The anwser is <code>templateProvder</code>.</p>
+<p>The anwser is <code>templateProvider</code>.</p>
 
 <p>Both Angular built-in router and the UI Router have a <code>templateProvider</code> configuration. <code>templateProvider</code> accepts a function that can be injected with run-time dependencies.</p>
 
@@ -141,7 +141,7 @@
 });
 </code></pre>
 
-<p><code>templateProvder</code> can also return a Promise which is resolved to template content.</p>
+<p><code>templateProvider</code> can also return a Promise which is resolved to template content.</p>
 
 <pre><code class="language-js">$stateProvider.state('home', {
   templateProvider: function($http, USER_SERVICE_REST_URL) {
@@ -161,7 +161,7 @@
 
 <h2 id="even-better-solution:7c673880e38fa750461b975e7ddb6656">EVEN BETTER SOLUTION</h2>
 
-<p>Having <code>ngInclude</code> in <code>templateProvder</code> function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is <code>$templateCache.get('templateUrl')</code>:</p>
+<p>Having <code>ngInclude</code> in <code>templateProvider</code> function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is <code>$templateCache.get('templateUrl')</code>:</p>
 
 <pre><code class="language-js">$stateProvider.state('home', {
   templateProvider: function(abTestService, $templateCache) {
@@ -211,7 +211,7 @@ gulp.task('templates', function() {
 
 <h2 id="conclusion:7c673880e38fa750461b975e7ddb6656">CONCLUSION</h2>
 
-<p>By leveraging the <code>templateProvder</code> function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.</p>
+<p>By leveraging the <code>templateProvider</code> function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.</p>
 
 <p><br /></p>
 
