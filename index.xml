@@ -135,7 +135,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
 
-&lt;p&gt;The anwser is &lt;code&gt;templateProvder&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The anwser is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both Angular built-in router and the UI Router have a &lt;code&gt;templateProvider&lt;/code&gt; configuration. &lt;code&gt;templateProvider&lt;/code&gt; accepts a function that can be injected with run-time dependencies.&lt;/p&gt;
 
@@ -166,7 +166,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;code&gt;templateProvder&lt;/code&gt; can also return a Promise which is resolved to template content.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;templateProvider&lt;/code&gt; can also return a Promise which is resolved to template content.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
   templateProvider: function($http, USER_SERVICE_REST_URL) {
@@ -186,7 +186,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
 
-&lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvder&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvider&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;$stateProvider.state(&#39;home&#39;, {
   templateProvider: function(abTestService, $templateCache) {
@@ -236,7 +236,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;h2 id=&#34;conclusion:7c673880e38fa750461b975e7ddb6656&#34;&gt;CONCLUSION&lt;/h2&gt;
 
-&lt;p&gt;By leveraging the &lt;code&gt;templateProvder&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
+&lt;p&gt;By leveraging the &lt;code&gt;templateProvider&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
