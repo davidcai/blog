@@ -135,7 +135,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
 
-&lt;p&gt;The anwser is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The answer is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both Angular built-in router and the UI Router have a &lt;code&gt;templateProvider&lt;/code&gt; configuration. &lt;code&gt;templateProvider&lt;/code&gt; accepts a function that can be injected with run-time dependencies.&lt;/p&gt;
 
