@@ -5,8 +5,45 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Webpack: Pack Your Web Assets</title>
+      <link>http://davidcai.github.io/blog/posts/introducing-webpack/</link>
+      <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/introducing-webpack/</guid>
+      <description>&lt;p&gt;I just had a presentation to introduce Webpack to our UI Guild in my company. Webpack is a module bundler to pack all kinds of web assets (JavaScript, styles, images, HTML partials, etc.) into one or more bundle JS files.&lt;/p&gt;
+
+&lt;p&gt;Here is &lt;a href=&#34;https://docs.google.com/presentation/d/1frBHDkSLvarbjFukhe3EuTuijpyTMHXwJDKu65OSVx8/edit?usp=sharing&#34;&gt;my presentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I should have highlighted the difference between Webpack and Require JS. Some developers are confused by these two tools.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Require JS (without using any plugin) sends a separate HTTP request to retrieve each dependency module.&lt;/li&gt;
+&lt;li&gt;However, Webpack is a pre-processor that bundles all required modules into one file before the bundle file is downloaded to users&amp;rsquo; browsers.&lt;/li&gt;
+&lt;li&gt;Require JS apps load dependency on demand, but complicate apps with many dependencies tend to send a lot of requests which might impact performance.&lt;/li&gt;
+&lt;li&gt;Webpack merges dependencies into one or more files, so the number of HTTP requests will be dramatically reduced, however, the initial download payload might be big. Webpack can be fine tuned to find a balance between the number of requests and download file size.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I love how we can use Webpack to leverage Common JS module system to encapsulate dependency declarations in their requiring modules instead of flattening the dependency graph in the index.html.&lt;/p&gt;
+
+&lt;p&gt;Moreover, because tasks such as packaging, minification, source mapping, and transpiling can be done in Webpack, Gulp/Grunt scripts will be greatly simplified. And, we probably don&amp;rsquo;t even need Bower since almost all JS libraries can be installed from NPM.&lt;/p&gt;
+
+&lt;p&gt;Something remained to be tested are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;How will Webpack solve library version conflicts? For instance, if Module A requires Angular 1.3 and Module B requires Angular 1.4, whether and how will Webpack help us solve the conflict? (Bower forces developers to manually resolve conflicts.)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;UI Performance. With Webpack, style sheets will be imported through dynamically injected &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; tags, will this introduce flickering in UI? We have to test it.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I will come back to these questions once I run some tests.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A Simple A/B Testing Service</title>
