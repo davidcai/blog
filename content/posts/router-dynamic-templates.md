@@ -50,7 +50,7 @@ $stateProvider.state('home', {
 
 ## SOLUTION
 
-The anwser is `templateProvider`.
+The answer is `templateProvider`.
 
 Both Angular built-in router and the UI Router have a `templateProvider` configuration. `templateProvider` accepts a function that can be injected with run-time dependencies.
 
