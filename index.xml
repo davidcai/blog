@@ -5,8 +5,136 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 22 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Copy vs. Extend vs. Merge</title>
+      <link>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</link>
+      <pubDate>Wed, 09 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</guid>
+      <description>
+
+&lt;p&gt;Copy, extend, and merge are parts of the utility functions come with Angular. This post explores their differences.&lt;/p&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;copy:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Copy&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is a &lt;em&gt;deep&lt;/em&gt; copy.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var o1 = { name: &#39;David&#39;, age: 26, skill: {} };
+var o2 = angular.copy(o1);
+
+console.log(o2);
+// Output: { name: &#39;David&#39;, age: 26, skill: {} }
+
+console.log(o1 === o2);
+// Output: false
+
+console.log(o1.skill === o2.skill);
+// Output: false
+// o2.skill is a copy of o1.skill. They don&#39;t point to the same skill object.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;extend:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Extend&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;angular.extend(dst, src1, src2, ...)&lt;/code&gt; is to &lt;em&gt;shallow&lt;/em&gt; copy the properties of the source objects from right to left, all the way to the destination object.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var src1 = { name: &#39;David&#39;, age: 30 }; // source 1
+var src2 = { age: 26, skill: {} }; // source 2
+var dst = {}; // destination
+
+console.log(angular.extend(dst, src1, src2));
+// Output: { name: &#39;David&#39;, age: 26, skill: {} }
+
+console.log(src2.skill === dst.skill);
+// Output: true
+// src2 and dst share the same skill object due to shallow copy.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Merge&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;angular.merge&lt;/code&gt; is an Angular 1.4+ API that is to &lt;em&gt;deep&lt;/em&gt; (recursively) copy the properties of the source objects to the destination object.&lt;/p&gt;
+
+&lt;p&gt;Here we use the above example, and replace &lt;code&gt;angular.extend&lt;/code&gt; with &lt;code&gt;angular.merge&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var src1 = { name: &#39;David&#39;, age: 30 };
+var src2 = { age: 26, skill: {} };
+var dst = {};
+
+console.log(angular.merge(dst, src1, src2));
+// Output: { name: &#39;David&#39;, age: 26, skill: {} }
+// It seems to the same result as the previous example&#39;s, however, ...
+
+console.log(src2.skill === dst.skill);
+// Output: false
+// src2.skill and dst.skill point to different skill objects due to deep copy.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;more-extend-vs-merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;More Extend vs. Merge&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is simply to clone an object. &lt;code&gt;angular.extend&lt;/code&gt; and &lt;code&gt;angular.merge&lt;/code&gt; are more interesting. Here is another set of comparing examples.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;angular.extend&lt;/code&gt; &amp;ndash; shallow copy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var src1 = { skill: { name: &#39;Java&#39;, experience: 20, certified: true } };
+var src2 = { skill: { name: &#39;JavaScript&#39;, experience: 10 } };
+var dst = {};
+
+console.log(angular.extend(dst, src1, src2));
+// Output: { skill: { name: &#39;JavaScript&#39;, experience: 10 } }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;certified: true&lt;/code&gt; is lost. Because of shallow copy, the skill property is &lt;em&gt;assigned&lt;/em&gt; from src2 to src1 without &lt;em&gt;recursively&lt;/em&gt; copying the individual properties inside the skill value.&lt;/p&gt;
+
+&lt;p&gt;The same code yields totally different result if we replace &lt;code&gt;extend&lt;/code&gt; with &lt;code&gt;merge&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;angular.merge&lt;/code&gt; &amp;ndash; deep (recursive) copy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var src1 = { skill: { name: &#39;Java&#39;, experience: 20, certified: true } };
+var src2 = { skill: { name: &#39;JavaScript&#39;, experience: 10 } };
+var dst = {};
+
+console.log(angular.merge(dst, src1, src2));
+// Output: { skill: { name: &#39;JavaScript&#39;, experience: 10, certified: true } }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With &lt;code&gt;angular.merge&lt;/code&gt;, properties are recursively copied from src2 to src1, so &lt;code&gt;certified: true&lt;/code&gt; is reserved.&lt;/p&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;user-and-default-options:1f01c150b870a11f9ba71472fb074eba&#34;&gt;User and Default Options&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;angular.extend&lt;/code&gt; or &lt;code&gt;angular.merge&lt;/code&gt; is often used to achieve user options overriding default options. Here is an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;function orderDrink(options) {
+
+  // Default options
+  var defaultOptions = { size: &#39;medium&#39; };
+
+  // Supplied options override default options
+  var opts = angular.extend({}, defaultOptions, options);
+
+  console.log(opts.size);
+}
+
+orderDrink({ size: &#39;large&#39; }); // Output: &#39;large&#39;
+orderDrink(); // Output: &#39;medium&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more complicate case that has nested options, you might want to use &lt;code&gt;angular.merge&lt;/code&gt; for its deep copy.&lt;/p&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Webpack: Pack Your Web Assets</title>
