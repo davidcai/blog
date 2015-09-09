@@ -1,5 +1,5 @@
 ---
-title: "Copy vs. Extend vs. Merge"
+title: "Angular: Copy vs. Extend vs. Merge"
 date: "2015-09-09"
 description: "Angular Copy vs. Extend vs. Merge"
 categories:
