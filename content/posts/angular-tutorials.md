@@ -1,7 +1,7 @@
 ---
-title: "Angular Video Tutorials"
+title: "Angular Tutorial Videos"
 date: "2015-09-10"
-description: "A collection of Angular video tutorials"
+description: "A collection of Angular tutorial videos"
 categories:
   - "angular"
   - "test"
@@ -9,7 +9,7 @@ hero: "/img/mentor.png"
 heroalt: "Mentoring"
 ---
 
-Here is my collection of free video tutorials. Could be really helpful for people new to Angular.
+Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.
 <!--more-->
 
 # 1. Shaping up with Angular JS
