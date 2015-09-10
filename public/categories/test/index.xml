@@ -5,8 +5,88 @@
     <link>http://davidcai.github.io/blog/categories/test/</link>
     <description>Recent content in Test on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Angular Video Tutorials</title>
+      <link>http://davidcai.github.io/blog/posts/angular-tutorials/</link>
+      <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/angular-tutorials/</guid>
+      <description>
+
+&lt;p&gt;Here is my collection of free video tutorials most helpful for people new to Angular.&lt;/p&gt;
+
+&lt;h1 id=&#34;1-shaping-up-with-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
+
+&lt;p&gt;Gregg Pollack&amp;rsquo;s &amp;ldquo;Shaping up with Angular.js&amp;rdquo; from codeschool.com has been there for a while. It is one of the tutorials that have the best intro. The series covers Angular setup, binding, controllers, directives, filters, form handling, and services. The best part is its challenges after each chapter.&lt;/p&gt;
+
+&lt;p&gt;&lt;a class=&#34;img-og&#34; href=&#34;http://campus.codeschool.com/courses/shaping-up-with-angular-js/intro&#34; target=&#34;_blank&#34;&gt;
+  &lt;img src=&#34;http://projector.codeschool.com/videos/6ab6e1ab/thumbnail&#34;&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The tutorial might be a bit confusing to navigate. Make sure you scroll all the way to the top, and click the &amp;ldquo;START COURSE&amp;rdquo; button, which will list all the chapters. It&amp;rsquo;s recommended starting from the beginning in the order. The tutorial walks you through building a gem store project. Skipping the previous chapters might make yourself lost.&lt;/p&gt;
+
+&lt;p&gt;At the bottom right corner, you will find the &amp;ldquo;START CHALLENGES&amp;rdquo; button which brings you to the exercises. The challenge mode gives you an inline editor to play around the code. Your editting will be immediately reflected in the &amp;ldquo;Preview&amp;rdquo; panel. Pretty handy for learn by play.&lt;/p&gt;
+
+&lt;p&gt;The tutorial has a sequel &amp;ndash; &amp;ldquo;Staying Sharp with Angular.js&amp;rdquo;. Alyssa Nicoll will be your mentor. The first chapter covers router. It is free. The following chapters might need payment to unlock.&lt;/p&gt;
+
+&lt;p&gt;Free tutorial: &lt;a href=&#34;http://campus.codeschool.com/courses/shaping-up-with-angular-js/intro&#34;&gt;Shaping up with Angular.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sequel: &lt;a href=&#34;https://www.codeschool.com/courses/staying-sharp-with-angular-js&#34;&gt;Staying Sharp with Angular.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;2-egghead-io-new-to-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
+
+&lt;p&gt;Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn somthing new from these informative discussions.&lt;/p&gt;
+
+&lt;p&gt;&lt;a class=&#34;img-og&#34; href=&#34;https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer&#34; target=&#34;_blank&#34;&gt;
+  &lt;img src=&#34;http://www.infragistics.com/community/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/brent_5F00_schooley.metablogapi/2061.logo_5F00_3309A602.png&#34;&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This tutorial spent a lot of inks on directives and isolated scopes, which are essential to writing better components in Angular JS.&lt;/p&gt;
+
+&lt;p&gt;Egghead.io is a powerhouse for all Angular learning. If you&amp;rsquo;d like to adventure to specific topics or advanced usage, check out this list of &lt;a href=&#34;https://egghead.io/technologies/angularjs&#34;&gt;all Angular lessons&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Egghead.io: &lt;a href=&#34;https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer&#34;&gt;New to AngularJS?&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;3-angular-youtube-channel:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
+
+&lt;p&gt;For people who prefer picking their own lessons, Angular&amp;rsquo;s Youtube channel is the gold mine.&lt;/p&gt;
+
+&lt;p&gt;&lt;a class=&#34;img-og&#34; href=&#34;https://www.youtube.com/user/angularjs&#34; target=&#34;_blank&#34;&gt;
+  &lt;img src=&#34;http://codegeekz.com/wp-content/uploads/AngularJS-YouTube.jpeg&#34;&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Strictly speaking, the channel itself is not a tutorial site, however, here, you will find great videos covering wide range of topics. I will give you some examples:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Julie Ralph&amp;rsquo;s video on Angular &lt;a href=&#34;https://www.youtube.com/watch?v=vvxsWokQblk&#34;&gt;Protractor test&lt;/a&gt; and &lt;a href=&#34;https://www.youtube.com/watch?v=BvAeabvZ61o&#34;&gt;more&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Vojta Jina&amp;rsquo;s &lt;a href=&#34;https://youtu.be/rB5b67Cg6bc&#34;&gt;Testing Directives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/dF_ObGgzGE8&#34;&gt;Reusable Components in Angular: Design patterns, transclusion, and more&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Youtube &lt;a href=&#34;https://www.youtube.com/user/angularjs&#34;&gt;Angular channel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Other Youtube channels related to Angular JS:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCm9iiIfgmVODUJxINecHQkA&#34;&gt;ng-conf channel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCBWXtgwaUqyvI50euTYlUWQ&#34;&gt;Angular U channel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;4-others:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;4. Others&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PluralSight.com &lt;a href=&#34;http://www.pluralsight.com/search/?searchTerm=angular&#34;&gt;Angular courses&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/UlvCbnKAH3g&#34;&gt;John Papa - 10 AngularJS Patterns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;David Mosher&amp;rsquo;s &lt;a href=&#34;https://www.youtube.com/watch?v=Ty8XcASK9js&#34;&gt;Advanced Directives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Now, some silly stuff &lt;a href=&#34;https://youtu.be/M_Wp-2XA9ZU&#34;&gt;ng-wat&lt;/a&gt; inspired by &lt;a href=&#34;https://youtu.be/FqhZZNUyVFM&#34;&gt;JS Wat&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A Simple A/B Testing Service</title>
