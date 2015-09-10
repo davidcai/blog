@@ -99,3 +99,38 @@ pre code,
 pre code.hljs {
   background-color: #F7F7F7;
 }
+
+/* Images in posts */
+.img-og img {
+  width: auto;
+}
+.img-xl img {
+  width: 85%;
+}
+.img-lg img {
+  width: 70%;
+}
+.img-md img {
+  width: 50%;
+}
+.img-sm img {
+  width: 30%;
+}
+.img-xs img {
+  width: 15%;
+}
+.img-og img,
+.img-xl img,
+.img-lg img,
+.img-md img,
+.img-sm img,
+.img-xs img,
+.img-center img {
+  margin: 0 auto 1rem;
+}
+.img-left img {
+  margin: 0 auto 1rem 0;
+}
+.img-right img {
+  margin: 0 0 1rem auto;
+}
