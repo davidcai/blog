@@ -9,7 +9,7 @@ hero: "/img/mentor.png"
 heroalt: "Mentoring"
 ---
 
-Here is my collection of free video tutorials most helpful for people new to Angular.
+Here is my collection of free video tutorials. Could be really helpful for people new to Angular.
 <!--more-->
 
 # 1. Shaping up with Angular JS
@@ -22,7 +22,7 @@ Gregg Pollack's "Shaping up with Angular.js" from codeschool.com has been there 
 
 The tutorial might be a bit confusing to navigate. Make sure you scroll all the way to the top, and click the "START COURSE" button, which will list all the chapters. It's recommended starting from the beginning in the order. The tutorial walks you through building a gem store project. Skipping the previous chapters might make yourself lost.
 
-At the bottom right corner, you will find the "START CHALLENGES" button which brings you to the exercises. The challenge mode gives you an inline editor to play around the code. Your editting will be immediately reflected in the "Preview" panel. Pretty handy for learn by play.  
+At the bottom right corner, you will find the "START CHALLENGES" button which brings you to the exercises. The challenge mode gives you an inline editor to play around the code. Your editing will be immediately reflected in the "Preview" panel. Pretty handy for learn by play.  
 
 The tutorial has a sequel -- "Staying Sharp with Angular.js". Alyssa Nicoll will be your mentor. The first chapter covers router. It is free. The following chapters might need payment to unlock.
 
@@ -33,7 +33,7 @@ Sequel: [Staying Sharp with Angular.js](https://www.codeschool.com/courses/stayi
 
 # 2. Egghead IO - New to Angular JS?
 
-Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn somthing new from these informative discussions.
+Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn something new from these informative discussions.
 
 <a class="img-og" href="https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer" target="_blank">
   <img src="http://www.infragistics.com/community/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/brent_5F00_schooley.metablogapi/2061.logo_5F00_3309A602.png">
