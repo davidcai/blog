@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on David Cai | Blog</title>
-    <link>http://localhost:1313/blog/posts/</link>
+    <link>http://davidcai.github.io/blog/posts/</link>
     <description>Recent content in Posts on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 10 Sep 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://davidcai.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Angular Tutorial Videos</title>
-      <link>http://localhost:1313/blog/posts/angular-tutorials/</link>
+      <link>http://davidcai.github.io/blog/posts/angular-tutorials/</link>
       <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/angular-tutorials/</guid>
+      <guid>http://davidcai.github.io/blog/posts/angular-tutorials/</guid>
       <description>
 
 &lt;p&gt;Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.&lt;/p&gt;
@@ -90,10 +90,10 @@
     
     <item>
       <title>Angular: Copy vs. Extend vs. Merge</title>
-      <link>http://localhost:1313/blog/posts/copy-vs-extend-vs-merge/</link>
+      <link>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</link>
       <pubDate>Wed, 09 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/copy-vs-extend-vs-merge/</guid>
+      <guid>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</guid>
       <description>
 
 &lt;p&gt;Copy, extend, and merge are parts of the utility functions come with Angular. This post explores their differences.&lt;/p&gt;
@@ -218,10 +218,10 @@ orderDrink(); // Output: &#39;medium&#39;
     
     <item>
       <title>Webpack: Pack Your Web Assets</title>
-      <link>http://localhost:1313/blog/posts/introducing-webpack/</link>
+      <link>http://davidcai.github.io/blog/posts/introducing-webpack/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/introducing-webpack/</guid>
+      <guid>http://davidcai.github.io/blog/posts/introducing-webpack/</guid>
       <description>&lt;p&gt;I just had a presentation to introduce Webpack to our UI Guild in my company. Webpack is a module bundler to pack all kinds of web assets (JavaScript, styles, images, HTML partials, etc.) into one or more bundle JS files.&lt;/p&gt;
 
 &lt;p&gt;Here is &lt;a href=&#34;https://docs.google.com/presentation/d/1frBHDkSLvarbjFukhe3EuTuijpyTMHXwJDKu65OSVx8/edit?usp=sharing&#34;&gt;my presentation&lt;/a&gt;.&lt;/p&gt;
@@ -255,10 +255,10 @@ orderDrink(); // Output: &#39;medium&#39;
     
     <item>
       <title>A Simple A/B Testing Service</title>
-      <link>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</link>
+      <link>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</link>
       <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</guid>
+      <guid>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</guid>
       <description>&lt;p&gt;A very simple A/B testing service implemented in Angular &amp;ndash; abTestService:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
@@ -328,7 +328,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 })();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://localhost:1313/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://davidcai.github.io/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
@@ -336,10 +336,10 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
     
     <item>
       <title>Router: Dynamic Templates</title>
-      <link>http://localhost:1313/blog/posts/router-dynamic-templates/</link>
+      <link>http://davidcai.github.io/blog/posts/router-dynamic-templates/</link>
       <pubDate>Sat, 15 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/router-dynamic-templates/</guid>
+      <guid>http://davidcai.github.io/blog/posts/router-dynamic-templates/</guid>
       <description>
 
 &lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router or the third-party UI Router.&lt;/p&gt;
@@ -489,10 +489,10 @@ gulp.task(&#39;templates&#39;, function() {
     
     <item>
       <title>Directive Isolated Scope: @ vs. =</title>
-      <link>http://localhost:1313/blog/posts/directive-at-vs-equal/</link>
+      <link>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/directive-at-vs-equal/</guid>
+      <guid>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</guid>
       <description>
 
 &lt;p&gt;Shall I use @ or = to bind scope variables? Their difference is very well explained in Angular&amp;rsquo;s documentation. However, this question still often pops up when I create directives. In this post, I listed some of the major differences between these two.&lt;/p&gt;
@@ -715,10 +715,10 @@ function awesomeWidget() {
     
     <item>
       <title>Angular Factory Pattern</title>
-      <link>http://localhost:1313/blog/posts/angular-factory-pattern/</link>
+      <link>http://davidcai.github.io/blog/posts/angular-factory-pattern/</link>
       <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/angular-factory-pattern/</guid>
+      <guid>http://davidcai.github.io/blog/posts/angular-factory-pattern/</guid>
       <description>
 
 &lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
@@ -924,20 +924,11 @@ function userService($http) {
     </item>
     
     <item>
-      <title>My Favorite Atom Editor Plugins</title>
-      <link>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</link>
-      <pubDate>Mon, 03 Aug 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Angular Best Practice Recap</title>
-      <link>http://localhost:1313/blog/posts/angular-best-practice-recap/</link>
+      <link>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</link>
       <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/angular-best-practice-recap/</guid>
+      <guid>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</guid>
       <description>
 
 &lt;p&gt;I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&amp;rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&amp;rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.&lt;/p&gt;
@@ -1209,7 +1200,7 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -1336,10 +1327,10 @@ app.controller(&#39;MainController&#39;, function($scope, $log) {
     
     <item>
       <title>Let&#39;s use NVM</title>
-      <link>http://localhost:1313/blog/posts/lets-use-nvm/</link>
+      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
       <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/lets-use-nvm/</guid>
+      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
       <description>
 
 &lt;p&gt;My colleague just came to me with a troubled face. He couldn&amp;rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)&lt;/p&gt;
@@ -1394,7 +1385,7 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
