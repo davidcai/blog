@@ -1,0 +1,371 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://davidcai.github.io/blog">
+  <title>Tips on Promise and $http Service</title>
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/angular-promise/">
+  
+
+  
+
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          David Cai | Blog
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">Tips on Promise and $http Service</h1>
+      <section id="main">
+        <div class="post-subtitle">
+          <h5 id="date">Mon Sep 14, 2015</h5>
+          
+        </div>
+        
+<p class="hero">
+  <img src="http://davidcai.github.io/blog/img/promise.png" alt="Promise">
+</p>
+
+
+        
+
+<p>I&rsquo;ve been reviewing a lot of Angular code lately. One common problem I found is the unnecessary use of deferred object to resolve and reject promises. In this post, I will illustrate a simplified approach. Another problem is a mix of then, catch, two callbacks in then, success, and error. I will go through each, and propose adopting a single style that can also be applied when using other Promise libraries.</p>
+
+<p><br/></p>
+
+<h2 id="resolve-promise:3ddbf3d50d77c978c68a9cd4e936397f">Resolve Promise</h2>
+
+<p>The following snippet uses $http service to make a REST call, and resolve the returned data from the response. This is a common pattern I often find in Angular code, however, the code is not optimal (see below).</p>
+
+<pre><code class="language-js">/////////////////////////////////////////////////
+// Not preferred. Unnecessary usage of deferred
+/////////////////////////////////////////////////
+function getUser($q, $http) {
+  var deferred = $q.defer();
+
+  $http.get('...').then(function(response) {
+    deferred.resolve(response.data);
+  });
+
+  return $q.promise;
+}
+</code></pre>
+
+<p>The above code can be simplified to this:</p>
+
+<pre><code class="language-js">//////////////
+// Preferred
+//////////////
+function getUser($http) {
+  return $http.get('...').then(function(response) {
+    return response.data;
+  });
+}
+</code></pre>
+
+<p>First, the <code>then</code> function accepts three callbacks: successCallback, errorCallback, and notifyCallback. If you return a value in the successCallback or errorCallback, the returned value will be used to <em>resolve</em> the promise. You don&rsquo;t have to explicitly call <code>deferred.resolve(response.data)</code> to resolve the promise. Instead, simply <code>return response.data</code> in <code>then</code>&rsquo;s callback.</p>
+
+<p>Second, the <code>then</code> function returns a new promise, so no need to use <code>$q</code> to create a deferred object and return its associated promise. Just return the promise created by <code>then</code>.</p>
+
+<p><br/></p>
+
+<h2 id="reject-promise:3ddbf3d50d77c978c68a9cd4e936397f">Reject Promise</h2>
+
+<p>What about error handling? Using the not preferred example, we can call <code>deferred.reject</code> in the error callback to reject the promise:</p>
+
+<pre><code class="language-js">/////////////////////////////////////////////////
+// Not preferred. Unnecessary usage of deferred
+/////////////////////////////////////////////////
+function getUser($q, $http) {
+  var deferred = $q.defer();
+
+  $http.get('...').then(
+    function(response) { // Success callback
+      deferred.resolve(response.data); // Resolve
+    },
+    function(response) { // Error callback
+      deferred.reject(response); // Reject
+    }
+  );
+
+  return $q.promise;
+}
+</code></pre>
+
+<p>However, a simplified solution is again to use <em>return</em> instead of <em>reject</em>. But, what shall we return? You probably think to return the response in the error callback like this:</p>
+
+<pre><code class="language-js">function getUser($http) {
+  return $http.get('...').then(
+    function(response) {
+      return response.data;
+    },
+    function(response) { // Error callback
+      return response; // &lt;&lt;&lt; Wrong
+      // Or return false; // &lt;&lt;&lt; Still wrong
+    }
+  );
+}
+</code></pre>
+
+<p>As I mentioned above, values returned from the successCallback or the errorCallback are considered to be resolved values for the promise. So the <code>return response</code> in the error callback will resolve instead reject the promise. Even when the returned value is falsy, the falsy value will be considered as a resolved value. The correct way is to return a rejected promise using <code>$q.reject(response)</code>:</p>
+
+<pre><code class="language-js">//////////////
+// Preferred
+//////////////
+function getUser($q, $http) {
+  return $http.get('...').then(
+    function(response) {
+      return response.data;
+    },
+    function(response) { // Error callback
+      return $q.reject(response); // Use $q.reject
+    }
+  );
+}
+</code></pre>
+
+<p>Besides the errorCallback in <code>then</code> function, Promise has another method &ndash; <code>catch</code> to take an error callback. I personally prefer the <code>then</code> and <code>catch</code> pair over the two callbacks in <code>then</code> for its readability.</p>
+
+<pre><code class="language-js">///////////////////////
+// Catch is preferred
+///////////////////////
+function getUser($q, $http) {
+  return $http.get('...').then(
+    function(response) {
+      return response.data;
+    }
+  ).catch( // Catch
+    function(response) {
+      return $q.reject(response);
+    }
+  );
+}
+</code></pre>
+
+<p>In the above code, <code>then</code> is used only for success callback. A <code>catch</code> is basically a <code>then()</code> without success callback &ndash; <code>then(angular.noop, errorCallback)</code>.</p>
+
+<p>The difference from <code>then(successCallback, errorCallback)</code> is that <code>catch</code> is chained of the promise returned by <code>then</code>. However, the errorCallback in <code>then</code> is chained of the original promise returned by <code>$http.get()</code>.</p>
+
+<p>Please be advised that in IE8 <code>catch</code> has special meaning, so instead of the dot syntax, write <code>['catch']</code>. Yes, in IE8, <code>catch</code> is the catch :)</p>
+
+<pre><code class="language-js">/////////////////
+// Catch in IE8
+/////////////////
+function getUser($q, $http) {
+  return $http.get('...').then(
+    function(response) {
+      return response.data;
+    }
+  )['catch']( // Catch
+    function(response) {
+      return $q.reject(response);
+    }
+  );
+}
+</code></pre>
+
+<p>If you don&rsquo;t need to handle the error in the <code>getUser</code> function shown above, you can drop the entire error callback, and let <code>getUser</code>&rsquo;s consuming code to handle the error:</p>
+
+<pre><code class="language-js">//////////////
+// Preferred
+//////////////
+function getUser($q, $http) {
+  return $http.get('...').then(function(response) {
+    return response.data;
+  });
+}
+
+// getUser's consuming code
+getUser().then(
+  function(data) { // Success callback
+    // Do something about data
+  },
+  function(response) { // Error callback
+    // Handle error state
+  }
+);
+</code></pre>
+
+<p><br/></p>
+
+<h2 id="success-and-error-in-http-service:3ddbf3d50d77c978c68a9cd4e936397f">Success and Error in $http Service</h2>
+
+<p>In old versions (1.3 and less) of Angular, $http service has two additional methods &ndash; success() and error(), which are similar to then(), however, the subtle differences are important:</p>
+
+<pre><code class="language-js">$http.get('')
+  .success(function(data) {
+    ...
+  })
+  .error(function(error) {
+    ...
+  });
+</code></pre>
+
+<p>These two methods are deprecated in Angular 1.4 partially for the confusion they introduced. The first argument passed into <code>success</code> and <code>error</code> callbacks is not the response object itself, instead, it is the data unwrapped from the response object. However, in <code>then</code> callback, you call <code>response.data</code> to retrieve the data. Here is a comparative example:</p>
+
+<pre><code class="language-js">// Success method
+$http.get('').success(function(data) {
+  $log.log(data);
+});
+
+// Then method
+$http.get('').then(function(response) {
+  $log.log(response.data); // &lt;&lt;&lt; See the difference?
+});
+</code></pre>
+
+<p>The second difference is that unlike <code>then</code>, neither <code>success</code> nor <code>error</code> will create and return new promises. The promise they return is the same HTTP promise from <code>$http.get()</code>.</p>
+
+<p>Overall, I&rsquo;d recommend not using <code>success</code> and <code>error</code>, but adopting <code>then</code> and <code>catch</code>. The latter can be found in other Promise libraries, and is already evolved to be a convention.</p>
+
+<p><br/></p>
+
+<h2 id="conclusion:3ddbf3d50d77c978c68a9cd4e936397f">Conclusion</h2>
+
+<p>The usage of a deferred object to resolve and reject promises can be replaced by a simplified style:</p>
+
+<ul>
+<li><p>Returning a value in success or error callbacks resolves the promise with the returned value.</p></li>
+
+<li><p>Returning a rejected promise using <code>return $q.reject(something)</code> rejects the promise.</p></li>
+</ul>
+
+<p>Prefer using catch to provide error callbacks. Change <code>.catch</code> to <code>['catch']</code> in IE8.</p>
+
+<p>Stop using <code>success</code> and <code>error</code>.</p>
+
+<p><br/></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/angular">angular</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container prev_next">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://davidcai.github.io/blog/posts/angular-tutorials/">Angular Tutorial Videos</a> &raquo;
+    </span>
+  
+</div>
+
+
+    <div class="container">
+      <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fangular-promise%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fangular-promise%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fangular-promise%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fangular-promise%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <br />
+    <div class="container">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/angular-promise\/';
+    var disqus_title = 'Tips on Promise and $http Service';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/angular-promise\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66412818-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
