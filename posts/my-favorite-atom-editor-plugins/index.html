@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="http://localhost:1313/blog/">
-  <title>My Favorite Atom Editor Plugins</title>
+  <title>Atom Essential packages</title>
   <link rel="canonical" href="http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/">
   
 
@@ -58,7 +58,7 @@
 
     
     <div class="container content article-content">
-      <h1 class="post-title">My Favorite Atom Editor Plugins</h1>
+      <h1 class="post-title">Atom Essential packages</h1>
       <section id="main">
         <div class="post-subtitle">
           <h5 id="date">Thu Nov 19, 2015</h5>
@@ -66,7 +66,90 @@
         </div>
         
 
-        <p>Test</p>
+        
+
+<p>Atom &ndash; the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor and extended its features. I found the following Atom packages are essential to my web development workflow.</p>
+
+<p><br/></p>
+
+<h2 id="project-manager:d55c2485435fe256bf1d0dbed34987bb">Project-manager</h2>
+
+<p>This package is a lifesaver for people like me who often need to work with more than one projects. Project-manager saves your project in a registry. Switching to other saved projects is just one key shortcut away - <code>cmd + ctrl + p</code>.</p>
+
+<p><img src="http://localhost:1313/blog/img/project-manager.png" alt="Project Manager" /></p>
+
+<p><br/></p>
+
+<h2 id="pigments:d55c2485435fe256bf1d0dbed34987bb">Pigments</h2>
+
+<p>When it comes to styling, colors might be the most important factor. It will be nice to see the actual color defined by color values right in the editor. The Pigments package gives you just that. All color values will be decorated with a block of their correspondent colors in the same file. You have options to select different decoration styles. For me, &ldquo;sqaure-dot&rdquo; worked the best.</p>
+
+<div class="img-og">
+  <img src="http://localhost:1313/blog/img/pigments.png">
+</div>
+
+<p><br/></p>
+
+<h2 id="highlight-selected:d55c2485435fe256bf1d0dbed34987bb">Highlight-selected</h2>
+
+<p>In Atom, I couldn&rsquo;t find a way to highlight all occurrences that matches my current selection. For example, I selected &ldquo;export&rdquo; and would like to immediately see all &ldquo;reports&rdquo; are highlighted in the current file. I consider this basic functionality should be included in Atom but sadly it isn&rsquo;t. Highlight-selected fixed that. You can choose to highlight the border or the background. The package even comes with two highlight colors - one for dark background, and the other for light.</p>
+
+<div class="img-og">
+  <img src="http://localhost:1313/blog/img/highlight-selected.png">
+</div>
+
+<p><br/></p>
+
+<h2 id="editorconfig:d55c2485435fe256bf1d0dbed34987bb">EditorConfig</h2>
+
+<p>Have you suffered from other developers&rsquo; bad habits of using a mix of tabs, spaces, charset, trailing white spaces and lines? EditorConfig.org created a standard to promote a consistent coding styles between different editors and IDEs. Their website maintained <a href="http://editorconfig.org/#download">a list of plugins</a> that support this standard. All you need to do is to define a <code>.editorconfig</code> file at the root of your project, and download the plugin. Then, your editor will recognize <code>.editorconfig</code> and start to apply the styles.</p>
+
+<p>Here is an example of .editorconfig file:</p>
+
+<pre><code># http://editorconfig.org
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+</code></pre>
+
+<p><br/></p>
+
+<h2 id="tabs-to-spaces:d55c2485435fe256bf1d0dbed34987bb">Tabs-to-spaces</h2>
+
+<p>I found editorconfig itself is not enough to convert all tab indentations to spaces. I had to use this tabs-to-spaces package for that. Like the name suggested, this package transforms all tabs indentations to spaces, or vice versa. In the package&rsquo;s setting UI, you have the option to choose &ldquo;none&rdquo;, &ldquo;tabify&rdquo;, and &ldquo;untabify&rdquo;. &ldquo;none&rdquo; does nothing; &ldquo;tabify&rdquo; changes indentations in spaces to tabs; and &ldquo;untabify&rdquo; does the opposite - replacing tabs with spaces.</p>
+
+<p><br/></p>
+
+<h2 id="linter-and-linter-eslint:d55c2485435fe256bf1d0dbed34987bb">Linter and linter-eslint</h2>
+
+<p>For hobby projects, you might don&rsquo;t care about linting. However, for me, even hobby projects could use some code static analysis. linter and linter-eslint shout out loud whenever (most of the time) I make syntax mistakes. They saved me tons of time that would have been wasted in JavaScript debugging.</p>
+
+<p><img src="http://localhost:1313/blog/img/eslint.png" alt="Eslint" /></p>
+
+<p><br/></p>
+
+<h2 id="themes:d55c2485435fe256bf1d0dbed34987bb">Themes</h2>
+
+<p>No matter how bad our art taste are, we developers do care about our color themes in editor, don&rsquo;t we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.</p>
+
+<p><img src="http://localhost:1313/blog/img/emerald-dream.png" alt="Emerald Dream Syntax" /></p>
+
+<p>This theme is not published as an Atom package yet, however, you can still get it from Github:
+<a href="https://github.com/davidcai/emerald-dream-syntax">https://github.com/davidcai/emerald-dream-syntax</a>. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerlad Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.</p>
+
+<p>Well, Emerald Dream or not, choose your own theme. The point is to make your editor more pleasant and effective.</p>
+
+<p><br/></p>
 
       </section>
     </div>
@@ -122,7 +205,7 @@
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
     var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/my-favorite-atom-editor-plugins\/';
-    var disqus_title = 'My Favorite Atom Editor Plugins';
+    var disqus_title = 'Atom Essential packages';
     var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/my-favorite-atom-editor-plugins\/';
 
     (function() {
@@ -155,6 +238,9 @@
 </script>
 
 
-</body>
+<script data-no-instant>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 
