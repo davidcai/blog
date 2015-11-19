@@ -1,9 +1,11 @@
 ---
 title: "Atom Essential packages"
 date: "2015-11-19"
-draft: true
+description: "Atom Essential packages for web development"
 categories:
   - tool
+hero: "/img/atom.jpg"
+heroalt: "Atom"
 ---
 
 Atom -- the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor and extended its features. I found the following Atom packages are essential to my web development workflow.
