@@ -1,7 +1,7 @@
 ---
 title: "Atom Essential Packages"
 date: "2015-11-19"
-description: "Atom Essential packages for web development"
+description: "Atom essential packages for web development"
 categories:
   - tool
 hero: "/img/atom.jpg"
