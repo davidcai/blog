@@ -1380,8 +1380,7 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
