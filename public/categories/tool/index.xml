@@ -16,7 +16,7 @@
       <guid>http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/</guid>
       <description>
 
-&lt;p&gt;Atom &amp;ndash; the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor and extended its features. I found the following Atom packages are essential to my web development workflow.&lt;/p&gt;
+&lt;p&gt;Atom &amp;ndash; the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor. I found the following Atom packages are essential to my web development workflow.&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
@@ -93,7 +93,7 @@ trim_trailing_whitespace = false
 &lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/emerald-dream.png&#34; alt=&#34;Emerald Dream Syntax&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This theme is not published as an Atom package yet, however, you can still get it from Github:
-&lt;a href=&#34;https://github.com/davidcai/emerald-dream-syntax&#34;&gt;https://github.com/davidcai/emerald-dream-syntax&lt;/a&gt;. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerlad Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.&lt;/p&gt;
+&lt;a href=&#34;https://github.com/davidcai/emerald-dream-syntax&#34;&gt;https://github.com/davidcai/emerald-dream-syntax&lt;/a&gt;. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerald Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.&lt;/p&gt;
 
 &lt;p&gt;Well, Emerald Dream or not, choose your own theme. The point is to make your editor more pleasant and effective.&lt;/p&gt;
 

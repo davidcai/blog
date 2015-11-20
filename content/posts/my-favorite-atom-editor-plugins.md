@@ -8,7 +8,7 @@ hero: "/img/atom.jpg"
 heroalt: "Atom"
 ---
 
-Atom -- the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor and extended its features. I found the following Atom packages are essential to my web development workflow.
+Atom -- the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor. I found the following Atom packages are essential to my web development workflow.
 <!--more-->
 <br/>
 
@@ -92,7 +92,7 @@ No matter how bad our art taste are, we developers do care about our color theme
 ![Emerald Dream Syntax](/img/emerald-dream.png)
 
 This theme is not published as an Atom package yet, however, you can still get it from Github:
-https://github.com/davidcai/emerald-dream-syntax. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerlad Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.
+https://github.com/davidcai/emerald-dream-syntax. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerald Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.
 
 Well, Emerald Dream or not, choose your own theme. The point is to make your editor more pleasant and effective.
 
