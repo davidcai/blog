@@ -89,7 +89,7 @@ For hobby projects, you might don't care about linting. However, for me, even ho
 
 No matter how bad our art taste are, we developers do care about our color themes in editor, don't we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.
 
-![Emerald Dream Syntax](/img/emerald-dream.png)
+![Emerald Dream Syntax](/img/emerald-dream-syntax-screenshot.png)
 
 This theme is not published as an Atom package yet, however, you can still get it from Github:
 https://github.com/davidcai/emerald-dream-syntax. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerald Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.
