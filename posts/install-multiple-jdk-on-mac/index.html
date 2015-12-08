@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://davidcai.github.io/blog">
+  <title>Install Multiple Java Versions on Mac</title>
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/">
+  
+
+  
+
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          David Cai | Blog
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">Install Multiple Java Versions on Mac</h1>
+      <section id="main">
+        <div class="post-subtitle">
+          <h5 id="date">Mon Dec 7, 2015</h5>
+          
+        </div>
+        
+<p class="hero">
+  <img src="http://davidcai.github.io/blog/img/install-multiple-jdk-on-mac.png" alt="Multiple JDKs">
+</p>
+
+
+        
+
+<p>During one of AWS Lambda exploration projects, I need to use Amazon&rsquo;s swagger-import-tool for uploading swagger documents to AWS. The problem is that this tool has a dependency on Java 8, however, my installed JDK is 7, and I have to keep it for all existing Java projects. It seems that I need to have something like NVM (Node Version Manager) &hellip; this time for JDKs.</p>
+
+<p>After some Google searches, a promising solution is to use <a href="http://www.jenv.be/">jEnv</a> &ndash; a command line tool to set JAVA_HOME on the fly.</p>
+
+<h2 id="homebrew-cask:677a9bde6e1ad5d989b759e109310067">Homebrew Cask</h2>
+
+<p>On Mac, Homebrew is the de-facto package manager, and <a href="http://gillesfabio.github.io/homebrew-cask-homepage/">Homebrew Cask</a> is the app manager. I&rsquo;m going to use Cask to install Java 7 and 8.</p>
+
+<p>Install Homebrew Cask first if you haven&rsquo;t:</p>
+
+<pre><code class="language-bash">brew update
+brew tap phinze/homebrew-cask
+brew install brew-cask
+</code></pre>
+
+<h2 id="install-java-7-and-8:677a9bde6e1ad5d989b759e109310067">Install Java 7 and 8</h2>
+
+<p>People on the Stackoverflow cautioned <em>not</em> to install 8 until 7 is installed. So we are going to install JDK 7 first.</p>
+
+<p>Unlike other version managers such as NVM, jEnv itself doesn&rsquo;t install JDKs. You have to do it yourself. Luckily, Homebrew Cask made this task really easy. But before doing that, let&rsquo;s check if we already have JDK 7 installed by Homebrew Cask:</p>
+
+<pre><code class="language-bash">brew cask info java7
+</code></pre>
+
+<p>If Java 7 is installed, you should see something like this:</p>
+
+<p><img src="http://davidcai.github.io/blog/img/brew-cask-info-java7.png" alt="brew cask info java7" /></p>
+
+<p>Otherwise, install Java 7:</p>
+
+<pre><code class="language-bash">brew cask install java7
+</code></pre>
+
+<p>As of today, Java 8 is the latest stable. Run the following command to install Java 8:</p>
+
+<pre><code class="language-bash">brew cask install java
+</code></pre>
+
+<p>These two JDKs will be installed at the following directories. Your JDKs&rsquo; minor and patch versions might be different.</p>
+
+<pre><code>/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+</code></pre>
+
+<h2 id="enter-jenv:677a9bde6e1ad5d989b759e109310067">Enter jEnv</h2>
+
+<p>Now it is time to install jEnv:</p>
+
+<pre><code class="language-bash">brew install jenv
+</code></pre>
+
+<p>Add the following lines to ~/.bash_profile. This will initialize jEnv.</p>
+
+<pre><code># Init jenv
+if which jenv &gt; /dev/null; then eval &quot;$(jenv init -)&quot;; fi
+</code></pre>
+
+<p>jEnv doesn&rsquo;t install JDKs, so we have to tell jEnv where to look for them. Type these commands to register JDKs in jEnv (replace the minor and patch versions with yours):</p>
+
+<pre><code class="language-bash">jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+</code></pre>
+
+<p>After that, run this command to list all registered JDKs:</p>
+
+<pre><code class="language-bash">jenv versions
+</code></pre>
+
+<p>The output will be something like this:</p>
+
+<p><img src="http://davidcai.github.io/blog/img/jenv-versions.png" alt="brew cask info java7" /></p>
+
+<p>The version with an asterisk is the active version.</p>
+
+<p>In my case, I need to keep JDK 7 as my default version, so I set the global version to 1.7:</p>
+
+<pre><code class="language-bash">jenv global oracle64-1.7.0.79
+</code></pre>
+
+<p>And in my project, I set the local JDK version to 1.8:</p>
+
+<pre><code class="language-bash">cd &lt;my project&gt;
+jenv local oracle64-1.8.0.66
+</code></pre>
+
+<p>The above command will create a <code>.java-version</code> file at project root. Its content is the version I just picked for this project:</p>
+
+<pre><code>oracle64-1.8.0.66
+</code></pre>
+
+<h2 id="references:677a9bde6e1ad5d989b759e109310067">References</h2>
+
+<p>To learn more about jEnv, here I list some references:</p>
+
+<ul>
+<li>jEnv <a href="http://www.jenv.be/">official site</a></li>
+<li>The <a href="http://stackoverflow.com/questions/26252591/mac-os-x-and-multiple-java-versions">Stackoverflow thread</a></li>
+<li>Andrew John&rsquo;s <a href="http://andrew-jones.com/blog/managing-multiple-versions-of-java-on-os-x/">blog post</a></li>
+</ul>
+
+<p><br/></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/java">java</a> </li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/mac">mac</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container prev_next">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/">Atom Essential Packages</a> &raquo;
+    </span>
+  
+</div>
+
+
+    <div class="container">
+      <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2finstall-multiple-jdk-on-mac%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2finstall-multiple-jdk-on-mac%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2finstall-multiple-jdk-on-mac%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2finstall-multiple-jdk-on-mac%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <br />
+    <div class="container">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/install-multiple-jdk-on-mac\/';
+    var disqus_title = 'Install Multiple Java Versions on Mac';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/install-multiple-jdk-on-mac\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66412818-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+

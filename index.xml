@@ -5,8 +5,120 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 19 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Dec 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Install Multiple Java Versions on Mac</title>
+      <link>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</link>
+      <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</guid>
+      <description>
+
+&lt;p&gt;During one of AWS Lambda exploration projects, I need to use Amazon&amp;rsquo;s swagger-import-tool for uploading swagger documents to AWS. The problem is that this tool has a dependency on Java 8, however, my installed JDK is 7, and I have to keep it for all existing Java projects. It seems that I need to have something like NVM (Node Version Manager) &amp;hellip; this time for JDKs.&lt;/p&gt;
+
+&lt;p&gt;After some Google searches, a promising solution is to use &lt;a href=&#34;http://www.jenv.be/&#34;&gt;jEnv&lt;/a&gt; &amp;ndash; a command line tool to set JAVA_HOME on the fly.&lt;/p&gt;
+
+&lt;h2 id=&#34;homebrew-cask:677a9bde6e1ad5d989b759e109310067&#34;&gt;Homebrew Cask&lt;/h2&gt;
+
+&lt;p&gt;On Mac, Homebrew is the de-facto package manager, and &lt;a href=&#34;http://gillesfabio.github.io/homebrew-cask-homepage/&#34;&gt;Homebrew Cask&lt;/a&gt; is the app manager. I&amp;rsquo;m going to use Cask to install Java 7 and 8.&lt;/p&gt;
+
+&lt;p&gt;Install Homebrew Cask first if you haven&amp;rsquo;t:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew update
+brew tap phinze/homebrew-cask
+brew install brew-cask
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;install-java-7-and-8:677a9bde6e1ad5d989b759e109310067&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
+
+&lt;p&gt;People on the Stackoverflow cautioned &lt;em&gt;not&lt;/em&gt; to install 8 until 7 is installed. So we are going to install JDK 7 first.&lt;/p&gt;
+
+&lt;p&gt;Unlike other version managers such as NVM, jEnv itself doesn&amp;rsquo;t install JDKs. You have to do it yourself. Luckily, Homebrew Cask made this task really easy. But before doing that, let&amp;rsquo;s check if we already have JDK 7 installed by Homebrew Cask:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew cask info java7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If Java 7 is installed, you should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/brew-cask-info-java7.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Otherwise, install Java 7:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew cask install java7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As of today, Java 8 is the latest stable. Run the following command to install Java 8:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew cask install java
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These two JDKs will be installed at the following directories. Your JDKs&amp;rsquo; minor and patch versions might be different.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;enter-jenv:677a9bde6e1ad5d989b759e109310067&#34;&gt;Enter jEnv&lt;/h2&gt;
+
+&lt;p&gt;Now it is time to install jEnv:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew install jenv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add the following lines to ~/.bash_profile. This will initialize jEnv.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Init jenv
+if which jenv &amp;gt; /dev/null; then eval &amp;quot;$(jenv init -)&amp;quot;; fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;jEnv doesn&amp;rsquo;t install JDKs, so we have to tell jEnv where to look for them. Type these commands to register JDKs in jEnv (replace the minor and patch versions with yours):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that, run this command to list all registered JDKs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jenv versions
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output will be something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/jenv-versions.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The version with an asterisk is the active version.&lt;/p&gt;
+
+&lt;p&gt;In my case, I need to keep JDK 7 as my default version, so I set the global version to 1.7:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;jenv global oracle64-1.7.0.79
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And in my project, I set the local JDK version to 1.8:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd &amp;lt;my project&amp;gt;
+jenv local oracle64-1.8.0.66
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above command will create a &lt;code&gt;.java-version&lt;/code&gt; file at project root. Its content is the version I just picked for this project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;oracle64-1.8.0.66
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;references:677a9bde6e1ad5d989b759e109310067&#34;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;To learn more about jEnv, here I list some references:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jEnv &lt;a href=&#34;http://www.jenv.be/&#34;&gt;official site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;a href=&#34;http://stackoverflow.com/questions/26252591/mac-os-x-and-multiple-java-versions&#34;&gt;Stackoverflow thread&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Andrew John&amp;rsquo;s &lt;a href=&#34;http://andrew-jones.com/blog/managing-multiple-versions-of-java-on-os-x/&#34;&gt;blog post&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Atom Essential Packages</title>
