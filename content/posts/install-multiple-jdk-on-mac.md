@@ -33,6 +33,7 @@ People on the Stackoverflow cautioned *not* to install 8 until 7 is installed. S
 Unlike other version managers such as NVM, jEnv itself doesn't install JDKs. You have to do it yourself. Luckily, Homebrew Cask made this task really easy. But before doing that, let's check if we already have JDK 7 installed by Homebrew Cask:
 
 ```bash
+brew tap caskroom/versions
 brew cask info java7
 ```
 
