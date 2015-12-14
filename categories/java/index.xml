@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/categories/java/</link>
+    <link>http://localhost:1313/blog/categories/java/</link>
     <description>Recent content in Java on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 07 Dec 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Install Multiple Java Versions on Mac</title>
-      <link>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</link>
+      <link>http://localhost:1313/blog/posts/install-multiple-jdk-on-mac/</link>
       <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</guid>
+      <guid>http://localhost:1313/blog/posts/install-multiple-jdk-on-mac/</guid>
       <description>
 
 &lt;p&gt;During one of AWS Lambda exploration projects, I need to use Amazon&amp;rsquo;s swagger-import-tool for uploading swagger documents to AWS. The problem is that this tool has a dependency on Java 8, however, my installed JDK is 7, and I have to keep it for all existing Java projects. It seems that I need to have something like NVM (Node Version Manager) &amp;hellip; this time for JDKs.&lt;/p&gt;
@@ -27,8 +27,13 @@
 &lt;p&gt;Install Homebrew Cask first if you haven&amp;rsquo;t:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew update
-brew tap phinze/homebrew-cask
+brew tap caskroom/cask
 brew install brew-cask
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your brew or cask is outdated, update and upgrade:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew update &amp;amp;&amp;amp; brew upgrade brew-cask &amp;amp;&amp;amp; brew cleanup &amp;amp;&amp;amp; brew cask cleanup
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;install-java-7-and-8:677a9bde6e1ad5d989b759e109310067&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
@@ -43,12 +48,14 @@ brew cask info java7
 
 &lt;p&gt;If Java 7 is installed, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/brew-cask-info-java7.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/brew-cask-info-java7.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Otherwise, install Java 7:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew cask install java7
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run into permission issue, add &lt;code&gt;sudo&lt;/code&gt; at the beginning of the above command.&lt;/p&gt;
 
 &lt;p&gt;As of today, Java 8 is the latest stable. Run the following command to install Java 8:&lt;/p&gt;
 
@@ -87,7 +94,7 @@ jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
 
 &lt;p&gt;The output will be something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/jenv-versions.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/jenv-versions.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The version with an asterisk is the active version.&lt;/p&gt;
 
