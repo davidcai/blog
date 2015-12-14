@@ -22,8 +22,14 @@ Install Homebrew Cask first if you haven't:
 
 ```bash
 brew update
-brew tap phinze/homebrew-cask
+brew tap caskroom/cask
 brew install brew-cask
+```
+
+If your brew or cask is outdated, update and upgrade:
+
+```bash
+brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
 ```
 
 ## Install Java 7 and 8
@@ -46,6 +52,8 @@ Otherwise, install Java 7:
 ```bash
 brew cask install java7
 ```
+
+If you run into permission issue, add `sudo` at the beginning of the above command.
 
 As of today, Java 8 is the latest stable. Run the following command to install Java 8:
 
