@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gulp on David Cai | Blog</title>
-    <link>http://localhost:1313/blog/categories/gulp/</link>
+    <link>http://davidcai.github.io/blog/categories/gulp/</link>
     <description>Recent content in Gulp on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 22 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/categories/gulp/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://davidcai.github.io/blog/categories/gulp/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Webpack: Pack Your Web Assets</title>
-      <link>http://localhost:1313/blog/posts/introducing-webpack/</link>
+      <link>http://davidcai.github.io/blog/posts/introducing-webpack/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/introducing-webpack/</guid>
+      <guid>http://davidcai.github.io/blog/posts/introducing-webpack/</guid>
       <description>&lt;p&gt;I just had a presentation to introduce Webpack to our UI Guild in my company. Webpack is a module bundler to pack all kinds of web assets (JavaScript, styles, images, HTML partials, etc.) into one or more bundle JS files.&lt;/p&gt;
 
 &lt;p&gt;Here is &lt;a href=&#34;https://docs.google.com/presentation/d/1frBHDkSLvarbjFukhe3EuTuijpyTMHXwJDKu65OSVx8/edit?usp=sharing&#34;&gt;my presentation&lt;/a&gt;.&lt;/p&gt;
