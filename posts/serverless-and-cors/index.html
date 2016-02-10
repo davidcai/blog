@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="http://davidcai.github.io/blog">
+  <title>Serverless Framework &amp; AWS API Gateway CORS</title>
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/serverless-and-cors/">
+  
+
+  
+
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
+  </nav>
+
+  
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          David Cai | Blog
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content article-content">
+      <h1 class="post-title">Serverless Framework &amp; AWS API Gateway CORS</h1>
+      <section id="main">
+        <div class="post-subtitle">
+          <h5 id="date">Wed Feb 10, 2016</h5>
+          
+        </div>
+        
+<p class="hero">
+  <img src="http://davidcai.github.io/blog/img/serverless.png" alt="Serverless and CORS">
+</p>
+
+
+        <p>If you run into HTTP errors related to &lsquo;Access-Control-Allow-Origin&rsquo; when calling a REST API endpoint through the AWS API Gateway, you probably need to enable CORS (Cross-Origin Resource Sharing) for your endpoint methods.</p>
+
+<p>AWS has a well written <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html">document</a> describing how to enable CORS in the API Gateway UI. However, if you&rsquo;d like to leverage the Serverless framework to automatically create API endpoints for you, including CORS settings, this article has an example of the Serverless configuration (see below).</p>
+
+<p>The Serverless configuration file you want to modify is at:</p>
+
+<p><code>&lt;serverless project&gt;/back/modules/&lt;module&gt;/&lt;function&gt;/s-function.json</code></p>
+
+<p>Take a look at the comment-annotated configurations from the snippet below. Please note if you copy the content to your s-function.json, remove all comments and empty lines; otherwise, the JSON probably will be invalid:</p>
+
+<pre><code class="language-js">{
+  &quot;functions&quot;: {
+    &quot;hello&quot;: {
+      &quot;custom&quot;: {
+        &quot;excludePatterns&quot;: [],
+        &quot;envVars&quot;: []
+      },
+      &quot;handler&quot;: &quot;modules/greetings/hello/handler.handler&quot;,
+      &quot;timeout&quot;: 6,
+      &quot;memorySize&quot;: 1024,
+      &quot;events&quot;: [
+        {
+          &quot;name&quot;: &quot;default&quot;,
+          &quot;eventSourceArn&quot;: &quot;&quot;,
+          &quot;startingPosition&quot;: &quot;TRIM_HORIZON&quot;,
+          &quot;batchSize&quot;: 100,
+          &quot;enabled&quot;: true
+        }
+      ],
+      &quot;endpoints&quot;: [
+        {
+          // Your API endpoint path
+          &quot;path&quot;: &quot;greetings/hello&quot;,
+
+          // Method could be POST, DELETE, etc, depending on your API schema
+          &quot;method&quot;: &quot;GET&quot;,
+          &quot;authorizationType&quot;: &quot;none&quot;,
+          &quot;apiKeyRequired&quot;: false,
+          &quot;requestParameters&quot;: {},
+          &quot;requestTemplates&quot;: {
+
+            // Your endpoint method probably doesn't need this mapping
+            &quot;application/json&quot;: &quot;{\&quot;name\&quot;: \&quot;$input.params('name')\&quot;}&quot;
+          },
+          &quot;responses&quot;: {
+            &quot;400&quot;: {
+              &quot;statusCode&quot;: &quot;400&quot;
+            },
+            &quot;default&quot;: {
+              &quot;statusCode&quot;: &quot;200&quot;,
+
+              // [start] Add the following response parameters for response 200. This will enable CORS for this GET method.
+              &quot;responseParameters&quot;: {
+                &quot;method.response.header.Access-Control-Allow-Headers&quot;: &quot;'Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control'&quot;,
+                &quot;method.response.header.Access-Control-Allow-Methods&quot;: &quot;'*'&quot;,
+                &quot;method.response.header.Access-Control-Allow-Origin&quot;: &quot;'*'&quot;
+              },
+              &quot;responseModels&quot;: {},
+              &quot;responseTemplates&quot;: {
+                &quot;application/json&quot;: &quot;&quot;
+              }
+              // [end]
+            }
+          }
+        },
+
+        // [start] Add the OPTIONS method required by CORS.
+        {
+          &quot;path&quot;: &quot;greetings/hello&quot;,
+          &quot;method&quot;: &quot;OPTIONS&quot;,
+          &quot;authorizationType&quot;: &quot;none&quot;,
+          &quot;apiKeyRequired&quot;: false,
+          &quot;requestParameters&quot;: {},
+          &quot;requestTemplates&quot;: {
+            &quot;application/json&quot;: &quot;\&quot;statusCode\&quot;: 200&quot;
+          },
+          &quot;responses&quot;: {
+            &quot;default&quot;: {
+              &quot;statusCode&quot;: &quot;200&quot;,
+              &quot;responseParameters&quot;: {
+                &quot;method.response.header.Access-Control-Allow-Headers&quot;: &quot;'Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control'&quot;,
+                &quot;method.response.header.Access-Control-Allow-Methods&quot;: &quot;'*'&quot;,
+                &quot;method.response.header.Access-Control-Allow-Origin&quot;: &quot;'*'&quot;
+              },
+              &quot;responseModels&quot;: {},
+              &quot;responseTemplates&quot;: {
+                &quot;application/json&quot;: &quot;&quot;
+              }
+            }
+          }
+        }
+        // [end]
+      ]
+    }
+  }
+}
+</code></pre>
+
+<p>Once you added required configuration to enable CORS, run the Serverless command to deploy the endpoint:</p>
+
+<pre><code class="language-bash">serverless function deploy
+</code></pre>
+
+<p>Go to AWS API Gateway, you should be able to see that CORS is now enabled for the endpoint method.</p>
+
+<p><br /></p>
+
+      </section>
+    </div>
+
+    
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+      <li><a href="http://davidcai.github.io/blog/categories/aws">aws</a> </li>
+    
+  </ul>
+</div>
+
+    
+
+<div class="container prev_next">
+  <hr />
+  
+
+  
+    <span class="right">
+      <a class="next" href="http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/">Install Multiple Java Versions on Mac</a> &raquo;
+    </span>
+  
+</div>
+
+
+    <div class="container">
+      <div class="share-on">
+  <div class="share-on-label">Share on: </div>
+  <div class="share-on-icons">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fserverless-and-cors%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
+    </a>
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fserverless-and-cors%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
+    </a>
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fserverless-and-cors%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
+    </a>
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fserverless-and-cors%2f">
+      <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
+    </a>
+  </div>
+</div>
+
+    </div>
+
+    <br />
+    <div class="container">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'davidcai';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/serverless-and-cors\/';
+    var disqus_title = 'Serverless Framework \x26 AWS API Gateway CORS';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/serverless-and-cors\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div> 
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-66412818-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
