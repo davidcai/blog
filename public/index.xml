@@ -5,8 +5,123 @@
     <link>http://davidcai.github.io/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Feb 2016 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Serverless Framework &amp; AWS API Gateway CORS</title>
+      <link>http://davidcai.github.io/blog/posts/serverless-and-cors/</link>
+      <pubDate>Wed, 10 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://davidcai.github.io/blog/posts/serverless-and-cors/</guid>
+      <description>&lt;p&gt;If you run into HTTP errors related to &amp;lsquo;Access-Control-Allow-Origin&amp;rsquo; when calling a REST API endpoint through the AWS API Gateway, you probably need to enable CORS (Cross-Origin Resource Sharing) for your endpoint methods.&lt;/p&gt;
+
+&lt;p&gt;AWS has a well written &lt;a href=&#34;http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html&#34;&gt;document&lt;/a&gt; describing how to enable CORS in the API Gateway UI. However, if you&amp;rsquo;d like to leverage the Serverless framework to automatically create API endpoints for you, including CORS settings, this article has an example of the Serverless configuration (see below).&lt;/p&gt;
+
+&lt;p&gt;The Serverless configuration file you want to modify is at:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;serverless project&amp;gt;/back/modules/&amp;lt;module&amp;gt;/&amp;lt;function&amp;gt;/s-function.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Take a look at the comment-annotated configurations from the snippet below. Please note if you copy the content to your s-function.json, remove all comments and empty lines; otherwise, the JSON probably will be invalid:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;{
+  &amp;quot;functions&amp;quot;: {
+    &amp;quot;hello&amp;quot;: {
+      &amp;quot;custom&amp;quot;: {
+        &amp;quot;excludePatterns&amp;quot;: [],
+        &amp;quot;envVars&amp;quot;: []
+      },
+      &amp;quot;handler&amp;quot;: &amp;quot;modules/greetings/hello/handler.handler&amp;quot;,
+      &amp;quot;timeout&amp;quot;: 6,
+      &amp;quot;memorySize&amp;quot;: 1024,
+      &amp;quot;events&amp;quot;: [
+        {
+          &amp;quot;name&amp;quot;: &amp;quot;default&amp;quot;,
+          &amp;quot;eventSourceArn&amp;quot;: &amp;quot;&amp;quot;,
+          &amp;quot;startingPosition&amp;quot;: &amp;quot;TRIM_HORIZON&amp;quot;,
+          &amp;quot;batchSize&amp;quot;: 100,
+          &amp;quot;enabled&amp;quot;: true
+        }
+      ],
+      &amp;quot;endpoints&amp;quot;: [
+        {
+          // Your API endpoint path
+          &amp;quot;path&amp;quot;: &amp;quot;greetings/hello&amp;quot;,
+
+          // Method could be POST, DELETE, etc, depending on your API schema
+          &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,
+          &amp;quot;authorizationType&amp;quot;: &amp;quot;none&amp;quot;,
+          &amp;quot;apiKeyRequired&amp;quot;: false,
+          &amp;quot;requestParameters&amp;quot;: {},
+          &amp;quot;requestTemplates&amp;quot;: {
+
+            // Your endpoint method probably doesn&#39;t need this mapping
+            &amp;quot;application/json&amp;quot;: &amp;quot;{\&amp;quot;name\&amp;quot;: \&amp;quot;$input.params(&#39;name&#39;)\&amp;quot;}&amp;quot;
+          },
+          &amp;quot;responses&amp;quot;: {
+            &amp;quot;400&amp;quot;: {
+              &amp;quot;statusCode&amp;quot;: &amp;quot;400&amp;quot;
+            },
+            &amp;quot;default&amp;quot;: {
+              &amp;quot;statusCode&amp;quot;: &amp;quot;200&amp;quot;,
+
+              // [start] Add the following response parameters for response 200. This will enable CORS for this GET method.
+              &amp;quot;responseParameters&amp;quot;: {
+                &amp;quot;method.response.header.Access-Control-Allow-Headers&amp;quot;: &amp;quot;&#39;Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control&#39;&amp;quot;,
+                &amp;quot;method.response.header.Access-Control-Allow-Methods&amp;quot;: &amp;quot;&#39;*&#39;&amp;quot;,
+                &amp;quot;method.response.header.Access-Control-Allow-Origin&amp;quot;: &amp;quot;&#39;*&#39;&amp;quot;
+              },
+              &amp;quot;responseModels&amp;quot;: {},
+              &amp;quot;responseTemplates&amp;quot;: {
+                &amp;quot;application/json&amp;quot;: &amp;quot;&amp;quot;
+              }
+              // [end]
+            }
+          }
+        },
+
+        // [start] Add the OPTIONS method required by CORS.
+        {
+          &amp;quot;path&amp;quot;: &amp;quot;greetings/hello&amp;quot;,
+          &amp;quot;method&amp;quot;: &amp;quot;OPTIONS&amp;quot;,
+          &amp;quot;authorizationType&amp;quot;: &amp;quot;none&amp;quot;,
+          &amp;quot;apiKeyRequired&amp;quot;: false,
+          &amp;quot;requestParameters&amp;quot;: {},
+          &amp;quot;requestTemplates&amp;quot;: {
+            &amp;quot;application/json&amp;quot;: &amp;quot;\&amp;quot;statusCode\&amp;quot;: 200&amp;quot;
+          },
+          &amp;quot;responses&amp;quot;: {
+            &amp;quot;default&amp;quot;: {
+              &amp;quot;statusCode&amp;quot;: &amp;quot;200&amp;quot;,
+              &amp;quot;responseParameters&amp;quot;: {
+                &amp;quot;method.response.header.Access-Control-Allow-Headers&amp;quot;: &amp;quot;&#39;Content-Type,X-Amz-Date,Authorization,X-Api-Key,Cache-Control&#39;&amp;quot;,
+                &amp;quot;method.response.header.Access-Control-Allow-Methods&amp;quot;: &amp;quot;&#39;*&#39;&amp;quot;,
+                &amp;quot;method.response.header.Access-Control-Allow-Origin&amp;quot;: &amp;quot;&#39;*&#39;&amp;quot;
+              },
+              &amp;quot;responseModels&amp;quot;: {},
+              &amp;quot;responseTemplates&amp;quot;: {
+                &amp;quot;application/json&amp;quot;: &amp;quot;&amp;quot;
+              }
+            }
+          }
+        }
+        // [end]
+      ]
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you added required configuration to enable CORS, run the Serverless command to deploy the endpoint:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;serverless function deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Go to AWS API Gateway, you should be able to see that CORS is now enabled for the endpoint method.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Install Multiple Java Versions on Mac</title>
