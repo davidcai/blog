@@ -20,7 +20,7 @@ The great thing about Serverless framework is that it incorporates many best pra
 
 Coding directly in AWS Lambda editor might be OK for small projects, but it is not fitting for any project larger than hello world examples. Having Lambda functions developed in local is essential to have an efficient working setup:
 
-1. Developers are able to version control the local Lambda code. With Serverless framework, configurations including API Gateway endpoint definitions and CloudFormation templates can also be version controlled.
+1. Developers are able to version control the local Lambda code. With Serverless framework, configurations including API Gateway endpoint definitions and CloudFormation templates can also be version controlled (more about this later).
 
 2. Developers can perform local unit test before deploying the Lambda function. The new features coming to Serverless even enables local testing of API endpoints together with Lambda functions. Greatly increased the chance to catch bugs before the actual deployment. Also, made local debugging feasible.
 
@@ -36,12 +36,25 @@ Creating new Lambda functions can be easily done via `serverless function create
 
 All of this made Lambda development much easy to kick off.
 
-##
-
-## Stages
-
 ## CloudFormation
 
+A CloudFormation template is a JSON object that declares AWS resources required by a project. The benefit of having a template is that we can use the same template to duplicate the creation of AWS resources in different stages and regions.
+
+For instance, our project needs to access a S3 bucket, and such bucket has its own bucket policy. Instead of manually setting up the S3 bucket and a bucket policy for each region and stage, we can declare S3 bucket and its policy in a CloudFormation template. Then, the AWS CloudFormation service will automate the resource creation by honoring the declarations in the template. This configuration driven approach is much easier to scale up, and friendly to version control.
+
+CloudFormation is the core part of the Serverless framework. Serverless relies on CloudFormation to manage AWS resources required by both the Serverless framework and project. Resources used by Serverless itself includes IAM policies, roles, log access, and Serverless' S3 bucket. Resources required by projects could be DynamoDB, S3, etc.
+
+Serverless provided `serverless resources deploy` command that will validate the CloudFormation template, check if the template is changed, update the CloudFormation stack if there is any change, or create the stack if the stack doesn't exist, and track the CloudFormation creation/updating status.
+
+CloudFormation is a powerful service that needs to be understood not only for Lambda development but also other AWS resource management. The Serverless framework fully embraces this service and makes the usage really easy.
+
+Admittedly, all these CloudFormation operations can be achieved using AWS CLI. Actually, I attempted duplicating Serverless features by creating my own Gulp tasks that leverage AWS CLI to perform CloudFormation validation, deployment, and status tracking. It is definitely doable. But I don't like to re-invent wheels.
+
+## API Gateway Endpoint
+
+As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless tries to close this gap. It allows API endpoints to be defined in JSON files. The `serverless function create` command will generate a default configuration file, and the `serverless endpoint deploy` command will use the configuration to create and deploy the API endpoints in Gateway.
+
+What I'd love to see is that we will be able to use Swagger definitions to define API endpoints instead of the current ad hoc syntax. Hope the Serverless team will pick this up in the future.
 
 
 <br />
