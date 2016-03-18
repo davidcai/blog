@@ -6,16 +6,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="http://localhost:1313/blog/">
+  <base href="http://davidcai.github.io/blog">
   <title>Serverless Framework at Financial Engines</title>
-  <link rel="canonical" href="http://localhost:1313/blog/posts/why-serverless/">
+  <link rel="canonical" href="http://davidcai.github.io/blog/posts/why-serverless/">
   
 
   
 
-<link rel="stylesheet" href="http://localhost:1313/blog/css/poole.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/lanyon.css">
-<link rel="stylesheet" href="http://localhost:1313/blog/css/app.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/poole.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/lanyon.css">
+<link rel="stylesheet" href="http://davidcai.github.io/blog/css/app.css">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github-gist.min.css">
@@ -37,9 +37,9 @@
 <div class="sidebar" id="sidebar">
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/">Home</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/posts">Posts</a>
-    <a class="sidebar-nav-item" href="http://localhost:1313/blog/categories">Categories</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/">Home</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/posts">Posts</a>
+    <a class="sidebar-nav-item" href="http://davidcai.github.io/blog/categories">Categories</a>
   </nav>
 
   
@@ -66,7 +66,7 @@
         </div>
         
 <p class="hero">
-  <img src="http://localhost:1313/blog/img/serverless-fe.png" alt="Serverless framework at FE">
+  <img src="http://davidcai.github.io/blog/img/serverless-fe.png" alt="Serverless framework at FE">
 </p>
 
 
@@ -112,7 +112,7 @@
 
 <p>A CloudFormation template is a JSON file that declares AWS resources required by a project. The benefit of having a template is that we can use the same template to duplicate the creation of AWS resources in different stages and regions.</p>
 
-<p><img src="http://localhost:1313/blog/img/aws-stages.png" alt="Stages" /></p>
+<p><img src="http://davidcai.github.io/blog/img/aws-stages.png" alt="Stages" /></p>
 
 <p>(L = Lambda function, E = API endpoint)</p>
 
@@ -130,7 +130,7 @@
 
 <h2 id="4-api-gateway-endpoint:21a5a79a44a185553300308dba71ec54">4. API Gateway Endpoint</h2>
 
-<p>As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless tries to close this gap. It allows API endpoints to be defined in JSON files. The <code>serverless function create</code> command generates a default configuration file, and the <code>serverless endpoint deploy</code> command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other <a href="http://localhost:1313/blog/posts/serverless-and-cors/">blog post</a>.)</p>
+<p>As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless tries to close this gap. It allows API endpoints to be defined in JSON files. The <code>serverless function create</code> command generates a default configuration file, and the <code>serverless endpoint deploy</code> command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other <a href="http://davidcai.github.io/blog/posts/serverless-and-cors/">blog post</a>.)</p>
 
 <p>What I&rsquo;d love to see is the ability to use Swagger to define API endpoints instead of the current ad hoc syntax. Hope the Serverless team will pick this up in the future.</p>
 
@@ -146,7 +146,7 @@
 
 <p>However, at Financial Engines, we have three AWS accounts &ndash; dev, test, and prod. We&rsquo;d like to promote builds from dev account to test account, and to prod account without bothering with stages. This three layers of accounts is actually quite common practice in IT. However, since Serverless doesn&rsquo;t support multiple AWS accounts yet, we have to rely on stages. We ended up with something like this in order to promote builds:</p>
 
-<p><img src="http://localhost:1313/blog/img/serverless-what-we-have.png" alt="Build promotion using stages" /></p>
+<p><img src="http://davidcai.github.io/blog/img/serverless-what-we-have.png" alt="Build promotion using stages" /></p>
 
 <p>Basically, we have code and resources deployed in one AWS account &ndash; prod; and inside this account, code is promoted from stage development to test, and then to production. We are not using the other two AWS accounts &ndash; dev and test.</p>
 
@@ -154,7 +154,7 @@
 
 <p>What we would love to have is something like this instead:</p>
 
-<p><img src="http://localhost:1313/blog/img/serverless-what-we-need.png" alt="Build promotion using accounts" /></p>
+<p><img src="http://davidcai.github.io/blog/img/serverless-what-we-need.png" alt="Build promotion using accounts" /></p>
 
 <p>No stage promotions but cross-account promotions.</p>
 
@@ -192,7 +192,7 @@
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://localhost:1313/blog/categories/aws">aws</a> </li>
+      <li><a href="http://davidcai.github.io/blog/categories/aws">aws</a> </li>
     
   </ul>
 </div>
@@ -205,7 +205,7 @@
 
   
     <span class="right">
-      <a class="next" href="http://localhost:1313/blog/posts/serverless-and-cors/">Serverless Framework &amp; AWS API Gateway CORS</a> &raquo;
+      <a class="next" href="http://davidcai.github.io/blog/posts/serverless-and-cors/">Serverless Framework &amp; AWS API Gateway CORS</a> &raquo;
     </span>
   
 </div>
@@ -215,16 +215,16 @@
       <div class="share-on">
   <div class="share-on-label">Share on: </div>
   <div class="share-on-icons">
-    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fwhy-serverless%2f">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fwhy-serverless%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
     </a>
-    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fwhy-serverless%2f">
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fwhy-serverless%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
     </a>
-    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fwhy-serverless%2f">
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fwhy-serverless%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
     </a>
-    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fwhy-serverless%2f">
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2fdavidcai.github.io%2fblog%2fposts%2fwhy-serverless%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
     </a>
   </div>
@@ -237,9 +237,9 @@
       <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
-    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/why-serverless\/';
+    var disqus_identifier = 'http:\/\/davidcai.github.io\/blog\/posts\/why-serverless\/';
     var disqus_title = 'Serverless Framework at Financial Engines';
-    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/why-serverless\/';
+    var disqus_url = 'http:\/\/davidcai.github.io\/blog\/posts\/why-serverless\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
