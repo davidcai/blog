@@ -7,8 +7,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="http://localhost:1313/blog/">
-  <title>A Simple A/B Testing Service</title>
-  <link rel="canonical" href="http://localhost:1313/blog/posts/a-simple-ab-testing-service/">
+  <title>A New Dawn</title>
+  <link rel="canonical" href="http://localhost:1313/blog/posts/a-new-dawn/">
   
 
   
@@ -58,88 +58,19 @@
 
     
     <div class="container content article-content">
-      <h1 class="post-title">A Simple A/B Testing Service</h1>
+      <h1 class="post-title">A New Dawn</h1>
       <section id="main">
         <div class="post-subtitle">
-          <h5 id="date">Sun Aug 16, 2015</h5>
+          <h5 id="date">Fri Mar 18, 2016</h5>
           
         </div>
         
 <p class="hero">
-  <img src="http://localhost:1313/blog/img/ab-testing.jpg" alt="A/B testing">
+  <img src="http://localhost:1313/blog/img/serverless-fe.png" alt="Serverless framework at FE">
 </p>
 
 
-        <p>A very simple A/B testing service implemented in Angular &ndash; abTestService:</p>
-
-<pre><code class="language-js">;(function() {
-  'use strict';
-
-  angular
-    .module('abTest', [])
-    .factory('abTestService', abTestService)
-  ;
-
-
-  function abTestService() {
-    return {
-      pick: pick
-    };
-
-    function pick() {
-      var i = Math.floor(Math.random() * arguments.length);
-      return arguments[i];
-    }
-  }
-
-})();
-</code></pre>
-
-<p>abTestService has only one method &ndash; pick, which is to evenly pick one from many choices:</p>
-
-<pre><code class="language-js">// a or b. 50% vs 50% chances
-abTestService.pick('a', 'b');
-
-// apple or orange. 50% vs 50%
-abTestService.pick('apple', 'orange');
-
-// a, b, or c. 1/3 vs 1/3 vs 1/3
-abTestService.pick('a', 'b', 'c');
-
-// a or b. 2/3 vs 1/3
-abTestService.pick('a', 'a', 'b');
-</code></pre>
-
-<p>Here is an example of how to use abTestService with UI Router:</p>
-
-<pre><code class="language-js">;(function() {
-  'use strict';
-
-  angular
-    .module('myApp', [
-      'abTest',
-      'ui.router'
-    ])
-    .config(configRoute)
-  ;
-
-
-  function configRoute($stateProvider) {
-    $stateProvider.state('home', {
-      url: '/',
-      templateProvider: function(abTestService) { // Inject abTestService
-        var result = abTestService.pick('a', 'b'); // Pick a or b
-
-        // home-a.html or home-b.html
-        return '&lt;div ng-include=&quot;\'app/home-' + result + '.html\'&quot;&gt;&lt;/div&gt;';
-      }
-    });
-  }
-
-})();
-</code></pre>
-
-<p>To better explain the logic behind templateProvider, I created this <a href="http://localhost:1313/blog/posts/router-dynamic-templates/">post</a>.</p>
+        <p>When working with Amazon Lambda, my colleagues asked what benefits we will reap from using the Serverless framework. We can directly code Lambda functions in AWS&rsquo; online editor, or upload a zip file to AWS if the Lambda function requires any 3rd-party node modules. The workflow might be tedious but quite easy to understand. So why Serverless?</p>
 
 <p><br /></p>
 
@@ -151,9 +82,7 @@ abTestService.pick('a', 'a', 'b');
   <ul class="catlist">
     <li><em>Categories: </em></li>
     
-      <li><a href="http://localhost:1313/blog/categories/angular">angular</a> </li>
-    
-      <li><a href="http://localhost:1313/blog/categories/test">test</a> </li>
+      <li><a href="http://localhost:1313/blog/categories/aws">aws</a> </li>
     
   </ul>
 </div>
@@ -163,14 +92,10 @@ abTestService.pick('a', 'a', 'b');
 <div class="container prev_next">
   <hr />
   
-    <span class="left">
-      <em>&laquo; </em> <a class="next" href="http://localhost:1313/blog/posts/introducing-webpack/">Webpack: Pack Your Web Assets</a>
-    </span>
-  
 
   
     <span class="right">
-      <a class="next" href="http://localhost:1313/blog/posts/router-dynamic-templates/">Router: Dynamic Templates</a> &raquo;
+      <a class="next" href="http://localhost:1313/blog/posts/why-serverless/">Serverless Framework at Financial Engines</a> &raquo;
     </span>
   
 </div>
@@ -180,16 +105,16 @@ abTestService.pick('a', 'a', 'b');
       <div class="share-on">
   <div class="share-on-label">Share on: </div>
   <div class="share-on-icons">
-    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+    <a class="social-button" href="http://www.facebook.com/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-new-dawn%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/facebook.png" alt="share on facebook">
     </a>
-    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+    <a class="social-button" href="https://twitter.com/intent/tweet?via=davidcaiblog&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-new-dawn%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/twitter.png" alt="share on twitter">
     </a>
-    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+    <a class="social-button" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-new-dawn%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/linkedin.png" alt="share on linkedin">
     </a>
-    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-simple-ab-testing-service%2f">
+    <a class="social-button" href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fblog%2fposts%2fa-new-dawn%2f">
       <img src="https://s3.amazonaws.com/activelab/files/icons/google-plus.png" alt="share on google plus">
     </a>
   </div>
@@ -202,9 +127,9 @@ abTestService.pick('a', 'a', 'b');
       <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'davidcai';
-    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/a-simple-ab-testing-service\/';
-    var disqus_title = 'A Simple A\/B Testing Service';
-    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/a-simple-ab-testing-service\/';
+    var disqus_identifier = 'http:\/\/localhost:1313\/blog\/posts\/a-new-dawn\/';
+    var disqus_title = 'A New Dawn';
+    var disqus_url = 'http:\/\/localhost:1313\/blog\/posts\/a-new-dawn\/';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
