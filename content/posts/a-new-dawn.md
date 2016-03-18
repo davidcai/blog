@@ -21,6 +21,8 @@ Now, I'm confident to make an assertion that our front-end technologies of today
 
 On my last day at FE, looking forward, I see FE has a bright future on the tech horizon. We might adopt Angular 2 or React JS, and TypeScript or ES6. Micro-service started steadily with backend code componentization. More people had their taste of AWS Lambda. Folks at Platforms did great work on APIGEE. And soon, we will have our first mobile app implemented in React Native. It is an exciting time for exploration and innovation.
 
-Tomorrow will be a new dawn for me, and certainly Financial Engines will see a bright future ahead. Wish you all the best, my friends.
+Tomorrow will be a new dawn for me, and certainly Financial Engines will see a bright future ahead. I have confidence in me and in you. Wish all of us the best.
+
+Goodbye, my friends, for now. 
 
 <br />
