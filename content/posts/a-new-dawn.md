@@ -23,6 +23,6 @@ On my last day at FE, looking forward, I see FE has a bright future on the tech 
 
 Tomorrow will be a new dawn for me, and certainly Financial Engines will see a bright future ahead. I have confidence in me and in you. Wish all of us the best.
 
-Goodbye, my friends, for now. 
+Goodbye, my friends. In Chinese, goodbye means 'see you another time'.
 
 <br />
