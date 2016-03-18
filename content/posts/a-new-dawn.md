@@ -9,19 +9,17 @@ heroalt: "A new dawn"
 draft: true
 ---
 
-It is the end of an era. After almost 8-year service at Financial Engines, I decided to advance my career in a different place. The decision is definitely not easy. Leaving FE is like carving out a big chunk of my life. So many familiar faces, so many beautiful memories. However, as of today, I still believe that when facing a great opportunity, I'd rather give it my best try than having the regrets of inaction.
+It is the end of an era. After almost 8-year service at Financial Engines, I decided to advance my career in a different place. The decision is definitely not easy. Leaving FE is like carving away a big chunk of my life. So many familiar faces, so many beautiful memories. However, as of today, I still believe that when facing a great opportunity, I'd rather give it my best try than having the regrets of inaction.
 <!--more-->
 
-Looking back, I'm proud to be a part of this great journey. During these 8 years, we went though two waves of technology evolutions at FE.
-
-The first one is when I joined FE in 2008, we renovated the legacy Servlet UI to Struts 2, FreeMarker, Flash, Yahoo! UI, and JWPlayer. This was when we created those three drawers and complicate sliders in the Dashboard page. And everything started from there.
+Looking back, I'm proud to be a part of this great journey. During these 8 years, we went though two waves of technology evolutions at FE. Each time we pushed forward closer to adopting a modern front-end technology stack. The past two years are the most exciting time for app developers at FE. Single Page Application (SPA) had its debut. Macbook was introduced to wider audience. SPA CICD pipeline was born at that time. Git, Gulp, Bower, Node JS, Optimizely, SauceLabs, App Dynamics, Analytics, Loggly, Jasmine, Protractor, and C3/D3 all happened within that short period. Things just got exploded ... in a good way :)
 
 ![UI revolution](/img/ui-revolution.png)
 
-The second wave is two and half years ago to present. It all began with this 'Angularity' experiment -- a small proof of concept to bridge legacy Struts UI with modern Angular JS and Bootstrap. Today we called it the hybrid mode, a stepping stone to pure HTML, CSS, and JavaScript front end. Later, a Hackathon project pushed things even further. Single Page Application (SPA) had its debut at FE. Then, one year ago, a group of developers led by Alex Y created the foundation of SPA development workflow. The first ever SPA CICD pipeline was born at that time. GIT was introduced to wide audience. Macbook, Gulp, Bower, Node JS, Optimizely, SauceLabs, App Dynamics, Analytics, Loggly, Jasmine, Protractor, and C3/D3 all happened within that short period. Things just got exploded ... in a good way :)
-
-Now, I'm confident to make an assertion here, that our front end technologies of today can compete head to head with any unicorn company's. We are at the head. 
+Now, I'm confident to make an assertion that our front-end technologies of today can compete head to head with any unicorn company's. All thanks to the great people here who made this happen. I'm honored to ride the journey together with you.
 
 ![Front end tech stack](/img/ui-tech-stack.png)
+
+On my last day at FE, I have this feeling of incompleteness. We achieved something great, and we can do more. However, I won't be part of this saga. The adventure in my new company will certainly be interesting. 
 
 <br />
