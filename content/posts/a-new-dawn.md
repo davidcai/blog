@@ -3,10 +3,9 @@ title: "A New Dawn"
 date: "2016-03-18"
 description: "A new dawn"
 categories:
-  - "aws"
+  - "other"
 hero: "/img/new-dawn.jpg"
 heroalt: "A new dawn"
-draft: true
 ---
 
 It is the end of an era. After almost 8-year service at Financial Engines, I decided to advance my career in a different place. The decision is definitely not easy. Leaving FE is like carving away a big chunk of my life. So many familiar faces, so many beautiful memories. However, as of today, I still believe that when facing a great opportunity, I'd rather give it my best try than having the regrets of inaction.
