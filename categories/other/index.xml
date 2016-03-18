@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Other on David Cai | Blog</title>
-    <link>http://localhost:1313/blog/categories/other/</link>
+    <link>http://davidcai.github.io/blog/categories/other/</link>
     <description>Recent content in Other on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 18 Mar 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/blog/categories/other/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://davidcai.github.io/blog/categories/other/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>A New Dawn</title>
-      <link>http://localhost:1313/blog/posts/a-new-dawn/</link>
+      <link>http://davidcai.github.io/blog/posts/a-new-dawn/</link>
       <pubDate>Fri, 18 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/blog/posts/a-new-dawn/</guid>
+      <guid>http://davidcai.github.io/blog/posts/a-new-dawn/</guid>
       <description>&lt;p&gt;It is the end of an era. After almost 8-year service at Financial Engines, I decided to advance my career in a different place. The decision is definitely not easy. Leaving FE is like carving away a big chunk of my life. So many familiar faces, so many beautiful memories. However, as of today, I still believe that when facing a great opportunity, I&amp;rsquo;d rather give it my best try than having the regrets of inaction.&lt;/p&gt;
 
 &lt;p&gt;Looking back, I&amp;rsquo;m proud to be a part of this great journey. During these 8 years, we went though two waves of technology evolutions at FE. Each time we pushed forward closer to adopting a modern front-end technology stack. The past two years are the most exciting for app developers at FE. Single Page Application (SPA) had its debut. Macbook was introduced to wider audience. SPA CICD pipeline was born at that time. Git, Gulp, Bower, Node JS, Optimizely, SauceLabs, App Dynamics, Analytics, Loggly, Jasmine, Protractor, and C3/D3 all happened within that short period. Things just got exploded &amp;hellip; in a good way :)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/ui-revolution.png&#34; alt=&#34;UI revolution&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/ui-revolution.png&#34; alt=&#34;UI revolution&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now, I&amp;rsquo;m confident to make an assertion that our front-end technologies of today can compete head to head with any unicorn company&amp;rsquo;s. We certainly have technical difficulties here and there, but overall, the teams are much better equipped compared to what we had one year ago. All thanks to the great people here who made this happen. I&amp;rsquo;m honored to ride the journey together with you.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/ui-tech-stack.png&#34; alt=&#34;Front end tech stack&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/ui-tech-stack.png&#34; alt=&#34;Front end tech stack&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On my last day at FE, looking forward, I see FE has a bright future on the tech horizon. We might adopt Angular 2 or React JS, and TypeScript or ES6. Micro-service started steadily with backend code componentization. More people had their taste of AWS Lambda. Folks at Platforms did great work on APIGEE. And soon, we will have our first mobile app implemented in React Native. It is an exciting time for exploration and innovation.&lt;/p&gt;
 
