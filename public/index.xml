@@ -2,18 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/</link>
+    <link>http://localhost:1313/blog/</link>
     <description>Recent content on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 17 Mar 2016 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Mar 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A New Dawn</title>
+      <link>http://localhost:1313/blog/posts/a-new-dawn/</link>
+      <pubDate>Fri, 18 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/blog/posts/a-new-dawn/</guid>
+      <description>&lt;p&gt;It is the end of an era. After almost 8-year service at Financial Engines, I decided to advance my career in a different place. The decision is definitely not easy. Leaving FE is like carving out a big chunk of my life. So many familiar faces, so many beautiful memories. However, as of today, I still believe that when facing a great opportunity, I&amp;rsquo;d rather give it my best try than having the regrets of inaction.&lt;/p&gt;
+
+&lt;p&gt;Looking back, I&amp;rsquo;m proud to be a part of this great journey. During these 8 years, we went though two waves of technology evolutions at FE.&lt;/p&gt;
+
+&lt;p&gt;The first one is when I joined FE in 2008, we renovated the legacy Servlet UI to Struts 2, FreeMarker, Flash, Yahoo! UI, and JWPlayer. This was when we created those three drawers and complicate sliders in the Dashboard page. And everything started from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/ui-revolution.png&#34; alt=&#34;UI revolution&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The second wave is two and half years ago to present. It all began with this &amp;lsquo;Angularity&amp;rsquo; experiment &amp;ndash; a small proof of concept to bridge legacy Struts UI with modern Angular JS and Bootstrap. Today we called it the hybrid mode, a stepping stone to pure HTML, CSS, and JavaScript front end. Later, a Hackathon project pushed things even further. Single Page Application (SPA) had its debut at FE. Then, one year ago, a group of developers led by Alex Y created the foundation of SPA development workflow. The first ever SPA CICD pipeline was born at that time. GIT was introduced to wide audience. Macbook, Gulp, Bower, Node JS, Optimizely, SauceLabs, App Dynamics, Analytics, Loggly, Jasmine, Protractor, and C3/D3 all happened within that short period. Things just got exploded &amp;hellip; in a good way :)&lt;/p&gt;
+
+&lt;p&gt;Now, I&amp;rsquo;m confident to make an assertion here, that our front end technologies of today can compete head to head with any unicorn company&amp;rsquo;s. We are at the head.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/ui-tech-stack.png&#34; alt=&#34;Front end tech stack&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Serverless Framework at Financial Engines</title>
-      <link>http://davidcai.github.io/blog/posts/why-serverless/</link>
+      <link>http://localhost:1313/blog/posts/why-serverless/</link>
       <pubDate>Thu, 17 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/why-serverless/</guid>
+      <guid>http://localhost:1313/blog/posts/why-serverless/</guid>
       <description>
 
 &lt;p&gt;When working with Amazon Lambda, my colleagues asked what benefits we will reap from using the Serverless framework. We can directly code Lambda functions in AWS&amp;rsquo; online editor, or upload a zip file to AWS if the Lambda function requires any 3rd-party node modules. The workflow might be tedious but quite easy to understand. So why Serverless?&lt;/p&gt;
@@ -56,7 +80,7 @@
 
 &lt;p&gt;A CloudFormation template is a JSON file that declares AWS resources required by a project. The benefit of having a template is that we can use the same template to duplicate the creation of AWS resources in different stages and regions. The picture below illustrated the relationships among regions, stages, Lambda functions, API endpoints, and other AWS resources:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/aws-stages.png&#34; alt=&#34;Stages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/aws-stages.png&#34; alt=&#34;Stages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;(L = Lambda function, E = API endpoint)&lt;/p&gt;
 
@@ -74,7 +98,7 @@
 
 &lt;h3 id=&#34;4-api-gateway-endpoint:21a5a79a44a185553300308dba71ec54&#34;&gt;4. API Gateway Endpoint&lt;/h3&gt;
 
-&lt;p&gt;As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless framework tries to close this gap. It allows API endpoints to be defined in JSON files. The &lt;code&gt;serverless function create&lt;/code&gt; command generates a default configuration file, and the &lt;code&gt;serverless endpoint deploy&lt;/code&gt; command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other &lt;a href=&#34;http://davidcai.github.io/blog/posts/serverless-and-cors/&#34;&gt;blog post&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless framework tries to close this gap. It allows API endpoints to be defined in JSON files. The &lt;code&gt;serverless function create&lt;/code&gt; command generates a default configuration file, and the &lt;code&gt;serverless endpoint deploy&lt;/code&gt; command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other &lt;a href=&#34;http://localhost:1313/blog/posts/serverless-and-cors/&#34;&gt;blog post&lt;/a&gt;.)&lt;/p&gt;
 
 &lt;p&gt;What I&amp;rsquo;d love to see is the ability to use Swagger to define API endpoints instead of the current ad hoc syntax. Hope the Serverless team will pick this up in the future.&lt;/p&gt;
 
@@ -90,7 +114,7 @@
 
 &lt;p&gt;However, at Financial Engines, we have three AWS accounts &amp;ndash; dev, test, and prod. We&amp;rsquo;d like to promote builds from dev account to test account, and to prod account without bothering with stages. This three layers of accounts is actually quite common practice in IT. However, since Serverless doesn&amp;rsquo;t support multiple AWS accounts yet, we have to rely on stages. We ended up with something like this in order to promote builds:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/serverless-what-we-have.png&#34; alt=&#34;Build promotion using stages&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/serverless-what-we-have.png&#34; alt=&#34;Build promotion using stages&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Basically, we have code and resources deployed in one AWS account &amp;ndash; prod; and inside this account, code is promoted from stage development to test, and then to production. We are not using the other two AWS accounts &amp;ndash; dev and test.&lt;/p&gt;
 
@@ -98,7 +122,7 @@
 
 &lt;p&gt;What we would love to have is something like this instead:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/serverless-what-we-need.png&#34; alt=&#34;Build promotion using accounts&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/serverless-what-we-need.png&#34; alt=&#34;Build promotion using accounts&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;No stage promotions but cross-account promotions.&lt;/p&gt;
 
@@ -144,10 +168,10 @@
     
     <item>
       <title>Serverless Framework &amp; AWS API Gateway CORS</title>
-      <link>http://davidcai.github.io/blog/posts/serverless-and-cors/</link>
+      <link>http://localhost:1313/blog/posts/serverless-and-cors/</link>
       <pubDate>Wed, 10 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/serverless-and-cors/</guid>
+      <guid>http://localhost:1313/blog/posts/serverless-and-cors/</guid>
       <description>&lt;p&gt;If you run into HTTP errors related to &amp;lsquo;Access-Control-Allow-Origin&amp;rsquo; when calling a REST API endpoint through the AWS API Gateway, you probably need to enable CORS (Cross-Origin Resource Sharing) for your endpoint methods.&lt;/p&gt;
 
 &lt;p&gt;AWS has a well written &lt;a href=&#34;http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html&#34;&gt;document&lt;/a&gt; describing how to enable CORS in the API Gateway UI. However, if you&amp;rsquo;d like to leverage the Serverless framework to automatically create API endpoints for you, including CORS settings, this article has an example of the Serverless configuration (see below).&lt;/p&gt;
@@ -259,10 +283,10 @@
     
     <item>
       <title>Install Multiple Java Versions on Mac</title>
-      <link>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</link>
+      <link>http://localhost:1313/blog/posts/install-multiple-jdk-on-mac/</link>
       <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/</guid>
+      <guid>http://localhost:1313/blog/posts/install-multiple-jdk-on-mac/</guid>
       <description>
 
 &lt;p&gt;During one of AWS Lambda exploration projects, I need to use Amazon&amp;rsquo;s swagger-import-tool for uploading swagger documents to AWS. The problem is that this tool has a dependency on Java 8, however, my installed JDK is 7, and I have to keep it for all existing Java projects. It seems that I need to have something like NVM (Node Version Manager) &amp;hellip; this time for JDKs.&lt;/p&gt;
@@ -297,7 +321,7 @@ brew cask info java7
 
 &lt;p&gt;If Java 7 is installed, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/brew-cask-info-java7.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/brew-cask-info-java7.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Otherwise, install Java 7:&lt;/p&gt;
 
@@ -343,7 +367,7 @@ jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
 
 &lt;p&gt;The output will be something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/jenv-versions.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/jenv-versions.png&#34; alt=&#34;brew cask info java7&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The version with an asterisk is the active version.&lt;/p&gt;
 
@@ -379,10 +403,10 @@ jenv local oracle64-1.8.0.66
     
     <item>
       <title>Atom Essential Packages</title>
-      <link>http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/</link>
+      <link>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</link>
       <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/</guid>
+      <guid>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</guid>
       <description>
 
 &lt;p&gt;Atom &amp;ndash; the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor. I found the following Atom packages are essential to my web development workflow.&lt;/p&gt;
@@ -393,7 +417,7 @@ jenv local oracle64-1.8.0.66
 
 &lt;p&gt;This package is a lifesaver for people like me who often need to work with more than one projects. Project-manager saves your project in a registry. Switching to other saved projects is just one key shortcut away - &lt;code&gt;cmd + ctrl + p&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/project-manager.png&#34; alt=&#34;Project Manager&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/project-manager.png&#34; alt=&#34;Project Manager&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
@@ -402,7 +426,7 @@ jenv local oracle64-1.8.0.66
 &lt;p&gt;When it comes to styling, colors might be the most important factor. It will be nice to see the actual color defined by color values right in the editor. The Pigments package gives you just that. All color values will be decorated with a block of their correspondent colors in the same file. You have options to select different decoration styles. For me, &amp;ldquo;sqaure-dot&amp;rdquo; worked the best.&lt;/p&gt;
 
 &lt;div class=&#34;img-og&#34;&gt;
-  &lt;img src=&#34;http://davidcai.github.io/blog/img/pigments.png&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/blog/img/pigments.png&#34;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
@@ -412,7 +436,7 @@ jenv local oracle64-1.8.0.66
 &lt;p&gt;In Atom, I couldn&amp;rsquo;t find a way to highlight all occurrences that matches my current selection. For example, I selected &amp;ldquo;export&amp;rdquo; and would like to immediately see all &amp;ldquo;reports&amp;rdquo; are highlighted in the current file. I consider this basic functionality should be included in Atom but sadly it isn&amp;rsquo;t. Highlight-selected fixed that. You can choose to highlight the border or the background. The package even comes with two highlight colors - one for dark background, and the other for light.&lt;/p&gt;
 
 &lt;div class=&#34;img-og&#34;&gt;
-  &lt;img src=&#34;http://davidcai.github.io/blog/img/highlight-selected.png&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/blog/img/highlight-selected.png&#34;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
@@ -451,7 +475,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;For hobby projects, you might don&amp;rsquo;t care about linting. However, for me, even hobby projects could use some code static analysis. linter and linter-eslint shout out loud whenever (most of the time) I make syntax mistakes. They saved me tons of time that would have been wasted in JavaScript debugging.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/eslint.png&#34; alt=&#34;Eslint&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/eslint.png&#34; alt=&#34;Eslint&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
@@ -459,7 +483,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;No matter how bad our art taste are, we developers do care about our color themes in editor, don&amp;rsquo;t we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/emerald-dream-syntax-screenshot.png&#34; alt=&#34;Emerald Dream Syntax&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/emerald-dream-syntax-screenshot.png&#34; alt=&#34;Emerald Dream Syntax&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This theme is not published as an Atom package yet, however, you can still get it from Github:
 &lt;a href=&#34;https://github.com/davidcai/emerald-dream-syntax&#34;&gt;https://github.com/davidcai/emerald-dream-syntax&lt;/a&gt;. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerald Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.&lt;/p&gt;
@@ -472,10 +496,10 @@ trim_trailing_whitespace = false
     
     <item>
       <title>Tips on Promise and $http Service</title>
-      <link>http://davidcai.github.io/blog/posts/angular-promise/</link>
+      <link>http://localhost:1313/blog/posts/angular-promise/</link>
       <pubDate>Mon, 14 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/angular-promise/</guid>
+      <guid>http://localhost:1313/blog/posts/angular-promise/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;ve been reviewing a lot of Angular code lately. One common problem I found is the unnecessary use of deferred object to resolve and reject promises. In this post, I will illustrate a simplified approach. Another problem is a mix of then, catch, two callbacks in then, success, and error. I will go through each, and propose adopting a single style that can also be applied when using other Promise libraries.&lt;/p&gt;
@@ -689,10 +713,10 @@ $http.get(&#39;&#39;).then(function(response) {
     
     <item>
       <title>Angular Tutorial Videos</title>
-      <link>http://davidcai.github.io/blog/posts/angular-tutorials/</link>
+      <link>http://localhost:1313/blog/posts/angular-tutorials/</link>
       <pubDate>Thu, 10 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/angular-tutorials/</guid>
+      <guid>http://localhost:1313/blog/posts/angular-tutorials/</guid>
       <description>
 
 &lt;p&gt;Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.&lt;/p&gt;
@@ -769,10 +793,10 @@ $http.get(&#39;&#39;).then(function(response) {
     
     <item>
       <title>Angular: Copy vs. Extend vs. Merge</title>
-      <link>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</link>
+      <link>http://localhost:1313/blog/posts/copy-vs-extend-vs-merge/</link>
       <pubDate>Wed, 09 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/copy-vs-extend-vs-merge/</guid>
+      <guid>http://localhost:1313/blog/posts/copy-vs-extend-vs-merge/</guid>
       <description>
 
 &lt;p&gt;Copy, extend, and merge are parts of the utility functions come with Angular. This post explores their differences.&lt;/p&gt;
@@ -897,10 +921,10 @@ orderDrink(); // Output: &#39;medium&#39;
     
     <item>
       <title>Webpack: Pack Your Web Assets</title>
-      <link>http://davidcai.github.io/blog/posts/introducing-webpack/</link>
+      <link>http://localhost:1313/blog/posts/introducing-webpack/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/introducing-webpack/</guid>
+      <guid>http://localhost:1313/blog/posts/introducing-webpack/</guid>
       <description>&lt;p&gt;I just had a presentation to introduce Webpack to our UI Guild in my company. Webpack is a module bundler to pack all kinds of web assets (JavaScript, styles, images, HTML partials, etc.) into one or more bundle JS files.&lt;/p&gt;
 
 &lt;p&gt;Here is &lt;a href=&#34;https://docs.google.com/presentation/d/1frBHDkSLvarbjFukhe3EuTuijpyTMHXwJDKu65OSVx8/edit?usp=sharing&#34;&gt;my presentation&lt;/a&gt;.&lt;/p&gt;
@@ -934,10 +958,10 @@ orderDrink(); // Output: &#39;medium&#39;
     
     <item>
       <title>A Simple A/B Testing Service</title>
-      <link>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</link>
+      <link>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</link>
       <pubDate>Sun, 16 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/a-simple-ab-testing-service/</guid>
+      <guid>http://localhost:1313/blog/posts/a-simple-ab-testing-service/</guid>
       <description>&lt;p&gt;A very simple A/B testing service implemented in Angular &amp;ndash; abTestService:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;;(function() {
@@ -1007,7 +1031,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 })();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://davidcai.github.io/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To better explain the logic behind templateProvider, I created this &lt;a href=&#34;http://localhost:1313/blog/posts/router-dynamic-templates/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
@@ -1015,10 +1039,10 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
     
     <item>
       <title>Router: Dynamic Templates</title>
-      <link>http://davidcai.github.io/blog/posts/router-dynamic-templates/</link>
+      <link>http://localhost:1313/blog/posts/router-dynamic-templates/</link>
       <pubDate>Sat, 15 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/router-dynamic-templates/</guid>
+      <guid>http://localhost:1313/blog/posts/router-dynamic-templates/</guid>
       <description>
 
 &lt;p&gt;This post discusses how to create dynamic templates by leveraging the templateProvider configuration provided by Angular&amp;rsquo;s built-in router or the third-party UI Router.&lt;/p&gt;
@@ -1168,10 +1192,10 @@ gulp.task(&#39;templates&#39;, function() {
     
     <item>
       <title>Directive Isolated Scope: @ vs. =</title>
-      <link>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</link>
+      <link>http://localhost:1313/blog/posts/directive-at-vs-equal/</link>
       <pubDate>Thu, 13 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/directive-at-vs-equal/</guid>
+      <guid>http://localhost:1313/blog/posts/directive-at-vs-equal/</guid>
       <description>
 
 &lt;p&gt;Shall I use @ or = to bind scope variables? Their difference is very well explained in Angular&amp;rsquo;s documentation. However, this question still often pops up when I create directives. In this post, I listed some of the major differences between these two.&lt;/p&gt;
@@ -1394,10 +1418,10 @@ function awesomeWidget() {
     
     <item>
       <title>Angular Factory Pattern</title>
-      <link>http://davidcai.github.io/blog/posts/angular-factory-pattern/</link>
+      <link>http://localhost:1313/blog/posts/angular-factory-pattern/</link>
       <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/angular-factory-pattern/</guid>
+      <guid>http://localhost:1313/blog/posts/angular-factory-pattern/</guid>
       <description>
 
 &lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
@@ -1604,10 +1628,10 @@ function userService($http) {
     
     <item>
       <title>Angular Best Practice Recap</title>
-      <link>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</link>
+      <link>http://localhost:1313/blog/posts/angular-best-practice-recap/</link>
       <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/angular-best-practice-recap/</guid>
+      <guid>http://localhost:1313/blog/posts/angular-best-practice-recap/</guid>
       <description>
 
 &lt;p&gt;I attended a great Angular training provided by OasisDigital the last week. Learned so many tips and best practices from Bill Odom and his team. While my memory is still fresh, I&amp;rsquo;d like to document the stuff I learned. So again, I use my blog as study notes. While I&amp;rsquo;m on the topic of Angular best practices, I also like to bring in some advices from John Papa, Shai Reznik, and other wisdoms of the community. This article basically is a recap of what I heard and learned.&lt;/p&gt;
@@ -1879,7 +1903,7 @@ console.log(app) // not defined
 
 &lt;p&gt;Martin Fowler discussed &lt;a href=&#34;http://martinfowler.com/bliki/TestPyramid.html&#34;&gt;Test pyramid&lt;/a&gt; in his blog.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/pyramid.png&#34; alt=&#34;Test Pyramid&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -2005,10 +2029,10 @@ app.controller(&#39;MainController&#39;, function($scope, $log) {
     
     <item>
       <title>Let&#39;s use NVM</title>
-      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
+      <link>http://localhost:1313/blog/posts/lets-use-nvm/</link>
       <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
+      <guid>http://localhost:1313/blog/posts/lets-use-nvm/</guid>
       <description>
 
 &lt;p&gt;My colleague just came to me with a troubled face. He couldn&amp;rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)&lt;/p&gt;
@@ -2063,7 +2087,7 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
 

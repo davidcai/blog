@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tool on David Cai | Blog</title>
-    <link>http://davidcai.github.io/blog/categories/tool/</link>
+    <link>http://localhost:1313/blog/categories/tool/</link>
     <description>Recent content in Tool on David Cai | Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 19 Nov 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://davidcai.github.io/blog/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/categories/tool/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Atom Essential Packages</title>
-      <link>http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/</link>
+      <link>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</link>
       <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/my-favorite-atom-editor-plugins/</guid>
+      <guid>http://localhost:1313/blog/posts/my-favorite-atom-editor-plugins/</guid>
       <description>
 
 &lt;p&gt;Atom &amp;ndash; the hackable editor coming from Github has been my favorite for web development. Like many other lightweight editors, Atom has a community-driven packages (plugins) marketplace that greatly enhanced the editor. I found the following Atom packages are essential to my web development workflow.&lt;/p&gt;
@@ -24,7 +24,7 @@
 
 &lt;p&gt;This package is a lifesaver for people like me who often need to work with more than one projects. Project-manager saves your project in a registry. Switching to other saved projects is just one key shortcut away - &lt;code&gt;cmd + ctrl + p&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/project-manager.png&#34; alt=&#34;Project Manager&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/project-manager.png&#34; alt=&#34;Project Manager&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
@@ -33,7 +33,7 @@
 &lt;p&gt;When it comes to styling, colors might be the most important factor. It will be nice to see the actual color defined by color values right in the editor. The Pigments package gives you just that. All color values will be decorated with a block of their correspondent colors in the same file. You have options to select different decoration styles. For me, &amp;ldquo;sqaure-dot&amp;rdquo; worked the best.&lt;/p&gt;
 
 &lt;div class=&#34;img-og&#34;&gt;
-  &lt;img src=&#34;http://davidcai.github.io/blog/img/pigments.png&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/blog/img/pigments.png&#34;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
@@ -43,7 +43,7 @@
 &lt;p&gt;In Atom, I couldn&amp;rsquo;t find a way to highlight all occurrences that matches my current selection. For example, I selected &amp;ldquo;export&amp;rdquo; and would like to immediately see all &amp;ldquo;reports&amp;rdquo; are highlighted in the current file. I consider this basic functionality should be included in Atom but sadly it isn&amp;rsquo;t. Highlight-selected fixed that. You can choose to highlight the border or the background. The package even comes with two highlight colors - one for dark background, and the other for light.&lt;/p&gt;
 
 &lt;div class=&#34;img-og&#34;&gt;
-  &lt;img src=&#34;http://davidcai.github.io/blog/img/highlight-selected.png&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/blog/img/highlight-selected.png&#34;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
@@ -82,7 +82,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;For hobby projects, you might don&amp;rsquo;t care about linting. However, for me, even hobby projects could use some code static analysis. linter and linter-eslint shout out loud whenever (most of the time) I make syntax mistakes. They saved me tons of time that would have been wasted in JavaScript debugging.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/eslint.png&#34; alt=&#34;Eslint&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/eslint.png&#34; alt=&#34;Eslint&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
@@ -90,7 +90,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;No matter how bad our art taste are, we developers do care about our color themes in editor, don&amp;rsquo;t we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/emerald-dream-syntax-screenshot.png&#34; alt=&#34;Emerald Dream Syntax&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/emerald-dream-syntax-screenshot.png&#34; alt=&#34;Emerald Dream Syntax&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This theme is not published as an Atom package yet, however, you can still get it from Github:
 &lt;a href=&#34;https://github.com/davidcai/emerald-dream-syntax&#34;&gt;https://github.com/davidcai/emerald-dream-syntax&lt;/a&gt;. Git clone to ~/.atom/packages/ directory, reload Atom, and then select Emerald Dream from the syntax themes dropdown list. This syntax theme works best with Atom Material UI theme.&lt;/p&gt;
@@ -103,10 +103,10 @@ trim_trailing_whitespace = false
     
     <item>
       <title>Let&#39;s use NVM</title>
-      <link>http://davidcai.github.io/blog/posts/lets-use-nvm/</link>
+      <link>http://localhost:1313/blog/posts/lets-use-nvm/</link>
       <pubDate>Sun, 14 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://davidcai.github.io/blog/posts/lets-use-nvm/</guid>
+      <guid>http://localhost:1313/blog/posts/lets-use-nvm/</guid>
       <description>
 
 &lt;p&gt;My colleague just came to me with a troubled face. He couldn&amp;rsquo;t figure out why his gulp script failed to start up local server where everyone else is able to do so. After a short debugging session, I found that the culprit is Node JS version. Certainly, our gulp scripts have a conflict with the latest Node JS. Now, my colleague has to downgrade his Node JS installation, or does he have to? :)&lt;/p&gt;
@@ -161,7 +161,7 @@ nvm use 0.10.38
 
 &lt;p&gt;To list all installed Node Js, and see which one is active, use the &lt;code&gt;nvm ls&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://davidcai.github.io/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/blog/img/nvm-ls.png&#34; alt=&#34;nvm ls&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The command reports that I have v0.10.38 and v0.12.4 installed. The current active version is 0.10.38. I have four aliases - default, node, sable, and iojs. Aliases can refer to other aliases. In this example, node refers stable, and stable refers 0.12.&lt;/p&gt;
 
