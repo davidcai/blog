@@ -46,13 +46,13 @@
 
 &lt;p&gt;For people new to Lambda, the amount of concepts introduced by Serverless could be overwhelming &amp;ndash; CloudFormation templates, Serverless&amp;rsquo;s S3 bucket, stages, Lambda function configurations, and Serverless&amp;rsquo; commands. At the early stage of JAWS (Serverless&amp;rsquo; previous brand name), I even found the framework is very opinionated in some way. So I tried to come up with my own solution &amp;ndash; &lt;a href=&#34;https://github.com/davidcai/lambda-gulp&#34;&gt;a collection of gulp tasks&lt;/a&gt; that automate CloudFormation and Lambda function deployment. The funny thing is that during the development of these Gulp scripts, I start to have better understanding of the Lambda development workflow, and appreciate more of what Serverless is trying to achieve. Understanding the aforementioned concepts are actually crucial to develop scalable Lambda projects. I stopped working on my own solution just before JAWS had a major release which re-branded the framework to Serverless, and brought in many needed features. And from then, I picked up Serverless again.&lt;/p&gt;
 
-&lt;h2 id=&#34;what-serverless-gave-us:21a5a79a44a185553300308dba71ec54&#34;&gt;What Serverless gave us&lt;/h2&gt;
+&lt;h2 id=&#34;what-serverless-gave-us&#34;&gt;What Serverless gave us&lt;/h2&gt;
 
 &lt;p&gt;The great thing about Serverless framework is that it incorporates many good practices that might seem to be over-complicate for simple projects, but will exponentially accelerate the development cycle for mid and large projects. Sure, there are many other tools and plugins that support Lambda development and deployment, such as Jenkins&amp;rsquo; Lambda plugin, and ThoughtWorks&amp;rsquo; node module &lt;a href=&#34;https://github.com/ThoughtWorksStudios/node-aws-lambda&#34;&gt;node-aws-lambda&lt;/a&gt;. But so far, Serverless is still one of the very few popular frameworks that handle the full development cycle of Lambda, API Gateway, and other AWS resources. The Serverless CLI can be integrated with CICD pipelines such as Jenkins (which we do at Financial Engines) that further automates the workflow. I found Serverless is especially useful in the following areas:&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1-local-development:21a5a79a44a185553300308dba71ec54&#34;&gt;1. Local Development&lt;/h3&gt;
+&lt;h3 id=&#34;1-local-development&#34;&gt;1. Local Development&lt;/h3&gt;
 
 &lt;p&gt;Coding directly in AWS Lambda editor might be OK for small projects, but it is not fitting for any project larger than hello world examples. Having Lambda functions developed in local is essential to have an efficient working setup:&lt;/p&gt;
 
@@ -66,7 +66,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;2-scaffolding:21a5a79a44a185553300308dba71ec54&#34;&gt;2. Scaffolding&lt;/h3&gt;
+&lt;h3 id=&#34;2-scaffolding&#34;&gt;2. Scaffolding&lt;/h3&gt;
 
 &lt;p&gt;With Serverless CLI, creating projects is just a command away. The &lt;code&gt;serverless project create&lt;/code&gt; command prepares the local project structures, generates default CloudFormation template, and creates IAM roles.&lt;/p&gt;
 
@@ -78,7 +78,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;3-cloudformation:21a5a79a44a185553300308dba71ec54&#34;&gt;3. CloudFormation&lt;/h3&gt;
+&lt;h3 id=&#34;3-cloudformation&#34;&gt;3. CloudFormation&lt;/h3&gt;
 
 &lt;p&gt;A CloudFormation template is a JSON file that declares AWS resources required by a project. The benefit of having a template is that we can use the same template to duplicate the creation of AWS resources in different stages and regions. The picture below illustrated the relationships among regions, stages, Lambda functions, API endpoints, and other AWS resources:&lt;/p&gt;
 
@@ -98,7 +98,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;4-api-gateway-endpoint:21a5a79a44a185553300308dba71ec54&#34;&gt;4. API Gateway Endpoint&lt;/h3&gt;
+&lt;h3 id=&#34;4-api-gateway-endpoint&#34;&gt;4. API Gateway Endpoint&lt;/h3&gt;
 
 &lt;p&gt;As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless framework tries to close this gap. It allows API endpoints to be defined in JSON files. The &lt;code&gt;serverless function create&lt;/code&gt; command generates a default configuration file, and the &lt;code&gt;serverless endpoint deploy&lt;/code&gt; command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other &lt;a href=&#34;http://davidcai.github.io/blog/posts/serverless-and-cors/&#34;&gt;blog post&lt;/a&gt;.)&lt;/p&gt;
 
@@ -106,11 +106,11 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;things-i-d-love-to-have:21a5a79a44a185553300308dba71ec54&#34;&gt;Things I&amp;rsquo;d love to have&lt;/h2&gt;
+&lt;h2 id=&#34;things-i-d-love-to-have&#34;&gt;Things I&amp;rsquo;d love to have&lt;/h2&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;1-multiple-aws-account-support:21a5a79a44a185553300308dba71ec54&#34;&gt;1. Multiple AWS account support&lt;/h3&gt;
+&lt;h3 id=&#34;1-multiple-aws-account-support&#34;&gt;1. Multiple AWS account support&lt;/h3&gt;
 
 &lt;p&gt;Just like other young software, Serverless certainly has room for improvement. One thing I&amp;rsquo;d really love to have is the support for deploying AWS resources in multiple AWS accounts. Currently, Serverless embraces Stages for promoting builds from development to test, and then from test to production. Each build environment is a &amp;lsquo;stage&amp;rsquo;, and they all live in one AWS account.&lt;/p&gt;
 
@@ -132,7 +132,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;2-session-token-support:21a5a79a44a185553300308dba71ec54&#34;&gt;2. Session token support&lt;/h3&gt;
+&lt;h3 id=&#34;2-session-token-support&#34;&gt;2. Session token support&lt;/h3&gt;
 
 &lt;p&gt;The AWS SDK supports Session Token &amp;ndash; a token that will expire after a certain period, and will be used together with access ID and secrete access key for AWS authentication. This is extremely useful for maintaining large number of IDs and keys. Since Session Token will simply expire, there is much less need to actively delete unused/obsolete IDs or keys.&lt;/p&gt;
 
@@ -140,7 +140,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;serverless-framework-alternatives:21a5a79a44a185553300308dba71ec54&#34;&gt;Serverless framework alternatives&lt;/h2&gt;
+&lt;h2 id=&#34;serverless-framework-alternatives&#34;&gt;Serverless framework alternatives&lt;/h2&gt;
 
 &lt;p&gt;Like every framework, it might solve 80% of your problems, but to get the other 20%, things might turn to exponentially difficult, to a point, you even feel like fighting against the framework :)&lt;/p&gt;
 
@@ -154,7 +154,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:21a5a79a44a185553300308dba71ec54&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Serverless framework is still young, yet it already brought us useful features that simplified the Lambda development. It certainly has room for improvement. The early product feels more limiting in how to organize and name your code assets. The later development has made some parts of this framework more configurable and thus flexible.&lt;/p&gt;
 
@@ -295,7 +295,7 @@
 
 &lt;p&gt;After some Google searches, a promising solution is to use &lt;a href=&#34;http://www.jenv.be/&#34;&gt;jEnv&lt;/a&gt; &amp;ndash; a command line tool to set JAVA_HOME on the fly.&lt;/p&gt;
 
-&lt;h2 id=&#34;homebrew-cask:677a9bde6e1ad5d989b759e109310067&#34;&gt;Homebrew Cask&lt;/h2&gt;
+&lt;h2 id=&#34;homebrew-cask&#34;&gt;Homebrew Cask&lt;/h2&gt;
 
 &lt;p&gt;On Mac, Homebrew is the de-facto package manager, and &lt;a href=&#34;http://gillesfabio.github.io/homebrew-cask-homepage/&#34;&gt;Homebrew Cask&lt;/a&gt; is the app manager. I&amp;rsquo;m going to use Cask to install Java 7 and 8.&lt;/p&gt;
 
@@ -311,7 +311,7 @@ brew install brew-cask
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew update &amp;amp;&amp;amp; brew upgrade brew-cask &amp;amp;&amp;amp; brew cleanup &amp;amp;&amp;amp; brew cask cleanup
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;install-java-7-and-8:677a9bde6e1ad5d989b759e109310067&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
+&lt;h2 id=&#34;install-java-7-and-8&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
 
 &lt;p&gt;People on the Stackoverflow cautioned &lt;em&gt;not&lt;/em&gt; to install 8 until 7 is installed. So we are going to install JDK 7 first.&lt;/p&gt;
 
@@ -343,7 +343,7 @@ brew cask info java7
 /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;enter-jenv:677a9bde6e1ad5d989b759e109310067&#34;&gt;Enter jEnv&lt;/h2&gt;
+&lt;h2 id=&#34;enter-jenv&#34;&gt;Enter jEnv&lt;/h2&gt;
 
 &lt;p&gt;Now it is time to install jEnv:&lt;/p&gt;
 
@@ -389,7 +389,7 @@ jenv local oracle64-1.8.0.66
 &lt;pre&gt;&lt;code&gt;oracle64-1.8.0.66
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;references:677a9bde6e1ad5d989b759e109310067&#34;&gt;References&lt;/h2&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 
 &lt;p&gt;To learn more about jEnv, here I list some references:&lt;/p&gt;
 
@@ -415,7 +415,7 @@ jenv local oracle64-1.8.0.66
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;project-manager:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Project-manager&lt;/h2&gt;
+&lt;h2 id=&#34;project-manager&#34;&gt;Project-manager&lt;/h2&gt;
 
 &lt;p&gt;This package is a lifesaver for people like me who often need to work with more than one projects. Project-manager saves your project in a registry. Switching to other saved projects is just one key shortcut away - &lt;code&gt;cmd + ctrl + p&lt;/code&gt;.&lt;/p&gt;
 
@@ -423,7 +423,7 @@ jenv local oracle64-1.8.0.66
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;pigments:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Pigments&lt;/h2&gt;
+&lt;h2 id=&#34;pigments&#34;&gt;Pigments&lt;/h2&gt;
 
 &lt;p&gt;When it comes to styling, colors might be the most important factor. It will be nice to see the actual color defined by color values right in the editor. The Pigments package gives you just that. All color values will be decorated with a block of their correspondent colors in the same file. You have options to select different decoration styles. For me, &amp;ldquo;sqaure-dot&amp;rdquo; worked the best.&lt;/p&gt;
 
@@ -433,7 +433,7 @@ jenv local oracle64-1.8.0.66
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;highlight-selected:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Highlight-selected&lt;/h2&gt;
+&lt;h2 id=&#34;highlight-selected&#34;&gt;Highlight-selected&lt;/h2&gt;
 
 &lt;p&gt;In Atom, I couldn&amp;rsquo;t find a way to highlight all occurrences that matches my current selection. For example, I selected &amp;ldquo;export&amp;rdquo; and would like to immediately see all &amp;ldquo;reports&amp;rdquo; are highlighted in the current file. I consider this basic functionality should be included in Atom but sadly it isn&amp;rsquo;t. Highlight-selected fixed that. You can choose to highlight the border or the background. The package even comes with two highlight colors - one for dark background, and the other for light.&lt;/p&gt;
 
@@ -443,7 +443,7 @@ jenv local oracle64-1.8.0.66
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;editorconfig:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;EditorConfig&lt;/h2&gt;
+&lt;h2 id=&#34;editorconfig&#34;&gt;EditorConfig&lt;/h2&gt;
 
 &lt;p&gt;Have you suffered from other developers&amp;rsquo; bad habits of using a mix of tabs, spaces, charset, trailing white spaces and lines? EditorConfig.org created a standard to promote a consistent coding styles between different editors and IDEs. Their website maintained &lt;a href=&#34;http://editorconfig.org/#download&#34;&gt;a list of plugins&lt;/a&gt; that support this standard. All you need to do is to define a &lt;code&gt;.editorconfig&lt;/code&gt; file at the root of your project, and download the plugin. Then, your editor will recognize &lt;code&gt;.editorconfig&lt;/code&gt; and start to apply the styles.&lt;/p&gt;
 
@@ -467,13 +467,13 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;tabs-to-spaces:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Tabs-to-spaces&lt;/h2&gt;
+&lt;h2 id=&#34;tabs-to-spaces&#34;&gt;Tabs-to-spaces&lt;/h2&gt;
 
 &lt;p&gt;I found editorconfig itself is not enough to convert all tab indentations to spaces. I had to use this tabs-to-spaces package for that. Like the name suggested, this package transforms all tabs indentations to spaces, or vice versa. In the package&amp;rsquo;s setting UI, you have the option to choose &amp;ldquo;none&amp;rdquo;, &amp;ldquo;tabify&amp;rdquo;, and &amp;ldquo;untabify&amp;rdquo;. &amp;ldquo;none&amp;rdquo; does nothing; &amp;ldquo;tabify&amp;rdquo; changes indentations in spaces to tabs; and &amp;ldquo;untabify&amp;rdquo; does the opposite - replacing tabs with spaces.&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;linter-and-linter-eslint:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Linter and linter-eslint&lt;/h2&gt;
+&lt;h2 id=&#34;linter-and-linter-eslint&#34;&gt;Linter and linter-eslint&lt;/h2&gt;
 
 &lt;p&gt;For hobby projects, you might don&amp;rsquo;t care about linting. However, for me, even hobby projects could use some code static analysis. linter and linter-eslint shout out loud whenever (most of the time) I make syntax mistakes. They saved me tons of time that would have been wasted in JavaScript debugging.&lt;/p&gt;
 
@@ -481,7 +481,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;themes:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Themes&lt;/h2&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
 
 &lt;p&gt;No matter how bad our art taste are, we developers do care about our color themes in editor, don&amp;rsquo;t we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.&lt;/p&gt;
 
@@ -508,7 +508,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;resolve-promise:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Resolve Promise&lt;/h2&gt;
+&lt;h2 id=&#34;resolve-promise&#34;&gt;Resolve Promise&lt;/h2&gt;
 
 &lt;p&gt;The following snippet uses $http service to make a REST call, and resolve the returned data from the response. This is a common pattern I often find in Angular code, however, the code is not optimal (see below).&lt;/p&gt;
 
@@ -544,7 +544,7 @@ function getUser($http) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;reject-promise:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Reject Promise&lt;/h2&gt;
+&lt;h2 id=&#34;reject-promise&#34;&gt;Reject Promise&lt;/h2&gt;
 
 &lt;p&gt;What about error handling? Using the not preferred example, we can call &lt;code&gt;deferred.reject&lt;/code&gt; in the error callback to reject the promise:&lt;/p&gt;
 
@@ -663,7 +663,7 @@ getUser().then(
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;success-and-error-in-http-service:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Success and Error in $http Service&lt;/h2&gt;
+&lt;h2 id=&#34;success-and-error-in-http-service&#34;&gt;Success and Error in $http Service&lt;/h2&gt;
 
 &lt;p&gt;In old versions (1.3 and less) of Angular, $http service has two additional methods &amp;ndash; success() and error(), which are similar to then(), however, the subtle differences are important:&lt;/p&gt;
 
@@ -695,7 +695,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;The usage of a deferred object to resolve and reject promises can be replaced by a simplified style:&lt;/p&gt;
 
@@ -723,7 +723,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.&lt;/p&gt;
 
-&lt;h1 id=&#34;1-shaping-up-with-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
+&lt;h1 id=&#34;1-shaping-up-with-angular-js&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
 
 &lt;p&gt;Gregg Pollack&amp;rsquo;s &amp;ldquo;Shaping up with Angular.js&amp;rdquo; from codeschool.com has been there for a while. It is one of the tutorials that have the best intro. The series covers Angular setup, binding, controllers, directives, filters, form handling, and services. The best part is its challenges after each chapter.&lt;/p&gt;
 
@@ -741,7 +741,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Sequel: &lt;a href=&#34;https://www.codeschool.com/courses/staying-sharp-with-angular-js&#34;&gt;Staying Sharp with Angular.js&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;2-egghead-io-new-to-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
+&lt;h1 id=&#34;2-egghead-io-new-to-angular-js&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
 
 &lt;p&gt;Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn something new from these informative discussions.&lt;/p&gt;
 
@@ -755,7 +755,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Egghead.io: &lt;a href=&#34;https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer&#34;&gt;New to AngularJS?&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;3-angular-youtube-channel:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
+&lt;h1 id=&#34;3-angular-youtube-channel&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
 
 &lt;p&gt;For people who prefer picking their own lessons, Angular&amp;rsquo;s Youtube channel is the gold mine.&lt;/p&gt;
 
@@ -780,7 +780,7 @@ $http.get(&#39;&#39;).then(function(response) {
 &lt;li&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCBWXtgwaUqyvI50euTYlUWQ&#34;&gt;Angular U channel&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;4-others:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;4. Others&lt;/h1&gt;
+&lt;h1 id=&#34;4-others&#34;&gt;4. Others&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PluralSight.com &lt;a href=&#34;http://www.pluralsight.com/search/?searchTerm=angular&#34;&gt;Angular courses&lt;/a&gt;&lt;/li&gt;
@@ -805,7 +805,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;copy:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Copy&lt;/h2&gt;
+&lt;h2 id=&#34;copy&#34;&gt;Copy&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is a &lt;em&gt;deep&lt;/em&gt; copy.&lt;/p&gt;
 
@@ -825,7 +825,7 @@ console.log(o1.skill === o2.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;extend:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Extend&lt;/h2&gt;
+&lt;h2 id=&#34;extend&#34;&gt;Extend&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.extend(dst, src1, src2, ...)&lt;/code&gt; is to &lt;em&gt;shallow&lt;/em&gt; copy the properties of the source objects from right to left, all the way to the destination object.&lt;/p&gt;
 
@@ -843,7 +843,7 @@ console.log(src2.skill === dst.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Merge&lt;/h2&gt;
+&lt;h2 id=&#34;merge&#34;&gt;Merge&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.merge&lt;/code&gt; is an Angular 1.4+ API that is to &lt;em&gt;deep&lt;/em&gt; (recursively) copy the properties of the source objects to the destination object.&lt;/p&gt;
 
@@ -864,7 +864,7 @@ console.log(src2.skill === dst.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;more-extend-vs-merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;More Extend vs. Merge&lt;/h2&gt;
+&lt;h2 id=&#34;more-extend-vs-merge&#34;&gt;More Extend vs. Merge&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is simply to clone an object. &lt;code&gt;angular.extend&lt;/code&gt; and &lt;code&gt;angular.merge&lt;/code&gt; are more interesting. Here is another set of comparing examples.&lt;/p&gt;
 
@@ -896,7 +896,7 @@ console.log(angular.merge(dst, src1, src2));
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;user-and-default-options:1f01c150b870a11f9ba71472fb074eba&#34;&gt;User and Default Options&lt;/h2&gt;
+&lt;h2 id=&#34;user-and-default-options&#34;&gt;User and Default Options&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.extend&lt;/code&gt; or &lt;code&gt;angular.merge&lt;/code&gt; is often used to achieve user options overriding default options. Here is an example:&lt;/p&gt;
 
@@ -1051,7 +1051,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;problem:7c673880e38fa750461b975e7ddb6656&#34;&gt;PROBLEM&lt;/h2&gt;
+&lt;h2 id=&#34;problem&#34;&gt;PROBLEM&lt;/h2&gt;
 
 &lt;p&gt;For Single Page Applications (SPAs), we often need to switch views or states inside containers. This is usually done through routers. With either Angular&amp;rsquo;s built-in router or the popular UI Router, we are able to define the relationship between states and their templates. For instance, here we defined a state &lt;code&gt;home&lt;/code&gt; and its template URL &lt;code&gt;app/home/home.html&lt;/code&gt;:&lt;/p&gt;
 
@@ -1083,7 +1083,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;solution&#34;&gt;SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;The answer is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
 
@@ -1134,7 +1134,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;even-better-solution&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvider&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
 
@@ -1184,7 +1184,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:7c673880e38fa750461b975e7ddb6656&#34;&gt;CONCLUSION&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;CONCLUSION&lt;/h2&gt;
 
 &lt;p&gt;By leveraging the &lt;code&gt;templateProvider&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
 
@@ -1204,7 +1204,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;interpolation-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: Interpolation Binding&lt;/h2&gt;
+&lt;h2 id=&#34;interpolation-binding&#34;&gt;@: Interpolation Binding&lt;/h2&gt;
 
 &lt;p&gt;&amp;rdquo;@&amp;rdquo; symbols can be used to bind interpolations. Interpolations are {{ }} expressions.&lt;/p&gt;
 
@@ -1257,7 +1257,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;variable-name-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: Variable Name Binding&lt;/h2&gt;
+&lt;h2 id=&#34;variable-name-binding&#34;&gt;=: Variable Name Binding&lt;/h2&gt;
 
 &lt;p&gt;&amp;rdquo;=&amp;rdquo; symbols can be used to bind variable names.&lt;/p&gt;
 
@@ -1301,7 +1301,7 @@ starting at [{ person.name }}].
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;one-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: One-way Binding&lt;/h2&gt;
+&lt;h2 id=&#34;one-way-binding&#34;&gt;@: One-way Binding&lt;/h2&gt;
 
 &lt;p&gt;@ is for one-way binding - the bound value is passed into a directive&amp;rsquo;s scope, however, any change made to the value inside the directive will not be passed back from the directive. To help myself remember this syntax, I&amp;rsquo;d like to think @ as &amp;lsquo;point at&amp;rsquo; - a one-way direction - from the external scope to a directive&amp;rsquo;s internal scope.&lt;/p&gt;
 
@@ -1351,7 +1351,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;two-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: Two-way Binding&lt;/h2&gt;
+&lt;h2 id=&#34;two-way-binding&#34;&gt;=: Two-way Binding&lt;/h2&gt;
 
 &lt;p&gt;= is for two-way binding, meaning the change made to the bound value will be &amp;ldquo;sync&amp;rsquo;d&amp;rdquo; both inside and outside of a directive. I&amp;rsquo;d like to think the &amp;ldquo;=&amp;rdquo; symbol as &amp;ldquo;bi-directional&amp;rdquo;.&lt;/p&gt;
 
@@ -1385,7 +1385,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:a300ed22ee47617686df42dbda8a1336&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -1426,7 +1426,7 @@ function awesomeWidget() {
       <guid>http://davidcai.github.io/blog/posts/angular-factory-pattern/</guid>
       <description>
 
-&lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
+&lt;h2 id=&#34;suffix-factory-with-service&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
 
 &lt;p&gt;The terminology &amp;ldquo;Factory&amp;rdquo; in Angular is different from the one used in the Java community. From a Java developer&amp;rsquo;s perspective, a factory is to create something by a specification supplied by the factory caller. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.&lt;/p&gt;
 
@@ -1443,7 +1443,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;decouple-interface-from-implementation:2125073d380548c4d6df7eb33c79e543&#34;&gt;Decouple Interface from Implementation&lt;/h2&gt;
+&lt;h2 id=&#34;decouple-interface-from-implementation&#34;&gt;Decouple Interface from Implementation&lt;/h2&gt;
 
 &lt;p&gt;A common factory looks like this:&lt;/p&gt;
 
@@ -1494,7 +1494,7 @@ function userService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;move-declarations-to-top:2125073d380548c4d6df7eb33c79e543&#34;&gt;Move Declarations to Top&lt;/h2&gt;
+&lt;h2 id=&#34;move-declarations-to-top&#34;&gt;Move Declarations to Top&lt;/h2&gt;
 
 &lt;p&gt;To push good readability further, I will move declarations above implementations, just like how we define Angular components. Here is an example of Angular controller definition:&lt;/p&gt;
 
@@ -1559,7 +1559,7 @@ function userService($http) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:2125073d380548c4d6df7eb33c79e543&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Suffix factories with &amp;lsquo;Service&amp;rsquo;. Leverage function hoisting to pull declarations above implementations.&lt;/p&gt;
 
@@ -1640,7 +1640,7 @@ function userService($http) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;prefer-factory-over-service:55578ab064fd5af32026dc69791cd223&#34;&gt;PREFER FACTORY OVER SERVICE&lt;/h2&gt;
+&lt;h2 id=&#34;prefer-factory-over-service&#34;&gt;PREFER FACTORY OVER SERVICE&lt;/h2&gt;
 
 &lt;p&gt;A service is a simplified version of a factory. Services are a constructor functions. However, I&amp;rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&amp;rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.&lt;/p&gt;
 
@@ -1659,7 +1659,7 @@ function fooService() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;assign-third-party-globals-to-values:55578ab064fd5af32026dc69791cd223&#34;&gt;ASSIGN THIRD-PARTY GLOBALS TO VALUES&lt;/h2&gt;
+&lt;h2 id=&#34;assign-third-party-globals-to-values&#34;&gt;ASSIGN THIRD-PARTY GLOBALS TO VALUES&lt;/h2&gt;
 
 &lt;p&gt;Although I can use $window to reference globals of third-party libraries, I like to assign globals to values, and inject them. This makes function arguments a clear contract of what dependencies my code requires.&lt;/p&gt;
 
@@ -1692,13 +1692,13 @@ function MainController(_, d3) { // Injection
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;stick-with-http:55578ab064fd5af32026dc69791cd223&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
+&lt;h2 id=&#34;stick-with-http&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
 
 &lt;p&gt;I feel $http gives me more flexibilities than $resource. And $http service&amp;rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;wrap-rest-in-services:55578ab064fd5af32026dc69791cd223&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
+&lt;h2 id=&#34;wrap-rest-in-services&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
 
 &lt;p&gt;Encapsulate REST requests as methods in services, so users of the service don&amp;rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).&lt;/p&gt;
 
@@ -1726,7 +1726,7 @@ function accountService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
+&lt;h2 id=&#34;ui-router-resolve-pattern&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
 
 &lt;p&gt;I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.&lt;/p&gt;
 
@@ -1761,7 +1761,7 @@ function accountService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;isolate-directive-scope:55578ab064fd5af32026dc69791cd223&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
+&lt;h2 id=&#34;isolate-directive-scope&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
 
 &lt;p&gt;Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&amp;rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&amp;rsquo;s DOM attributes) should be the only place where a directive retrieves external information.&lt;/p&gt;
 
@@ -1803,7 +1803,7 @@ function browseHappyBanner() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;clean-template:55578ab064fd5af32026dc69791cd223&#34;&gt;CLEAN TEMPLATE&lt;/h2&gt;
+&lt;h2 id=&#34;clean-template&#34;&gt;CLEAN TEMPLATE&lt;/h2&gt;
 
 &lt;p&gt;If snippets in a template look like program, then you are doing it wrong. Templates need to be declarative, easy to understand for non-programmers. The best practice is to imagine your template is written by a web designer rather than a developer.&lt;/p&gt;
 
@@ -1829,13 +1829,13 @@ function browseHappyBanner() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;thin-controller:55578ab064fd5af32026dc69791cd223&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
+&lt;h2 id=&#34;thin-controller&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
 
 &lt;p&gt;Make controller thin. Move logic to services and directives. This makes controller much easy to test.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;light-filter:55578ab064fd5af32026dc69791cd223&#34;&gt;LIGHT FILTER&lt;/h2&gt;
+&lt;h2 id=&#34;light-filter&#34;&gt;LIGHT FILTER&lt;/h2&gt;
 
 &lt;p&gt;Filter tends to be called multiple times. So if you have a filter that does a lot of heavy lifting, it will drag down the performance of the entire app. Try to simplify the logic in filter. Use cache or memoization to improve the performance.&lt;/p&gt;
 
@@ -1861,7 +1861,7 @@ function heavyLifting() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;named-functions:55578ab064fd5af32026dc69791cd223&#34;&gt;NAMED FUNCTIONS&lt;/h2&gt;
+&lt;h2 id=&#34;named-functions&#34;&gt;NAMED FUNCTIONS&lt;/h2&gt;
 
 &lt;p&gt;Use named functions whenever you can. When error occurs inside the named function, the function name will appear in the stack trace, which is really helpful for debugging.&lt;/p&gt;
 
@@ -1882,7 +1882,7 @@ function MyController() { ... }
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scope-js-code-in-iife:55578ab064fd5af32026dc69791cd223&#34;&gt;SCOPE JS CODE IN IIFE&lt;/h2&gt;
+&lt;h2 id=&#34;scope-js-code-in-iife&#34;&gt;SCOPE JS CODE IN IIFE&lt;/h2&gt;
 
 &lt;p&gt;This best practice is not limited to Angular. IIFE (Immediately-Invoked Function Expression) is often used to create scopes in which the variables and functions will not be leaked to outer scopes.&lt;/p&gt;
 
@@ -1897,7 +1897,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;pyramid-testing:55578ab064fd5af32026dc69791cd223&#34;&gt;PYRAMID TESTING&lt;/h2&gt;
+&lt;h2 id=&#34;pyramid-testing&#34;&gt;PYRAMID TESTING&lt;/h2&gt;
 
 &lt;p&gt;Again this advice is not limited to Angular.&lt;/p&gt;
 
@@ -1909,7 +1909,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;ng-model-dot-rule:55578ab064fd5af32026dc69791cd223&#34;&gt;NG-MODEL DOT RULE&lt;/h2&gt;
+&lt;h2 id=&#34;ng-model-dot-rule&#34;&gt;NG-MODEL DOT RULE&lt;/h2&gt;
 
 &lt;p&gt;Misko Hevery in his presentation on Angular best practices coined the &lt;a href=&#34;https://www.youtube.com/watch?feature=player_detailpage&amp;amp;v=ZhfUv0spHCY#t=1758s&#34;&gt;dot rule&lt;/a&gt;. My over-simplified version is to bind objects instead of primitives to $scope, and always initialize the bound object:&lt;/p&gt;
 
@@ -1931,7 +1931,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;one-component-per-file:55578ab064fd5af32026dc69791cd223&#34;&gt;ONE COMPONENT PER FILE&lt;/h2&gt;
+&lt;h2 id=&#34;one-component-per-file&#34;&gt;ONE COMPONENT PER FILE&lt;/h2&gt;
 
 &lt;p&gt;Limit one Angular component (directive, service, controller, etc.) per JavaScript file. Make it easy to locate components, and keep files shorter.&lt;/p&gt;
 
@@ -1948,7 +1948,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;group-files-by-features:55578ab064fd5af32026dc69791cd223&#34;&gt;GROUP FILES BY FEATURES&lt;/h2&gt;
+&lt;h2 id=&#34;group-files-by-features&#34;&gt;GROUP FILES BY FEATURES&lt;/h2&gt;
 
 &lt;p&gt;There are two schools of thoughts when it comes to organizing Angular files - grouping by types, and grouping by features. I prefer the latter for big projects. Much easier for navigation.&lt;/p&gt;
 
@@ -1964,7 +1964,7 @@ action-panel
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;include-intention-in-file-names:55578ab064fd5af32026dc69791cd223&#34;&gt;INCLUDE INTENTION IN FILE NAMES&lt;/h2&gt;
+&lt;h2 id=&#34;include-intention-in-file-names&#34;&gt;INCLUDE INTENTION IN FILE NAMES&lt;/h2&gt;
 
 &lt;p&gt;.js can mean a lot of things in Angular apps. It makes the intention much clear when the file names contain .controller, .directive, .spec, .service, etc.&lt;/p&gt;
 
@@ -1972,13 +1972,13 @@ action-panel
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;lint-javascript:55578ab064fd5af32026dc69791cd223&#34;&gt;LINT JAVASCRIPT&lt;/h2&gt;
+&lt;h2 id=&#34;lint-javascript&#34;&gt;LINT JAVASCRIPT&lt;/h2&gt;
 
 &lt;p&gt;Use jshint, JSCS, or even better - &lt;a href=&#34;http://eslint.org/&#34;&gt;eslint&lt;/a&gt; to lint javascript code. Integrate lint into the build process. Use editor plugins to bring lint warnings and errors right in front of developers&amp;rsquo;s eyes. I&amp;rsquo;ve been considering to create GIT hook to block git pushes if lint reports any warnings or errors.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;use-ng-annotate:55578ab064fd5af32026dc69791cd223&#34;&gt;USE NG-ANNOTATE&lt;/h2&gt;
+&lt;h2 id=&#34;use-ng-annotate&#34;&gt;USE NG-ANNOTATE&lt;/h2&gt;
 
 &lt;p&gt;Angular replies on the names of function arguments for dependency injection. However, JS minification will shorten argument names, which ruined Angular DI. To work around this issue, we either use the DI array syntax:&lt;/p&gt;
 
@@ -2012,7 +2012,7 @@ app.controller(&#39;MainController&#39;, function($scope, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;leverage-task-runners:55578ab064fd5af32026dc69791cd223&#34;&gt;LEVERAGE TASK RUNNERS&lt;/h2&gt;
+&lt;h2 id=&#34;leverage-task-runners&#34;&gt;LEVERAGE TASK RUNNERS&lt;/h2&gt;
 
 &lt;p&gt;Lint and ngAnnotate can be integrated in the build process by task runners such as Gulp.&lt;/p&gt;
 
@@ -2095,7 +2095,7 @@ nvm use 0.10.38
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:873ad2aa58948dc097de69876bea24cc&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Managing versions is crucial but tedious. The task should be automated. NVM helps us manage multiple Node Js versions without a sweat. It becomes much easy to work in a working version, and try something new in the latest version. All I have to do is &lt;code&gt;nvm use default&lt;/code&gt; and &lt;code&gt;nvm use stable&lt;/code&gt;.&lt;/p&gt;
 

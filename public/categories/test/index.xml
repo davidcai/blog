@@ -18,7 +18,7 @@
 
 &lt;p&gt;Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.&lt;/p&gt;
 
-&lt;h1 id=&#34;1-shaping-up-with-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
+&lt;h1 id=&#34;1-shaping-up-with-angular-js&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
 
 &lt;p&gt;Gregg Pollack&amp;rsquo;s &amp;ldquo;Shaping up with Angular.js&amp;rdquo; from codeschool.com has been there for a while. It is one of the tutorials that have the best intro. The series covers Angular setup, binding, controllers, directives, filters, form handling, and services. The best part is its challenges after each chapter.&lt;/p&gt;
 
@@ -36,7 +36,7 @@
 
 &lt;p&gt;Sequel: &lt;a href=&#34;https://www.codeschool.com/courses/staying-sharp-with-angular-js&#34;&gt;Staying Sharp with Angular.js&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;2-egghead-io-new-to-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
+&lt;h1 id=&#34;2-egghead-io-new-to-angular-js&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
 
 &lt;p&gt;Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn something new from these informative discussions.&lt;/p&gt;
 
@@ -50,7 +50,7 @@
 
 &lt;p&gt;Egghead.io: &lt;a href=&#34;https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer&#34;&gt;New to AngularJS?&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;3-angular-youtube-channel:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
+&lt;h1 id=&#34;3-angular-youtube-channel&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
 
 &lt;p&gt;For people who prefer picking their own lessons, Angular&amp;rsquo;s Youtube channel is the gold mine.&lt;/p&gt;
 
@@ -75,7 +75,7 @@
 &lt;li&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCBWXtgwaUqyvI50euTYlUWQ&#34;&gt;Angular U channel&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;4-others:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;4. Others&lt;/h1&gt;
+&lt;h1 id=&#34;4-others&#34;&gt;4. Others&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PluralSight.com &lt;a href=&#34;http://www.pluralsight.com/search/?searchTerm=angular&#34;&gt;Angular courses&lt;/a&gt;&lt;/li&gt;
@@ -181,7 +181,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;problem:7c673880e38fa750461b975e7ddb6656&#34;&gt;PROBLEM&lt;/h2&gt;
+&lt;h2 id=&#34;problem&#34;&gt;PROBLEM&lt;/h2&gt;
 
 &lt;p&gt;For Single Page Applications (SPAs), we often need to switch views or states inside containers. This is usually done through routers. With either Angular&amp;rsquo;s built-in router or the popular UI Router, we are able to define the relationship between states and their templates. For instance, here we defined a state &lt;code&gt;home&lt;/code&gt; and its template URL &lt;code&gt;app/home/home.html&lt;/code&gt;:&lt;/p&gt;
 
@@ -213,7 +213,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;solution&#34;&gt;SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;The answer is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
 
@@ -264,7 +264,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;even-better-solution&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvider&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
 
@@ -314,7 +314,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:7c673880e38fa750461b975e7ddb6656&#34;&gt;CONCLUSION&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;CONCLUSION&lt;/h2&gt;
 
 &lt;p&gt;By leveraging the &lt;code&gt;templateProvider&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
 

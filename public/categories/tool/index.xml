@@ -20,7 +20,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;project-manager:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Project-manager&lt;/h2&gt;
+&lt;h2 id=&#34;project-manager&#34;&gt;Project-manager&lt;/h2&gt;
 
 &lt;p&gt;This package is a lifesaver for people like me who often need to work with more than one projects. Project-manager saves your project in a registry. Switching to other saved projects is just one key shortcut away - &lt;code&gt;cmd + ctrl + p&lt;/code&gt;.&lt;/p&gt;
 
@@ -28,7 +28,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;pigments:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Pigments&lt;/h2&gt;
+&lt;h2 id=&#34;pigments&#34;&gt;Pigments&lt;/h2&gt;
 
 &lt;p&gt;When it comes to styling, colors might be the most important factor. It will be nice to see the actual color defined by color values right in the editor. The Pigments package gives you just that. All color values will be decorated with a block of their correspondent colors in the same file. You have options to select different decoration styles. For me, &amp;ldquo;sqaure-dot&amp;rdquo; worked the best.&lt;/p&gt;
 
@@ -38,7 +38,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;highlight-selected:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Highlight-selected&lt;/h2&gt;
+&lt;h2 id=&#34;highlight-selected&#34;&gt;Highlight-selected&lt;/h2&gt;
 
 &lt;p&gt;In Atom, I couldn&amp;rsquo;t find a way to highlight all occurrences that matches my current selection. For example, I selected &amp;ldquo;export&amp;rdquo; and would like to immediately see all &amp;ldquo;reports&amp;rdquo; are highlighted in the current file. I consider this basic functionality should be included in Atom but sadly it isn&amp;rsquo;t. Highlight-selected fixed that. You can choose to highlight the border or the background. The package even comes with two highlight colors - one for dark background, and the other for light.&lt;/p&gt;
 
@@ -48,7 +48,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;editorconfig:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;EditorConfig&lt;/h2&gt;
+&lt;h2 id=&#34;editorconfig&#34;&gt;EditorConfig&lt;/h2&gt;
 
 &lt;p&gt;Have you suffered from other developers&amp;rsquo; bad habits of using a mix of tabs, spaces, charset, trailing white spaces and lines? EditorConfig.org created a standard to promote a consistent coding styles between different editors and IDEs. Their website maintained &lt;a href=&#34;http://editorconfig.org/#download&#34;&gt;a list of plugins&lt;/a&gt; that support this standard. All you need to do is to define a &lt;code&gt;.editorconfig&lt;/code&gt; file at the root of your project, and download the plugin. Then, your editor will recognize &lt;code&gt;.editorconfig&lt;/code&gt; and start to apply the styles.&lt;/p&gt;
 
@@ -72,13 +72,13 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;tabs-to-spaces:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Tabs-to-spaces&lt;/h2&gt;
+&lt;h2 id=&#34;tabs-to-spaces&#34;&gt;Tabs-to-spaces&lt;/h2&gt;
 
 &lt;p&gt;I found editorconfig itself is not enough to convert all tab indentations to spaces. I had to use this tabs-to-spaces package for that. Like the name suggested, this package transforms all tabs indentations to spaces, or vice versa. In the package&amp;rsquo;s setting UI, you have the option to choose &amp;ldquo;none&amp;rdquo;, &amp;ldquo;tabify&amp;rdquo;, and &amp;ldquo;untabify&amp;rdquo;. &amp;ldquo;none&amp;rdquo; does nothing; &amp;ldquo;tabify&amp;rdquo; changes indentations in spaces to tabs; and &amp;ldquo;untabify&amp;rdquo; does the opposite - replacing tabs with spaces.&lt;/p&gt;
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;linter-and-linter-eslint:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Linter and linter-eslint&lt;/h2&gt;
+&lt;h2 id=&#34;linter-and-linter-eslint&#34;&gt;Linter and linter-eslint&lt;/h2&gt;
 
 &lt;p&gt;For hobby projects, you might don&amp;rsquo;t care about linting. However, for me, even hobby projects could use some code static analysis. linter and linter-eslint shout out loud whenever (most of the time) I make syntax mistakes. They saved me tons of time that would have been wasted in JavaScript debugging.&lt;/p&gt;
 
@@ -86,7 +86,7 @@ trim_trailing_whitespace = false
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;themes:d55c2485435fe256bf1d0dbed34987bb&#34;&gt;Themes&lt;/h2&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
 
 &lt;p&gt;No matter how bad our art taste are, we developers do care about our color themes in editor, don&amp;rsquo;t we? Since this is a very subjective area, I will leave the theme picking to yourself. However, here I just want to shamelessly introduce to you my own syntax theme majorly emphasizing on green, brown, white, and blue, designed for web app coding - the theme color for Druids in World of Warcraft, hence the name.&lt;/p&gt;
 
@@ -167,7 +167,7 @@ nvm use 0.10.38
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:873ad2aa58948dc097de69876bea24cc&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Managing versions is crucial but tedious. The task should be automated. NVM helps us manage multiple Node Js versions without a sweat. It becomes much easy to work in a working version, and try something new in the latest version. All I have to do is &lt;code&gt;nvm use default&lt;/code&gt; and &lt;code&gt;nvm use stable&lt;/code&gt;.&lt;/p&gt;
 

@@ -111,7 +111,7 @@ nvm use 0.10.38
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:873ad2aa58948dc097de69876bea24cc&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Managing versions is crucial but tedious. The task should be automated. NVM helps us manage multiple Node Js versions without a sweat. It becomes much easy to work in a working version, and try something new in the latest version. All I have to do is &lt;code&gt;nvm use default&lt;/code&gt; and &lt;code&gt;nvm use stable&lt;/code&gt;.&lt;/p&gt;
 

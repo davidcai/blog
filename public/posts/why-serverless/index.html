@@ -76,13 +76,13 @@
 
 <p>For people new to Lambda, the amount of concepts introduced by Serverless could be overwhelming &ndash; CloudFormation templates, Serverless&rsquo;s S3 bucket, stages, Lambda function configurations, and Serverless&rsquo; commands. At the early stage of JAWS (Serverless&rsquo; previous brand name), I even found the framework is very opinionated in some way. So I tried to come up with my own solution &ndash; <a href="https://github.com/davidcai/lambda-gulp">a collection of gulp tasks</a> that automate CloudFormation and Lambda function deployment. The funny thing is that during the development of these Gulp scripts, I start to have better understanding of the Lambda development workflow, and appreciate more of what Serverless is trying to achieve. Understanding the aforementioned concepts are actually crucial to develop scalable Lambda projects. I stopped working on my own solution just before JAWS had a major release which re-branded the framework to Serverless, and brought in many needed features. And from then, I picked up Serverless again.</p>
 
-<h2 id="what-serverless-gave-us:21a5a79a44a185553300308dba71ec54">What Serverless gave us</h2>
+<h2 id="what-serverless-gave-us">What Serverless gave us</h2>
 
 <p>The great thing about Serverless framework is that it incorporates many good practices that might seem to be over-complicate for simple projects, but will exponentially accelerate the development cycle for mid and large projects. Sure, there are many other tools and plugins that support Lambda development and deployment, such as Jenkins&rsquo; Lambda plugin, and ThoughtWorks&rsquo; node module <a href="https://github.com/ThoughtWorksStudios/node-aws-lambda">node-aws-lambda</a>. But so far, Serverless is still one of the very few popular frameworks that handle the full development cycle of Lambda, API Gateway, and other AWS resources. The Serverless CLI can be integrated with CICD pipelines such as Jenkins (which we do at Financial Engines) that further automates the workflow. I found Serverless is especially useful in the following areas:</p>
 
 <p><br/></p>
 
-<h3 id="1-local-development:21a5a79a44a185553300308dba71ec54">1. Local Development</h3>
+<h3 id="1-local-development">1. Local Development</h3>
 
 <p>Coding directly in AWS Lambda editor might be OK for small projects, but it is not fitting for any project larger than hello world examples. Having Lambda functions developed in local is essential to have an efficient working setup:</p>
 
@@ -96,7 +96,7 @@
 
 <p><br/></p>
 
-<h3 id="2-scaffolding:21a5a79a44a185553300308dba71ec54">2. Scaffolding</h3>
+<h3 id="2-scaffolding">2. Scaffolding</h3>
 
 <p>With Serverless CLI, creating projects is just a command away. The <code>serverless project create</code> command prepares the local project structures, generates default CloudFormation template, and creates IAM roles.</p>
 
@@ -108,7 +108,7 @@
 
 <p><br/></p>
 
-<h3 id="3-cloudformation:21a5a79a44a185553300308dba71ec54">3. CloudFormation</h3>
+<h3 id="3-cloudformation">3. CloudFormation</h3>
 
 <p>A CloudFormation template is a JSON file that declares AWS resources required by a project. The benefit of having a template is that we can use the same template to duplicate the creation of AWS resources in different stages and regions. The picture below illustrated the relationships among regions, stages, Lambda functions, API endpoints, and other AWS resources:</p>
 
@@ -128,7 +128,7 @@
 
 <p><br/></p>
 
-<h3 id="4-api-gateway-endpoint:21a5a79a44a185553300308dba71ec54">4. API Gateway Endpoint</h3>
+<h3 id="4-api-gateway-endpoint">4. API Gateway Endpoint</h3>
 
 <p>As of today, CloudFormation still cannot be used to define AWS API Gateway endpoints. Serverless framework tries to close this gap. It allows API endpoints to be defined in JSON files. The <code>serverless function create</code> command generates a default configuration file, and the <code>serverless endpoint deploy</code> command will use the configuration to create and deploy the API endpoints in Gateway. (For more examples, check my other <a href="http://davidcai.github.io/blog/posts/serverless-and-cors/">blog post</a>.)</p>
 
@@ -136,11 +136,11 @@
 
 <p><br/></p>
 
-<h2 id="things-i-d-love-to-have:21a5a79a44a185553300308dba71ec54">Things I&rsquo;d love to have</h2>
+<h2 id="things-i-d-love-to-have">Things I&rsquo;d love to have</h2>
 
 <p><br/></p>
 
-<h3 id="1-multiple-aws-account-support:21a5a79a44a185553300308dba71ec54">1. Multiple AWS account support</h3>
+<h3 id="1-multiple-aws-account-support">1. Multiple AWS account support</h3>
 
 <p>Just like other young software, Serverless certainly has room for improvement. One thing I&rsquo;d really love to have is the support for deploying AWS resources in multiple AWS accounts. Currently, Serverless embraces Stages for promoting builds from development to test, and then from test to production. Each build environment is a &lsquo;stage&rsquo;, and they all live in one AWS account.</p>
 
@@ -162,7 +162,7 @@
 
 <p><br/></p>
 
-<h3 id="2-session-token-support:21a5a79a44a185553300308dba71ec54">2. Session token support</h3>
+<h3 id="2-session-token-support">2. Session token support</h3>
 
 <p>The AWS SDK supports Session Token &ndash; a token that will expire after a certain period, and will be used together with access ID and secrete access key for AWS authentication. This is extremely useful for maintaining large number of IDs and keys. Since Session Token will simply expire, there is much less need to actively delete unused/obsolete IDs or keys.</p>
 
@@ -170,7 +170,7 @@
 
 <p><br/></p>
 
-<h2 id="serverless-framework-alternatives:21a5a79a44a185553300308dba71ec54">Serverless framework alternatives</h2>
+<h2 id="serverless-framework-alternatives">Serverless framework alternatives</h2>
 
 <p>Like every framework, it might solve 80% of your problems, but to get the other 20%, things might turn to exponentially difficult, to a point, you even feel like fighting against the framework :)</p>
 
@@ -184,7 +184,7 @@
 
 <p><br/></p>
 
-<h2 id="conclusion:21a5a79a44a185553300308dba71ec54">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Serverless framework is still young, yet it already brought us useful features that simplified the Lambda development. It certainly has room for improvement. The early product feels more limiting in how to organize and name your code assets. The later development has made some parts of this framework more configurable and thus flexible.</p>
 

@@ -20,7 +20,7 @@
 
 &lt;p&gt;After some Google searches, a promising solution is to use &lt;a href=&#34;http://www.jenv.be/&#34;&gt;jEnv&lt;/a&gt; &amp;ndash; a command line tool to set JAVA_HOME on the fly.&lt;/p&gt;
 
-&lt;h2 id=&#34;homebrew-cask:677a9bde6e1ad5d989b759e109310067&#34;&gt;Homebrew Cask&lt;/h2&gt;
+&lt;h2 id=&#34;homebrew-cask&#34;&gt;Homebrew Cask&lt;/h2&gt;
 
 &lt;p&gt;On Mac, Homebrew is the de-facto package manager, and &lt;a href=&#34;http://gillesfabio.github.io/homebrew-cask-homepage/&#34;&gt;Homebrew Cask&lt;/a&gt; is the app manager. I&amp;rsquo;m going to use Cask to install Java 7 and 8.&lt;/p&gt;
 
@@ -36,7 +36,7 @@ brew install brew-cask
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew update &amp;amp;&amp;amp; brew upgrade brew-cask &amp;amp;&amp;amp; brew cleanup &amp;amp;&amp;amp; brew cask cleanup
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;install-java-7-and-8:677a9bde6e1ad5d989b759e109310067&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
+&lt;h2 id=&#34;install-java-7-and-8&#34;&gt;Install Java 7 and 8&lt;/h2&gt;
 
 &lt;p&gt;People on the Stackoverflow cautioned &lt;em&gt;not&lt;/em&gt; to install 8 until 7 is installed. So we are going to install JDK 7 first.&lt;/p&gt;
 
@@ -68,7 +68,7 @@ brew cask info java7
 /Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;enter-jenv:677a9bde6e1ad5d989b759e109310067&#34;&gt;Enter jEnv&lt;/h2&gt;
+&lt;h2 id=&#34;enter-jenv&#34;&gt;Enter jEnv&lt;/h2&gt;
 
 &lt;p&gt;Now it is time to install jEnv:&lt;/p&gt;
 
@@ -114,7 +114,7 @@ jenv local oracle64-1.8.0.66
 &lt;pre&gt;&lt;code&gt;oracle64-1.8.0.66
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;references:677a9bde6e1ad5d989b759e109310067&#34;&gt;References&lt;/h2&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 
 &lt;p&gt;To learn more about jEnv, here I list some references:&lt;/p&gt;
 

@@ -76,7 +76,7 @@
 
 <p><br /></p>
 
-<h2 id="problem:7c673880e38fa750461b975e7ddb6656">PROBLEM</h2>
+<h2 id="problem">PROBLEM</h2>
 
 <p>For Single Page Applications (SPAs), we often need to switch views or states inside containers. This is usually done through routers. With either Angular&rsquo;s built-in router or the popular UI Router, we are able to define the relationship between states and their templates. For instance, here we defined a state <code>home</code> and its template URL <code>app/home/home.html</code>:</p>
 
@@ -108,7 +108,7 @@
 
 <p><br /></p>
 
-<h2 id="solution:7c673880e38fa750461b975e7ddb6656">SOLUTION</h2>
+<h2 id="solution">SOLUTION</h2>
 
 <p>The answer is <code>templateProvider</code>.</p>
 
@@ -159,7 +159,7 @@
 
 <p><br /></p>
 
-<h2 id="even-better-solution:7c673880e38fa750461b975e7ddb6656">EVEN BETTER SOLUTION</h2>
+<h2 id="even-better-solution">EVEN BETTER SOLUTION</h2>
 
 <p>Having <code>ngInclude</code> in <code>templateProvider</code> function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is <code>$templateCache.get('templateUrl')</code>:</p>
 
@@ -209,7 +209,7 @@ gulp.task('templates', function() {
 
 <p><br /></p>
 
-<h2 id="conclusion:7c673880e38fa750461b975e7ddb6656">CONCLUSION</h2>
+<h2 id="conclusion">CONCLUSION</h2>
 
 <p>By leveraging the <code>templateProvider</code> function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.</p>
 

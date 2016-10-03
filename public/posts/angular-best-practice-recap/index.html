@@ -76,7 +76,7 @@
 
 <p><br /></p>
 
-<h2 id="prefer-factory-over-service:55578ab064fd5af32026dc69791cd223">PREFER FACTORY OVER SERVICE</h2>
+<h2 id="prefer-factory-over-service">PREFER FACTORY OVER SERVICE</h2>
 
 <p>A service is a simplified version of a factory. Services are a constructor functions. However, I&rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.</p>
 
@@ -95,7 +95,7 @@ function fooService() {
 
 <p><br /></p>
 
-<h2 id="assign-third-party-globals-to-values:55578ab064fd5af32026dc69791cd223">ASSIGN THIRD-PARTY GLOBALS TO VALUES</h2>
+<h2 id="assign-third-party-globals-to-values">ASSIGN THIRD-PARTY GLOBALS TO VALUES</h2>
 
 <p>Although I can use $window to reference globals of third-party libraries, I like to assign globals to values, and inject them. This makes function arguments a clear contract of what dependencies my code requires.</p>
 
@@ -128,13 +128,13 @@ function MainController(_, d3) { // Injection
 
 <p><br /></p>
 
-<h2 id="stick-with-http:55578ab064fd5af32026dc69791cd223">STICK WITH $HTTP</h2>
+<h2 id="stick-with-http">STICK WITH $HTTP</h2>
 
 <p>I feel $http gives me more flexibilities than $resource. And $http service&rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.</p>
 
 <p><br /></p>
 
-<h2 id="wrap-rest-in-services:55578ab064fd5af32026dc69791cd223">WRAP REST IN SERVICES</h2>
+<h2 id="wrap-rest-in-services">WRAP REST IN SERVICES</h2>
 
 <p>Encapsulate REST requests as methods in services, so users of the service don&rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).</p>
 
@@ -162,7 +162,7 @@ function accountService($http, $log) {
 
 <p><br /></p>
 
-<h2 id="ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223">UI ROUTER RESOLVE PATTERN</h2>
+<h2 id="ui-router-resolve-pattern">UI ROUTER RESOLVE PATTERN</h2>
 
 <p>I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.</p>
 
@@ -197,7 +197,7 @@ function accountService($http, $log) {
 
 <p><br /></p>
 
-<h2 id="isolate-directive-scope:55578ab064fd5af32026dc69791cd223">ISOLATE DIRECTIVE SCOPE</h2>
+<h2 id="isolate-directive-scope">ISOLATE DIRECTIVE SCOPE</h2>
 
 <p>Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&rsquo;s DOM attributes) should be the only place where a directive retrieves external information.</p>
 
@@ -239,7 +239,7 @@ function browseHappyBanner() {
 
 <p><br /></p>
 
-<h2 id="clean-template:55578ab064fd5af32026dc69791cd223">CLEAN TEMPLATE</h2>
+<h2 id="clean-template">CLEAN TEMPLATE</h2>
 
 <p>If snippets in a template look like program, then you are doing it wrong. Templates need to be declarative, easy to understand for non-programmers. The best practice is to imagine your template is written by a web designer rather than a developer.</p>
 
@@ -265,13 +265,13 @@ function browseHappyBanner() {
 
 <p><br /></p>
 
-<h2 id="thin-controller:55578ab064fd5af32026dc69791cd223">THIN CONTROLLER</h2>
+<h2 id="thin-controller">THIN CONTROLLER</h2>
 
 <p>Make controller thin. Move logic to services and directives. This makes controller much easy to test.</p>
 
 <p><br /></p>
 
-<h2 id="light-filter:55578ab064fd5af32026dc69791cd223">LIGHT FILTER</h2>
+<h2 id="light-filter">LIGHT FILTER</h2>
 
 <p>Filter tends to be called multiple times. So if you have a filter that does a lot of heavy lifting, it will drag down the performance of the entire app. Try to simplify the logic in filter. Use cache or memoization to improve the performance.</p>
 
@@ -297,7 +297,7 @@ function heavyLifting() {
 
 <p><br /></p>
 
-<h2 id="named-functions:55578ab064fd5af32026dc69791cd223">NAMED FUNCTIONS</h2>
+<h2 id="named-functions">NAMED FUNCTIONS</h2>
 
 <p>Use named functions whenever you can. When error occurs inside the named function, the function name will appear in the stack trace, which is really helpful for debugging.</p>
 
@@ -318,7 +318,7 @@ function MyController() { ... }
 
 <p><br /></p>
 
-<h2 id="scope-js-code-in-iife:55578ab064fd5af32026dc69791cd223">SCOPE JS CODE IN IIFE</h2>
+<h2 id="scope-js-code-in-iife">SCOPE JS CODE IN IIFE</h2>
 
 <p>This best practice is not limited to Angular. IIFE (Immediately-Invoked Function Expression) is often used to create scopes in which the variables and functions will not be leaked to outer scopes.</p>
 
@@ -333,7 +333,7 @@ console.log(app) // not defined
 
 <p><br /></p>
 
-<h2 id="pyramid-testing:55578ab064fd5af32026dc69791cd223">PYRAMID TESTING</h2>
+<h2 id="pyramid-testing">PYRAMID TESTING</h2>
 
 <p>Again this advice is not limited to Angular.</p>
 
@@ -345,7 +345,7 @@ console.log(app) // not defined
 
 <p><br /></p>
 
-<h2 id="ng-model-dot-rule:55578ab064fd5af32026dc69791cd223">NG-MODEL DOT RULE</h2>
+<h2 id="ng-model-dot-rule">NG-MODEL DOT RULE</h2>
 
 <p>Misko Hevery in his presentation on Angular best practices coined the <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=ZhfUv0spHCY#t=1758s">dot rule</a>. My over-simplified version is to bind objects instead of primitives to $scope, and always initialize the bound object:</p>
 
@@ -367,7 +367,7 @@ console.log(app) // not defined
 
 <p><br /></p>
 
-<h2 id="one-component-per-file:55578ab064fd5af32026dc69791cd223">ONE COMPONENT PER FILE</h2>
+<h2 id="one-component-per-file">ONE COMPONENT PER FILE</h2>
 
 <p>Limit one Angular component (directive, service, controller, etc.) per JavaScript file. Make it easy to locate components, and keep files shorter.</p>
 
@@ -384,7 +384,7 @@ console.log(app) // not defined
 
 <p><br /></p>
 
-<h2 id="group-files-by-features:55578ab064fd5af32026dc69791cd223">GROUP FILES BY FEATURES</h2>
+<h2 id="group-files-by-features">GROUP FILES BY FEATURES</h2>
 
 <p>There are two schools of thoughts when it comes to organizing Angular files - grouping by types, and grouping by features. I prefer the latter for big projects. Much easier for navigation.</p>
 
@@ -400,7 +400,7 @@ action-panel
 
 <p><br /></p>
 
-<h2 id="include-intention-in-file-names:55578ab064fd5af32026dc69791cd223">INCLUDE INTENTION IN FILE NAMES</h2>
+<h2 id="include-intention-in-file-names">INCLUDE INTENTION IN FILE NAMES</h2>
 
 <p>.js can mean a lot of things in Angular apps. It makes the intention much clear when the file names contain .controller, .directive, .spec, .service, etc.</p>
 
@@ -408,13 +408,13 @@ action-panel
 
 <p><br /></p>
 
-<h2 id="lint-javascript:55578ab064fd5af32026dc69791cd223">LINT JAVASCRIPT</h2>
+<h2 id="lint-javascript">LINT JAVASCRIPT</h2>
 
 <p>Use jshint, JSCS, or even better - <a href="http://eslint.org/">eslint</a> to lint javascript code. Integrate lint into the build process. Use editor plugins to bring lint warnings and errors right in front of developers&rsquo;s eyes. I&rsquo;ve been considering to create GIT hook to block git pushes if lint reports any warnings or errors.</p>
 
 <p><br /></p>
 
-<h2 id="use-ng-annotate:55578ab064fd5af32026dc69791cd223">USE NG-ANNOTATE</h2>
+<h2 id="use-ng-annotate">USE NG-ANNOTATE</h2>
 
 <p>Angular replies on the names of function arguments for dependency injection. However, JS minification will shorten argument names, which ruined Angular DI. To work around this issue, we either use the DI array syntax:</p>
 
@@ -448,7 +448,7 @@ app.controller('MainController', function($scope, $log) {
 
 <p><br /></p>
 
-<h2 id="leverage-task-runners:55578ab064fd5af32026dc69791cd223">LEVERAGE TASK RUNNERS</h2>
+<h2 id="leverage-task-runners">LEVERAGE TASK RUNNERS</h2>
 
 <p>Lint and ngAnnotate can be integrated in the build process by task runners such as Gulp.</p>
 

@@ -20,7 +20,7 @@
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;resolve-promise:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Resolve Promise&lt;/h2&gt;
+&lt;h2 id=&#34;resolve-promise&#34;&gt;Resolve Promise&lt;/h2&gt;
 
 &lt;p&gt;The following snippet uses $http service to make a REST call, and resolve the returned data from the response. This is a common pattern I often find in Angular code, however, the code is not optimal (see below).&lt;/p&gt;
 
@@ -56,7 +56,7 @@ function getUser($http) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;reject-promise:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Reject Promise&lt;/h2&gt;
+&lt;h2 id=&#34;reject-promise&#34;&gt;Reject Promise&lt;/h2&gt;
 
 &lt;p&gt;What about error handling? Using the not preferred example, we can call &lt;code&gt;deferred.reject&lt;/code&gt; in the error callback to reject the promise:&lt;/p&gt;
 
@@ -175,7 +175,7 @@ getUser().then(
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;success-and-error-in-http-service:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Success and Error in $http Service&lt;/h2&gt;
+&lt;h2 id=&#34;success-and-error-in-http-service&#34;&gt;Success and Error in $http Service&lt;/h2&gt;
 
 &lt;p&gt;In old versions (1.3 and less) of Angular, $http service has two additional methods &amp;ndash; success() and error(), which are similar to then(), however, the subtle differences are important:&lt;/p&gt;
 
@@ -207,7 +207,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:3ddbf3d50d77c978c68a9cd4e936397f&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;The usage of a deferred object to resolve and reject promises can be replaced by a simplified style:&lt;/p&gt;
 
@@ -235,7 +235,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Here is my collection of free tutorial videos. Could be really helpful for people new to Angular.&lt;/p&gt;
 
-&lt;h1 id=&#34;1-shaping-up-with-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
+&lt;h1 id=&#34;1-shaping-up-with-angular-js&#34;&gt;1. Shaping up with Angular JS&lt;/h1&gt;
 
 &lt;p&gt;Gregg Pollack&amp;rsquo;s &amp;ldquo;Shaping up with Angular.js&amp;rdquo; from codeschool.com has been there for a while. It is one of the tutorials that have the best intro. The series covers Angular setup, binding, controllers, directives, filters, form handling, and services. The best part is its challenges after each chapter.&lt;/p&gt;
 
@@ -253,7 +253,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Sequel: &lt;a href=&#34;https://www.codeschool.com/courses/staying-sharp-with-angular-js&#34;&gt;Staying Sharp with Angular.js&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;2-egghead-io-new-to-angular-js:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
+&lt;h1 id=&#34;2-egghead-io-new-to-angular-js&#34;&gt;2. Egghead IO - New to Angular JS?&lt;/h1&gt;
 
 &lt;p&gt;Egghead is famous of its bite-sized videos. Each video can be consumed within 10 min. The entire tutorial is very easy to navigate. The noteworthy is that each short clip has its own discussion section. You might very well learn something new from these informative discussions.&lt;/p&gt;
 
@@ -267,7 +267,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;Egghead.io: &lt;a href=&#34;https://egghead.io/articles/new-to-angularjs-start-learning-here?utm_content=buffer3b17a&amp;amp;utm_medium=social&amp;amp;utm_source=twitter.com&amp;amp;utm_campaign=buffer&#34;&gt;New to AngularJS?&lt;/a&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;3-angular-youtube-channel:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
+&lt;h1 id=&#34;3-angular-youtube-channel&#34;&gt;3. Angular Youtube Channel&lt;/h1&gt;
 
 &lt;p&gt;For people who prefer picking their own lessons, Angular&amp;rsquo;s Youtube channel is the gold mine.&lt;/p&gt;
 
@@ -292,7 +292,7 @@ $http.get(&#39;&#39;).then(function(response) {
 &lt;li&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCBWXtgwaUqyvI50euTYlUWQ&#34;&gt;Angular U channel&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;4-others:44f7cb680bd7f49bb2adaeef5a9fd994&#34;&gt;4. Others&lt;/h1&gt;
+&lt;h1 id=&#34;4-others&#34;&gt;4. Others&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;PluralSight.com &lt;a href=&#34;http://www.pluralsight.com/search/?searchTerm=angular&#34;&gt;Angular courses&lt;/a&gt;&lt;/li&gt;
@@ -317,7 +317,7 @@ $http.get(&#39;&#39;).then(function(response) {
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;copy:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Copy&lt;/h2&gt;
+&lt;h2 id=&#34;copy&#34;&gt;Copy&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is a &lt;em&gt;deep&lt;/em&gt; copy.&lt;/p&gt;
 
@@ -337,7 +337,7 @@ console.log(o1.skill === o2.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;extend:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Extend&lt;/h2&gt;
+&lt;h2 id=&#34;extend&#34;&gt;Extend&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.extend(dst, src1, src2, ...)&lt;/code&gt; is to &lt;em&gt;shallow&lt;/em&gt; copy the properties of the source objects from right to left, all the way to the destination object.&lt;/p&gt;
 
@@ -355,7 +355,7 @@ console.log(src2.skill === dst.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;Merge&lt;/h2&gt;
+&lt;h2 id=&#34;merge&#34;&gt;Merge&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.merge&lt;/code&gt; is an Angular 1.4+ API that is to &lt;em&gt;deep&lt;/em&gt; (recursively) copy the properties of the source objects to the destination object.&lt;/p&gt;
 
@@ -376,7 +376,7 @@ console.log(src2.skill === dst.skill);
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;more-extend-vs-merge:1f01c150b870a11f9ba71472fb074eba&#34;&gt;More Extend vs. Merge&lt;/h2&gt;
+&lt;h2 id=&#34;more-extend-vs-merge&#34;&gt;More Extend vs. Merge&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.copy&lt;/code&gt; is simply to clone an object. &lt;code&gt;angular.extend&lt;/code&gt; and &lt;code&gt;angular.merge&lt;/code&gt; are more interesting. Here is another set of comparing examples.&lt;/p&gt;
 
@@ -408,7 +408,7 @@ console.log(angular.merge(dst, src1, src2));
 
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;user-and-default-options:1f01c150b870a11f9ba71472fb074eba&#34;&gt;User and Default Options&lt;/h2&gt;
+&lt;h2 id=&#34;user-and-default-options&#34;&gt;User and Default Options&lt;/h2&gt;
 
 &lt;p&gt;&lt;code&gt;angular.extend&lt;/code&gt; or &lt;code&gt;angular.merge&lt;/code&gt; is often used to achieve user options overriding default options. Here is an example:&lt;/p&gt;
 
@@ -526,7 +526,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;problem:7c673880e38fa750461b975e7ddb6656&#34;&gt;PROBLEM&lt;/h2&gt;
+&lt;h2 id=&#34;problem&#34;&gt;PROBLEM&lt;/h2&gt;
 
 &lt;p&gt;For Single Page Applications (SPAs), we often need to switch views or states inside containers. This is usually done through routers. With either Angular&amp;rsquo;s built-in router or the popular UI Router, we are able to define the relationship between states and their templates. For instance, here we defined a state &lt;code&gt;home&lt;/code&gt; and its template URL &lt;code&gt;app/home/home.html&lt;/code&gt;:&lt;/p&gt;
 
@@ -558,7 +558,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;solution&#34;&gt;SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;The answer is &lt;code&gt;templateProvider&lt;/code&gt;.&lt;/p&gt;
 
@@ -609,7 +609,7 @@ abTestService.pick(&#39;a&#39;, &#39;a&#39;, &#39;b&#39;);
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;even-better-solution:7c673880e38fa750461b975e7ddb6656&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
+&lt;h2 id=&#34;even-better-solution&#34;&gt;EVEN BETTER SOLUTION&lt;/h2&gt;
 
 &lt;p&gt;Having &lt;code&gt;ngInclude&lt;/code&gt; in &lt;code&gt;templateProvider&lt;/code&gt; function feels still a bit hackish to me. The ideal solution is to specify a template URL, and then let Angular fetch the content. However, sending separate HTTP requests just to fetch templates seems to be unnecessary web traffic. It will be better if the template content can be cached in the $templateCache service; and then, all I need to do is &lt;code&gt;$templateCache.get(&#39;templateUrl&#39;)&lt;/code&gt;:&lt;/p&gt;
 
@@ -659,7 +659,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:7c673880e38fa750461b975e7ddb6656&#34;&gt;CONCLUSION&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;CONCLUSION&lt;/h2&gt;
 
 &lt;p&gt;By leveraging the &lt;code&gt;templateProvider&lt;/code&gt; function that can be injected with dependencies, we are able to resolve template content based on run-time data. This technique is useful for switching among more than one templates for a state, for instance, A/B testing, and swappable content in limited space.&lt;/p&gt;
 
@@ -679,7 +679,7 @@ gulp.task(&#39;templates&#39;, function() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;interpolation-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: Interpolation Binding&lt;/h2&gt;
+&lt;h2 id=&#34;interpolation-binding&#34;&gt;@: Interpolation Binding&lt;/h2&gt;
 
 &lt;p&gt;&amp;rdquo;@&amp;rdquo; symbols can be used to bind interpolations. Interpolations are {{ }} expressions.&lt;/p&gt;
 
@@ -732,7 +732,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;variable-name-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: Variable Name Binding&lt;/h2&gt;
+&lt;h2 id=&#34;variable-name-binding&#34;&gt;=: Variable Name Binding&lt;/h2&gt;
 
 &lt;p&gt;&amp;rdquo;=&amp;rdquo; symbols can be used to bind variable names.&lt;/p&gt;
 
@@ -776,7 +776,7 @@ starting at [{ person.name }}].
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;one-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;@: One-way Binding&lt;/h2&gt;
+&lt;h2 id=&#34;one-way-binding&#34;&gt;@: One-way Binding&lt;/h2&gt;
 
 &lt;p&gt;@ is for one-way binding - the bound value is passed into a directive&amp;rsquo;s scope, however, any change made to the value inside the directive will not be passed back from the directive. To help myself remember this syntax, I&amp;rsquo;d like to think @ as &amp;lsquo;point at&amp;rsquo; - a one-way direction - from the external scope to a directive&amp;rsquo;s internal scope.&lt;/p&gt;
 
@@ -826,7 +826,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;two-way-binding:a300ed22ee47617686df42dbda8a1336&#34;&gt;=: Two-way Binding&lt;/h2&gt;
+&lt;h2 id=&#34;two-way-binding&#34;&gt;=: Two-way Binding&lt;/h2&gt;
 
 &lt;p&gt;= is for two-way binding, meaning the change made to the bound value will be &amp;ldquo;sync&amp;rsquo;d&amp;rdquo; both inside and outside of a directive. I&amp;rsquo;d like to think the &amp;ldquo;=&amp;rdquo; symbol as &amp;ldquo;bi-directional&amp;rdquo;.&lt;/p&gt;
 
@@ -860,7 +860,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:a300ed22ee47617686df42dbda8a1336&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
@@ -901,7 +901,7 @@ function awesomeWidget() {
       <guid>http://davidcai.github.io/blog/posts/angular-factory-pattern/</guid>
       <description>
 
-&lt;h2 id=&#34;suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
+&lt;h2 id=&#34;suffix-factory-with-service&#34;&gt;Suffix Factory with &amp;lsquo;Service&amp;rsquo;&lt;/h2&gt;
 
 &lt;p&gt;The terminology &amp;ldquo;Factory&amp;rdquo; in Angular is different from the one used in the Java community. From a Java developer&amp;rsquo;s perspective, a factory is to create something by a specification supplied by the factory caller. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.&lt;/p&gt;
 
@@ -918,7 +918,7 @@ function awesomeWidget() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;decouple-interface-from-implementation:2125073d380548c4d6df7eb33c79e543&#34;&gt;Decouple Interface from Implementation&lt;/h2&gt;
+&lt;h2 id=&#34;decouple-interface-from-implementation&#34;&gt;Decouple Interface from Implementation&lt;/h2&gt;
 
 &lt;p&gt;A common factory looks like this:&lt;/p&gt;
 
@@ -969,7 +969,7 @@ function userService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;move-declarations-to-top:2125073d380548c4d6df7eb33c79e543&#34;&gt;Move Declarations to Top&lt;/h2&gt;
+&lt;h2 id=&#34;move-declarations-to-top&#34;&gt;Move Declarations to Top&lt;/h2&gt;
 
 &lt;p&gt;To push good readability further, I will move declarations above implementations, just like how we define Angular components. Here is an example of Angular controller definition:&lt;/p&gt;
 
@@ -1034,7 +1034,7 @@ function userService($http) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;conclusion:2125073d380548c4d6df7eb33c79e543&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
 
 &lt;p&gt;Suffix factories with &amp;lsquo;Service&amp;rsquo;. Leverage function hoisting to pull declarations above implementations.&lt;/p&gt;
 
@@ -1115,7 +1115,7 @@ function userService($http) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;prefer-factory-over-service:55578ab064fd5af32026dc69791cd223&#34;&gt;PREFER FACTORY OVER SERVICE&lt;/h2&gt;
+&lt;h2 id=&#34;prefer-factory-over-service&#34;&gt;PREFER FACTORY OVER SERVICE&lt;/h2&gt;
 
 &lt;p&gt;A service is a simplified version of a factory. Services are a constructor functions. However, I&amp;rsquo;ve seen some service code that returns objects. The author of the code probably mistook services with factories. To clear the confusion, let&amp;rsquo;s favor factories over services. I personally prefer naming a factory as xyzService instead of xyzFactory.&lt;/p&gt;
 
@@ -1134,7 +1134,7 @@ function fooService() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;assign-third-party-globals-to-values:55578ab064fd5af32026dc69791cd223&#34;&gt;ASSIGN THIRD-PARTY GLOBALS TO VALUES&lt;/h2&gt;
+&lt;h2 id=&#34;assign-third-party-globals-to-values&#34;&gt;ASSIGN THIRD-PARTY GLOBALS TO VALUES&lt;/h2&gt;
 
 &lt;p&gt;Although I can use $window to reference globals of third-party libraries, I like to assign globals to values, and inject them. This makes function arguments a clear contract of what dependencies my code requires.&lt;/p&gt;
 
@@ -1167,13 +1167,13 @@ function MainController(_, d3) { // Injection
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;stick-with-http:55578ab064fd5af32026dc69791cd223&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
+&lt;h2 id=&#34;stick-with-http&#34;&gt;STICK WITH $HTTP&lt;/h2&gt;
 
 &lt;p&gt;I feel $http gives me more flexibilities than $resource. And $http service&amp;rsquo;s promise interface is much nicer. Better to stick with $http than mixing $http and $resource which unnecessarily complicate my code.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;wrap-rest-in-services:55578ab064fd5af32026dc69791cd223&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
+&lt;h2 id=&#34;wrap-rest-in-services&#34;&gt;WRAP REST IN SERVICES&lt;/h2&gt;
 
 &lt;p&gt;Encapsulate REST requests as methods in services, so users of the service don&amp;rsquo;t have to know the interface of your REST APIs, and the choice of REST libraries ($http, $resource, etc.).&lt;/p&gt;
 
@@ -1201,7 +1201,7 @@ function accountService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;ui-router-resolve-pattern:55578ab064fd5af32026dc69791cd223&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
+&lt;h2 id=&#34;ui-router-resolve-pattern&#34;&gt;UI ROUTER RESOLVE PATTERN&lt;/h2&gt;
 
 &lt;p&gt;I often run to the scenarios where I need to hold off displaying UI until certain data is ready. The resolve property of uiRouter is designed to tackle this common problem.&lt;/p&gt;
 
@@ -1236,7 +1236,7 @@ function accountService($http, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;isolate-directive-scope:55578ab064fd5af32026dc69791cd223&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
+&lt;h2 id=&#34;isolate-directive-scope&#34;&gt;ISOLATE DIRECTIVE SCOPE&lt;/h2&gt;
 
 &lt;p&gt;Think Angular directives as re-usable functions, and its scope as the argument list of a function. In most cases, a directive shouldn&amp;rsquo;t assume the presence of data in the ancestor scopes or elements in the DOM. The scope (and the directive&amp;rsquo;s DOM attributes) should be the only place where a directive retrieves external information.&lt;/p&gt;
 
@@ -1278,7 +1278,7 @@ function browseHappyBanner() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;clean-template:55578ab064fd5af32026dc69791cd223&#34;&gt;CLEAN TEMPLATE&lt;/h2&gt;
+&lt;h2 id=&#34;clean-template&#34;&gt;CLEAN TEMPLATE&lt;/h2&gt;
 
 &lt;p&gt;If snippets in a template look like program, then you are doing it wrong. Templates need to be declarative, easy to understand for non-programmers. The best practice is to imagine your template is written by a web designer rather than a developer.&lt;/p&gt;
 
@@ -1304,13 +1304,13 @@ function browseHappyBanner() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;thin-controller:55578ab064fd5af32026dc69791cd223&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
+&lt;h2 id=&#34;thin-controller&#34;&gt;THIN CONTROLLER&lt;/h2&gt;
 
 &lt;p&gt;Make controller thin. Move logic to services and directives. This makes controller much easy to test.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;light-filter:55578ab064fd5af32026dc69791cd223&#34;&gt;LIGHT FILTER&lt;/h2&gt;
+&lt;h2 id=&#34;light-filter&#34;&gt;LIGHT FILTER&lt;/h2&gt;
 
 &lt;p&gt;Filter tends to be called multiple times. So if you have a filter that does a lot of heavy lifting, it will drag down the performance of the entire app. Try to simplify the logic in filter. Use cache or memoization to improve the performance.&lt;/p&gt;
 
@@ -1336,7 +1336,7 @@ function heavyLifting() {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;named-functions:55578ab064fd5af32026dc69791cd223&#34;&gt;NAMED FUNCTIONS&lt;/h2&gt;
+&lt;h2 id=&#34;named-functions&#34;&gt;NAMED FUNCTIONS&lt;/h2&gt;
 
 &lt;p&gt;Use named functions whenever you can. When error occurs inside the named function, the function name will appear in the stack trace, which is really helpful for debugging.&lt;/p&gt;
 
@@ -1357,7 +1357,7 @@ function MyController() { ... }
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;scope-js-code-in-iife:55578ab064fd5af32026dc69791cd223&#34;&gt;SCOPE JS CODE IN IIFE&lt;/h2&gt;
+&lt;h2 id=&#34;scope-js-code-in-iife&#34;&gt;SCOPE JS CODE IN IIFE&lt;/h2&gt;
 
 &lt;p&gt;This best practice is not limited to Angular. IIFE (Immediately-Invoked Function Expression) is often used to create scopes in which the variables and functions will not be leaked to outer scopes.&lt;/p&gt;
 
@@ -1372,7 +1372,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;pyramid-testing:55578ab064fd5af32026dc69791cd223&#34;&gt;PYRAMID TESTING&lt;/h2&gt;
+&lt;h2 id=&#34;pyramid-testing&#34;&gt;PYRAMID TESTING&lt;/h2&gt;
 
 &lt;p&gt;Again this advice is not limited to Angular.&lt;/p&gt;
 
@@ -1384,7 +1384,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;ng-model-dot-rule:55578ab064fd5af32026dc69791cd223&#34;&gt;NG-MODEL DOT RULE&lt;/h2&gt;
+&lt;h2 id=&#34;ng-model-dot-rule&#34;&gt;NG-MODEL DOT RULE&lt;/h2&gt;
 
 &lt;p&gt;Misko Hevery in his presentation on Angular best practices coined the &lt;a href=&#34;https://www.youtube.com/watch?feature=player_detailpage&amp;amp;v=ZhfUv0spHCY#t=1758s&#34;&gt;dot rule&lt;/a&gt;. My over-simplified version is to bind objects instead of primitives to $scope, and always initialize the bound object:&lt;/p&gt;
 
@@ -1406,7 +1406,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;one-component-per-file:55578ab064fd5af32026dc69791cd223&#34;&gt;ONE COMPONENT PER FILE&lt;/h2&gt;
+&lt;h2 id=&#34;one-component-per-file&#34;&gt;ONE COMPONENT PER FILE&lt;/h2&gt;
 
 &lt;p&gt;Limit one Angular component (directive, service, controller, etc.) per JavaScript file. Make it easy to locate components, and keep files shorter.&lt;/p&gt;
 
@@ -1423,7 +1423,7 @@ console.log(app) // not defined
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;group-files-by-features:55578ab064fd5af32026dc69791cd223&#34;&gt;GROUP FILES BY FEATURES&lt;/h2&gt;
+&lt;h2 id=&#34;group-files-by-features&#34;&gt;GROUP FILES BY FEATURES&lt;/h2&gt;
 
 &lt;p&gt;There are two schools of thoughts when it comes to organizing Angular files - grouping by types, and grouping by features. I prefer the latter for big projects. Much easier for navigation.&lt;/p&gt;
 
@@ -1439,7 +1439,7 @@ action-panel
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;include-intention-in-file-names:55578ab064fd5af32026dc69791cd223&#34;&gt;INCLUDE INTENTION IN FILE NAMES&lt;/h2&gt;
+&lt;h2 id=&#34;include-intention-in-file-names&#34;&gt;INCLUDE INTENTION IN FILE NAMES&lt;/h2&gt;
 
 &lt;p&gt;.js can mean a lot of things in Angular apps. It makes the intention much clear when the file names contain .controller, .directive, .spec, .service, etc.&lt;/p&gt;
 
@@ -1447,13 +1447,13 @@ action-panel
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;lint-javascript:55578ab064fd5af32026dc69791cd223&#34;&gt;LINT JAVASCRIPT&lt;/h2&gt;
+&lt;h2 id=&#34;lint-javascript&#34;&gt;LINT JAVASCRIPT&lt;/h2&gt;
 
 &lt;p&gt;Use jshint, JSCS, or even better - &lt;a href=&#34;http://eslint.org/&#34;&gt;eslint&lt;/a&gt; to lint javascript code. Integrate lint into the build process. Use editor plugins to bring lint warnings and errors right in front of developers&amp;rsquo;s eyes. I&amp;rsquo;ve been considering to create GIT hook to block git pushes if lint reports any warnings or errors.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;use-ng-annotate:55578ab064fd5af32026dc69791cd223&#34;&gt;USE NG-ANNOTATE&lt;/h2&gt;
+&lt;h2 id=&#34;use-ng-annotate&#34;&gt;USE NG-ANNOTATE&lt;/h2&gt;
 
 &lt;p&gt;Angular replies on the names of function arguments for dependency injection. However, JS minification will shorten argument names, which ruined Angular DI. To work around this issue, we either use the DI array syntax:&lt;/p&gt;
 
@@ -1487,7 +1487,7 @@ app.controller(&#39;MainController&#39;, function($scope, $log) {
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;leverage-task-runners:55578ab064fd5af32026dc69791cd223&#34;&gt;LEVERAGE TASK RUNNERS&lt;/h2&gt;
+&lt;h2 id=&#34;leverage-task-runners&#34;&gt;LEVERAGE TASK RUNNERS&lt;/h2&gt;
 
 &lt;p&gt;Lint and ngAnnotate can be integrated in the build process by task runners such as Gulp.&lt;/p&gt;
 

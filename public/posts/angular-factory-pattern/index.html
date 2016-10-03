@@ -72,7 +72,7 @@
 
         
 
-<h2 id="suffix-factory-with-service:2125073d380548c4d6df7eb33c79e543">Suffix Factory with &lsquo;Service&rsquo;</h2>
+<h2 id="suffix-factory-with-service">Suffix Factory with &lsquo;Service&rsquo;</h2>
 
 <p>The terminology &ldquo;Factory&rdquo; in Angular is different from the one used in the Java community. From a Java developer&rsquo;s perspective, a factory is to create something by a specification supplied by the factory caller. There should be only one public method on a factory - getInstance(). Well, maybe some variations of the getInstance method. But that should be it. Factories simply create stuff.</p>
 
@@ -89,7 +89,7 @@
 
 <p><br /></p>
 
-<h2 id="decouple-interface-from-implementation:2125073d380548c4d6df7eb33c79e543">Decouple Interface from Implementation</h2>
+<h2 id="decouple-interface-from-implementation">Decouple Interface from Implementation</h2>
 
 <p>A common factory looks like this:</p>
 
@@ -140,7 +140,7 @@ function userService($http, $log) {
 
 <p><br /></p>
 
-<h2 id="move-declarations-to-top:2125073d380548c4d6df7eb33c79e543">Move Declarations to Top</h2>
+<h2 id="move-declarations-to-top">Move Declarations to Top</h2>
 
 <p>To push good readability further, I will move declarations above implementations, just like how we define Angular components. Here is an example of Angular controller definition:</p>
 
@@ -205,7 +205,7 @@ function userService($http) {
 
 <p><br /></p>
 
-<h2 id="conclusion:2125073d380548c4d6df7eb33c79e543">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Suffix factories with &lsquo;Service&rsquo;. Leverage function hoisting to pull declarations above implementations.</p>
 
